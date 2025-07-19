@@ -1,0 +1,133 @@
+{
+  "TileSpawnDatas": [
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 2,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 3,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 4,
+      "TileID": 0
+    },
+
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 2,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 3,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 4,
+      "TileID": 0
+    },
+
+    {
+      "GridPositionX": 2,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 2,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 2,
+      "GridPositionY": 2,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 2,
+      "GridPositionY": 3,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 2,
+      "GridPositionY": 4,
+      "TileID": 0
+    },
+
+    {
+      "GridPositionX": 3,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 3,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 3,
+      "GridPositionY": 2,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 3,
+      "GridPositionY": 3,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 3,
+      "GridPositionY": 4,
+      "TileID": 0
+    },
+
+    {
+      "GridPositionX": 4,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 4,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 4,
+      "GridPositionY": 2,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 4,
+      "GridPositionY": 3,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 4,
+      "GridPositionY": 4,
+      "TileID": 0
+    }
+  ]
+}

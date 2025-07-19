@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399cd519176a5d1499924cae4f149a0e, type: 3}
+  m_Name: StageEnemySpawnData_TurnGroup
+  m_EditorClassIdentifier: 
+  StageEnemySpawnData_Turns:
+  - StageID: 0
+    EnemySpawnData_TurnJsonFile: {fileID: 4900000, guid: 6b3494bd30ff8184b84104781a147b35, type: 3}
+  - StageID: 1
+    EnemySpawnData_TurnJsonFile: {fileID: 4900000, guid: 688bef3e9a6d68d41a67019a03dc7cfd, type: 3}
+  - StageID: 2
+    EnemySpawnData_TurnJsonFile: {fileID: 4900000, guid: 103fecf3d378b7a459742bd8be630045, type: 3}

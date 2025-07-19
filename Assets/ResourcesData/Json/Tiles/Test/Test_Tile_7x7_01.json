@@ -1,0 +1,210 @@
+{
+  "TileSpawnDatas": [
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 2,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 3,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 4,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 5,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 0,
+      "GridPositionY": 6,
+      "TileID": 0
+    },
+
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 2,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 3,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 4,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 5,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 1,
+      "GridPositionY": 6,
+      "TileID": 0
+    },
+
+    {
+      "GridPositionX": 2,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 2,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 2,
+      "GridPositionY": 5,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 2,
+      "GridPositionY": 6,
+      "TileID": 0
+    },
+
+    {
+      "GridPositionX": 3,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 3,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 3,
+      "GridPositionY": 5,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 3,
+      "GridPositionY": 6,
+      "TileID": 0
+    },
+
+    {
+      "GridPositionX": 4,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 4,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 4,
+      "GridPositionY": 5,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 4,
+      "GridPositionY": 6,
+      "TileID": 0
+    },
+
+    {
+      "GridPositionX": 5,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 5,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 5,
+      "GridPositionY": 2,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 5,
+      "GridPositionY": 3,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 5,
+      "GridPositionY": 4,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 5,
+      "GridPositionY": 5,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 5,
+      "GridPositionY": 6,
+      "TileID": 0
+    },
+
+    {
+      "GridPositionX": 6,
+      "GridPositionY": 0,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 6,
+      "GridPositionY": 1,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 6,
+      "GridPositionY": 2,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 6,
+      "GridPositionY": 3,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 6,
+      "GridPositionY": 4,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 6,
+      "GridPositionY": 5,
+      "TileID": 0
+    },
+    {
+      "GridPositionX": 6,
+      "GridPositionY": 6,
+      "TileID": 0
+    }
+  ]
+}

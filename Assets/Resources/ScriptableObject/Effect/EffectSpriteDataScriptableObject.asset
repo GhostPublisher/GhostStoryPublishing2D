@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f7107b4ea652a45a11d6b1f3e8bd5f, type: 3}
+  m_Name: EffectSpriteDataScriptableObject
+  m_EditorClassIdentifier: 
+  EffectSpriteDatas:
+  - EffectID: 0
+    EffectPositionMarker: 0
+    EffectFrames:
+    - {fileID: 21300000, guid: 384934bccdec69f4ea7c109c621b7de5, type: 2}
+    - {fileID: 21300000, guid: 651f57cb74b6a844cb3eaca987facfbe, type: 2}
+    - {fileID: 21300000, guid: 6681c9c920c248c4fb3d0cc8d22d492a, type: 2}
+    - {fileID: 21300000, guid: 4705051e91aec7749ae14a6a7a8504cd, type: 2}
+    - {fileID: 21300000, guid: 9604c6f2db476254ba4bddbe7218617b, type: 2}
+    - {fileID: 21300000, guid: 5ee1c5aa61b291e4bb6d46a11e927f1b, type: 2}
+    - {fileID: 21300000, guid: 2e20675596ffe6a419c33b4a0aa41109, type: 2}
+    - {fileID: 21300000, guid: 22d634d66034833468388f561753b3fd, type: 2}
+    - {fileID: 21300000, guid: c8bb2826efd65f746b76b07f704357cb, type: 2}
+    - {fileID: 21300000, guid: 2b60230a6d83cb24cb54650295b4c934, type: 2}
+    - {fileID: 21300000, guid: 1750d831ad7404044b03f2bfbdff427a, type: 2}
+    - {fileID: 21300000, guid: b743c098d408c0f4b9b2ac0b31f24066, type: 2}
+    - {fileID: 21300000, guid: 12027aec7d324fd43a08cb90f171790b, type: 2}
+    - {fileID: 21300000, guid: 782aa60aaa433f942960e6fa8f3c09d6, type: 2}
+    - {fileID: 21300000, guid: 8a1895ce64d729f48aadc219da4dcd6a, type: 2}
+    - {fileID: 21300000, guid: 6c3e83c98164cfe409340f2c903911f2, type: 2}
+    FrameInterval: 5

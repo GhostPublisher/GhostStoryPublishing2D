@@ -1,0 +1,49 @@
+{
+  "EnemySpawnData_Triggers": [
+    {
+      "TriggerID": 0,
+      "EnemySpawnDatas": [
+        {
+          "UnitID": 1000,
+          "EnemySpawnPositionX": 0,
+          "EnemySpawnPositionY": 1
+        },
+        {
+          "UnitID": 1001,
+          "EnemySpawnPositionX": 6,
+          "EnemySpawnPositionY": 1
+        }
+      ]
+    },
+    {
+      "TriggerID": 1,
+      "EnemySpawnDatas": [
+        {
+          "UnitID": 1002,
+          "EnemySpawnPositionX": 0,
+          "EnemySpawnPositionY": 3
+        },
+        {
+          "UnitID": 1003,
+          "EnemySpawnPositionX": 6,
+          "EnemySpawnPositionY": 3
+        }
+      ]
+    },
+    {
+      "TriggerID": 2,
+      "EnemySpawnDatas": [
+        {
+          "UnitID": 1000,
+          "EnemySpawnPositionX": 0,
+          "EnemySpawnPositionY": 5
+        },
+        {
+          "UnitID": 1001,
+          "EnemySpawnPositionX": 6,
+          "EnemySpawnPositionY": 5
+        }
+      ]
+    }
+  ]
+}

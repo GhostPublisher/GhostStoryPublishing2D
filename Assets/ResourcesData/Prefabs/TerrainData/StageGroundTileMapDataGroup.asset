@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a841f80c00fe94284b33976cd1b2f6, type: 3}
+  m_Name: StageGroundTileMapDataGroup
+  m_EditorClassIdentifier: 
+  StageGroundTileMapDatas:
+  - StageID: 0
+    GroundTileMapPrefab: {fileID: 8466494616055900313, guid: c5383d4d46664a143ab1165ff97bc80a, type: 3}
