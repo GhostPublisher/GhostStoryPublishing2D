@@ -34,7 +34,7 @@ namespace Example00
         [SerializeField] private GenerateGroundTilemapEvent_Test GenerateGroundTilemapEvent_Test;
 
         [Header("Terrain Data 가중치 설정")]
-        [SerializeField] private AdditionalSetGeneratedTerrainDataEvent_Test AdditionalSetGeneratedTerrainDataEvent_Test;
+        [SerializeField] private InitialSetGeneratedTerrainDataEvent_Test InitialSetGeneratedTerrainDataEvent_Test;
 
         [Header("Enemy 위치 설정")]
         [SerializeField] private List<EnemySpawnEvent_Test> EnemySpawnEvent_Tests;
@@ -69,12 +69,7 @@ namespace Example00
         // Terrain Data 할당 / 삭제
         public void Notify_Allocate_GeneratedTerrainData()
         {
-            InitialSetGeneratedTerrainDataEvent InitialSetGeneratedTerrainDataEvent = new();
-            InitialSetGeneratedTerrainDataEvent.Width = this.Width;
-            InitialSetGeneratedTerrainDataEvent.Height = this.Height;
-
-            this.EventObserverNotifier.NotifyEvent(InitialSetGeneratedTerrainDataEvent);
-            this.EventObserverNotifier.NotifyEvent(this.AdditionalSetGeneratedTerrainDataEvent_Test);
+            this.EventObserverNotifier.NotifyEvent(this.InitialSetGeneratedTerrainDataEvent_Test);
         }
         public void Notify_Clear_GeneratedTerrainData()
         {

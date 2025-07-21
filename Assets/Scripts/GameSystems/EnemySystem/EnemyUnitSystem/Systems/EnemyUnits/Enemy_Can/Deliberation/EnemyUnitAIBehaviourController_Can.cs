@@ -1,18 +1,79 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 
 using UnityEngine;
 
 namespace GameSystems.EnemySystem.EnemyUnitSystem
 {
-
+    // Enemy 행동 순서 관리자.
     public class EnemyUnitAIBehaviourController_Can : MonoBehaviour, IEnemyUnitAIBehaviourController
     {
-        //
+        [SerializeField] private GameObject EnemyAIControllerContainer;
+
+        // 가공
+        private IEnemyUnitAIDataPreprocessor EnemyUnitAIDataPreprocessor;
+        // 가공
+        private Dictionary<SkillSlotType, IEnemyUnitSkillRangeDataPreprocessor> EnemyUnitSkillRangeDataPreprocessors;
+
+        // 사용
+        private IEnemyUnitMoveController EnemyUnitMoveController;
+        // 사용
+        private Dictionary<SkillSlotType, IEnemyUnitSkillController> EnemyUnitSkillControllers;
+
+
         private EnemyUnitManagerData myEnemyUnitManagerData;
         
         public void InitialSetting(EnemyUnitManagerData enemyUnitManagerData)
         {
             this.myEnemyUnitManagerData = enemyUnitManagerData;
+
+            this.EnemyUnitAIDataPreprocessor = this.EnemyAIControllerContainer.GetComponent<IEnemyUnitAIDataPreprocessor>();
+            this.EnemyUnitMoveController = this.EnemyAIControllerContainer.GetComponent<IEnemyUnitMoveController>();
+
+            this.EnemyUnitSkillRangeDataPreprocessors = new();
+            this.EnemyUnitSkillControllers = new();
+
+            // 하이어러키 Component 가져오기.
+            foreach (var component in this.EnemyAIControllerContainer.GetComponents<MonoBehaviour>())
+            {
+                if (component is IEnemyUnitSkillRangeDataPreprocessor enemyUnitSkillRangeDataPreprocessor)
+                {
+                    this.EnemyUnitSkillRangeDataPreprocessors.Add(enemyUnitSkillRangeDataPreprocessor.SkillSlotType, enemyUnitSkillRangeDataPreprocessor);
+                }
+
+                if (component is IEnemyUnitSkillController enemyUnitSkillController)
+                {
+                    this.EnemyUnitSkillControllers.Add(enemyUnitSkillController.SkillSlotType, enemyUnitSkillController);
+                }
+            }
+
+            // 인터페이스 등록.
+            var myEnemyUnitFeatureInterfaceGroup = this.myEnemyUnitManagerData.EnemyUnitFeatureInterfaceGroup;
+
+            myEnemyUnitFeatureInterfaceGroup.EnemyUnitAIDataPreprocessor = this.EnemyUnitAIDataPreprocessor;
+            myEnemyUnitFeatureInterfaceGroup.EnemyUnitMoveController = this.EnemyUnitMoveController;
+
+            foreach (var interfaceMember in this.EnemyUnitSkillRangeDataPreprocessors)
+            {
+                myEnemyUnitFeatureInterfaceGroup.EnemyUnitSkillRangeDataPreprocessors.Add(interfaceMember.Key, interfaceMember.Value);
+            }
+            foreach (var interfaceMember in this.EnemyUnitSkillControllers)
+            {
+                myEnemyUnitFeatureInterfaceGroup.EnemyUnitSkillControllers.Add(interfaceMember.Key, interfaceMember.Value);
+            }
+
+
+            this.EnemyUnitAIDataPreprocessor.InitialSetting(this.myEnemyUnitManagerData);
+            this.EnemyUnitMoveController.InitialSetting(this.myEnemyUnitManagerData);
+
+            foreach (var interfaceMember in this.EnemyUnitSkillRangeDataPreprocessors.Values)
+            {
+                interfaceMember.InitialSetting(this.myEnemyUnitManagerData);
+            }
+            foreach (var interfaceMember in this.EnemyUnitSkillControllers.Values)
+            {
+                interfaceMember.InitialSetting(this.myEnemyUnitManagerData);
+            }
         }
 
         // true : 행동을 수행한 것, false : 수행할 행동이 없는 것.
@@ -44,6 +105,18 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
 
             this.StartCoroutine(this.WaitNotifyEnd());
+        }
+
+        // 행동 판단을 위한 데이터 갱신.
+        public void UpdateSensingAndPerceptionData()
+        {
+            // 감각 범위 및 인지 데이터 갱신.
+            this.EnemyUnitAIDataPreprocessor.UpdateDataPreprocessor();
+            // 스킬 범위 및 인지 데이터 갱신.
+            foreach (var dataProcessor in this.EnemyUnitSkillRangeDataPreprocessors.Values)
+            {
+                dataProcessor.UpdateSkillDataPreprocessor();
+            }
         }
 
         // 탐지된 적(현재 시야 내 보이는 객체)이 있는지 확인하고, 해당 로직 수행을 요청.

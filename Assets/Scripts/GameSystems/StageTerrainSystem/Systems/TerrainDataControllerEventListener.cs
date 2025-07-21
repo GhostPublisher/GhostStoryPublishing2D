@@ -18,8 +18,7 @@ namespace GameSystems.TerrainSystem
         private void OnEnable()
         {
             this.EventObserverLinker.RegisterSubscriberListener<InitialSetGeneratedTerrainDataEvent>();
-
-            this.EventObserverLinker.RegisterSubscriberListener<AdditionalSetGeneratedTerrainDataEvent_Test>();
+            this.EventObserverLinker.RegisterSubscriberListener<InitialSetGeneratedTerrainDataEvent_Test>();
             this.EventObserverLinker.RegisterSubscriberListener<ClearTrerrainData>();
         }
 
@@ -34,11 +33,12 @@ namespace GameSystems.TerrainSystem
             {
                 case InitialSetGeneratedTerrainDataEvent:
                     var data01 = (InitialSetGeneratedTerrainDataEvent)eventData;
-                    this.TerrainDataController.InitialSetGeneratedTerrainData(data01.Width, data01.Height);
+                    this.TerrainDataController.InitialSetGeneratedTerrainData(data01.StageID);
                     break;
-                case AdditionalSetGeneratedTerrainDataEvent_Test:
-                    var data02 = (AdditionalSetGeneratedTerrainDataEvent_Test)eventData;
-                    this.TerrainDataController.AdditionalSetGeneratedTerrainData(data02.TerrainDatas);
+                case InitialSetGeneratedTerrainDataEvent_Test:
+                    var data02 = (InitialSetGeneratedTerrainDataEvent_Test)eventData;
+                    this.TerrainDataController.InitialSetGeneratedTerrainData_Test(data02.Width, data02.Height);
+                    this.TerrainDataController.OverwriteSetGeneratedTerrainData_Test(data02.TerrainDatas);
                     break;
                 case ClearTrerrainData:
                     this.TerrainDataController.ClearTrerrainData();

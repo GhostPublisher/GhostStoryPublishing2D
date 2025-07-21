@@ -29,8 +29,8 @@ namespace GameSystems.TilemapSystem.FogTilemap
             var HandlerManager = LazyReferenceHandlerManager.Instance;
             var StageTileSpawnDataDBHandler = HandlerManager.GetStaticDataHandler<StageTerrainDataDBHandler>();
 
-            // 만약, Stage 정보가 없으면 임시로 10, 10을 리턴해줌.
-            StageTileSpawnDataDBHandler.TryGetStageTileSapwnDatas(stageID, out int width, out int height, out var _);
+            // 만약, Stage 정보가 없으면 임시로 0, 0을 리턴해줌.
+            StageTileSpawnDataDBHandler.TryGetStageTerrainSize(stageID, out int width, out int height);
 
             this.InitialSetting(width, height);
         }

@@ -16,4 +16,4 @@ MonoBehaviour:
   - UnitID: 1000
     EnemyPrefab: {fileID: 2332438589004003702, guid: 556ebafb0921ba448b19ac4d89655e13, type: 3}
   - UnitID: 1001
-    EnemyPrefab: {fileID: 2332438589004003702, guid: ce1f63b8a3eb791408e2f25ab635e12a, type: 3}
+    EnemyPrefab: {fileID: 2332438589004003702, guid: b81e5447f2a87524880fc6c65570403b, type: 3}

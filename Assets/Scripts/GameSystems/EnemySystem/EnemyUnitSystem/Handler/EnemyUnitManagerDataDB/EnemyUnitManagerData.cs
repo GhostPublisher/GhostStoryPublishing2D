@@ -232,6 +232,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
         public IEnemyHitReactionController EnemyHitReactionController;
         public IEnemyUnitEffectController EnemyUnitEffectController;
 
+        public IEnemyUnitAIDataPreprocessor EnemyUnitAIDataPreprocessor;
         public IEnemyUnitMoveController EnemyUnitMoveController;
 
         public Dictionary<SkillSlotType, IEnemyUnitSkillRangeDataPreprocessor> EnemyUnitSkillRangeDataPreprocessors = new();

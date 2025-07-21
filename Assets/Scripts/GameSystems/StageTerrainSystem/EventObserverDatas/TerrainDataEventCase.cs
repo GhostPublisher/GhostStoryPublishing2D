@@ -8,13 +8,14 @@ namespace GameSystems.TerrainSystem
     [Serializable]
     public class InitialSetGeneratedTerrainDataEvent : IEventData
     {
-        public int Width;
-        public int Height;
+        public int StageID;
     }
 
     [Serializable]
-    public class AdditionalSetGeneratedTerrainDataEvent_Test : IEventData
+    public class InitialSetGeneratedTerrainDataEvent_Test : IEventData
     {
+        public int Width;
+        public int Height;
         public List<TerrainData> TerrainDatas;
     }
 

@@ -9205,56 +9205,58 @@ MonoBehaviour:
   Height: 10
   GenerateGroundTilemapEvent_Test:
     GroundTilemapGameObject: {fileID: 8466494616055900313, guid: c5383d4d46664a143ab1165ff97bc80a, type: 3}
-  AdditionalSetGeneratedTerrainDataEvent_Test:
+  InitialSetGeneratedTerrainDataEvent_Test:
+    Width: 10
+    Height: 10
     TerrainDatas:
     - GridPositionX: 0
       GridPositionY: 3
+      TerrainType: 0
       VisibleBlockWeight: 25
       GroundBlockWeight: 50
-      CommandBlockWeight: 0
-      SkillBlockWeight: 0
+      SkillBlockWeight: 50
     - GridPositionX: 1
       GridPositionY: 3
+      TerrainType: 0
       VisibleBlockWeight: 25
       GroundBlockWeight: 50
-      CommandBlockWeight: 0
-      SkillBlockWeight: 0
+      SkillBlockWeight: 50
     - GridPositionX: 2
       GridPositionY: 3
-      VisibleBlockWeight: 0
+      TerrainType: 0
+      VisibleBlockWeight: 25
       GroundBlockWeight: 25
-      CommandBlockWeight: 0
-      SkillBlockWeight: 0
+      SkillBlockWeight: 25
     - GridPositionX: 3
       GridPositionY: 3
-      VisibleBlockWeight: 0
+      TerrainType: 0
+      VisibleBlockWeight: 25
       GroundBlockWeight: 25
-      CommandBlockWeight: 0
-      SkillBlockWeight: 0
+      SkillBlockWeight: 25
     - GridPositionX: 4
       GridPositionY: 3
-      VisibleBlockWeight: 100
-      GroundBlockWeight: 100
-      CommandBlockWeight: 0
-      SkillBlockWeight: 0
+      TerrainType: 0
+      VisibleBlockWeight: 75
+      GroundBlockWeight: 75
+      SkillBlockWeight: 75
     - GridPositionX: 5
       GridPositionY: 3
-      VisibleBlockWeight: 100
-      GroundBlockWeight: 100
-      CommandBlockWeight: 0
-      SkillBlockWeight: 0
+      TerrainType: 0
+      VisibleBlockWeight: 75
+      GroundBlockWeight: 75
+      SkillBlockWeight: 75
     - GridPositionX: 8
       GridPositionY: 3
-      VisibleBlockWeight: 100
-      GroundBlockWeight: 100
-      CommandBlockWeight: 0
-      SkillBlockWeight: 0
+      TerrainType: 0
+      VisibleBlockWeight: 75
+      GroundBlockWeight: 75
+      SkillBlockWeight: 75
     - GridPositionX: 9
       GridPositionY: 3
-      VisibleBlockWeight: 100
-      GroundBlockWeight: 100
-      CommandBlockWeight: 0
-      SkillBlockWeight: 0
+      TerrainType: 0
+      VisibleBlockWeight: 75
+      GroundBlockWeight: 75
+      SkillBlockWeight: 75
   EnemySpawnEvent_Tests:
   - UnitID: 1000
     SpawnPosition: {x: 2, y: 0}

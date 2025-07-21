@@ -25,8 +25,8 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
             var HandlerManager = LazyReferenceHandlerManager.Instance;
             var StageTileSpawnDataDBHandler = HandlerManager.GetStaticDataHandler<StageTerrainDataDBHandler>();
 
-            // 값이 없으면 10 x 10 크기를 반환해줌.
-            StageTileSpawnDataDBHandler.TryGetStageTileSapwnDatas(stageID, out int width, out int height, out var _);
+            // 값이 없으면 0 x 0 크기를 반환해줌.
+            StageTileSpawnDataDBHandler.TryGetStageTerrainSize(stageID, out int width, out int height);
 
             this.InitialSetting(width, height);
         }
