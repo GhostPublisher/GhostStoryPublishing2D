@@ -9,7 +9,6 @@ using GameSystems.UtilitySystem;
 
 namespace GameSystems.PlayerSystem.PlayerUnitSystem
 {
-
     public class PlayerUnitMoveRangeCalculator_FourDirection : MonoBehaviour, IPlayerUnitMoveRangeCalculator
     {
         private IEventObserverNotifier EventObserverNotifier;
@@ -37,7 +36,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         {
             if (this.UnitMoveRangeCalculator_BFS_FourDirection == null) return;
 
-            Vector2Int currentPosition = this.GetCurrentGridPosition();
+            Vector2Int currentPosition = this.myPlayerUnitManagerData.PlayerUnitGridPosition();
 
             // '현재 위치'에서 '일정 이동 코스트'를 통해 도달 할 수 있는 '이동 가능 범위'를 가져옵니다. ( 이동 (육지)극복치 비교 수행 )
             // 이동 가능 범위가 없을 시 리턴함.
@@ -53,16 +52,6 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             activatePlayerUnitInteractionTileMap__Move.MoveableRange = moveableRange;
 
             this.EventObserverNotifier.NotifyEvent(activatePlayerUnitInteractionTileMap__Move);
-        }
-
-        private Vector2Int GetCurrentGridPosition()
-        {
-            Transform PlayerUnitTransform = this.myPlayerUnitManagerData.PlayerUnitTransform;
-
-            return new Vector2Int(
-                Mathf.FloorToInt(PlayerUnitTransform.position.x / 1f),
-                Mathf.FloorToInt(PlayerUnitTransform.position.y / 1f)
-            );
         }
     }
 }

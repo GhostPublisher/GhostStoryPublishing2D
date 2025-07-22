@@ -50,6 +50,8 @@ namespace GameSystems.TilemapSystem.MovementTilemap
             // 좌표가 동일하면 넘어가기.
             if (this.currentGridPosition != gridPos)
             {
+                Debug.Log($"MousePos : {cellPos}, GirdPos : {gridPos}");
+
                 // 좌표가 변경되었을 경우.
                 // 이전 좌표 값이 활성화된 상태였을 경우, PointerExit.
                 if (this.moveableRange.Contains(currentGridPosition))

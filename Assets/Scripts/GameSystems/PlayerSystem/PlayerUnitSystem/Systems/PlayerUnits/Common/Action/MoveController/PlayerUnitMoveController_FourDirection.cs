@@ -44,7 +44,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         public void OperatePlayerUnitMove(Vector2Int targetPosition)
         {
             // 이동 경로 못찾음. 또는 이동할 필요 없음.(근처?)
-            if (!this.TryGetMovePath(this.myPlayerUnitManagerData.PlayerUnitGridPosition, targetPosition, out var movePath))
+            if (!this.TryGetMovePath(this.myPlayerUnitManagerData.PlayerUnitGridPosition(), targetPosition, out var movePath))
                 return;
 
             this.IPlayerUnitSpriteRendererController.UpdateFlipX(targetPosition);
@@ -67,10 +67,17 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 
         private IEnumerator MovePlayerToTarget(List<Vector2Int> movePath)
         {
+            Debug.Log($"CurrentPosition : {this.myPlayerUnitManagerData.PlayerUnitTransform.localPosition}," +
+                $" CurrentGridPosition : {this.myPlayerUnitManagerData.PlayerUnitGridPosition()}");
+            foreach (var pos in movePath)
+            {
+                Debug.Log($"movePath : {pos}");
+            }
+
             // 경로까지 이동.
             foreach (Vector2Int nextPosition in movePath)
             {
-                Vector2Int currentGridPosition = this.myPlayerUnitManagerData.PlayerUnitGridPosition;
+                Vector2Int currentGridPosition = this.myPlayerUnitManagerData.PlayerUnitGridPosition();
 
                 if (nextPosition == currentGridPosition) continue;
                 // 두 Grid 격자의 중심을 구함.
@@ -92,24 +99,30 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         private IEnumerator MoveToNextPosition(Vector2 nextPosition)
         {
             Transform PlayerUnitTransform = this.myPlayerUnitManagerData.PlayerUnitTransform;
-            Vector3 nextWorldPosition = new Vector3(nextPosition.x * 1f, nextPosition.y * 1f, 0);
+            Vector3 nextWorldPosition = this.ConvertWorldToGrid(nextPosition);
 
-            while (Vector3.Distance(PlayerUnitTransform.position, nextWorldPosition) > 0.01f) // 목표 지점과의 거리 체크
+            while (Vector3.Distance(PlayerUnitTransform.localPosition, nextWorldPosition) > 0.01f) // 목표 지점과의 거리 체크
             {
-                PlayerUnitTransform.position = Vector3.MoveTowards(
-                    PlayerUnitTransform.position,
+                PlayerUnitTransform.localPosition = Vector3.MoveTowards(
+                    PlayerUnitTransform.localPosition,
                     nextWorldPosition,
                     this.PlayerMoveSpeed * Time.deltaTime);
 
                 yield return null; // 다음 프레임까지 대기
             }
 
-            PlayerUnitTransform.position = nextWorldPosition;
+            PlayerUnitTransform.localPosition = nextWorldPosition;
         }
 
         public void MoveForce(Vector2Int forceDirection)
         {
 
+        }
+
+        public Vector3 ConvertWorldToGrid(Vector2 targetPosition)
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance.GetUtilityHandler<UtilitySystem.IsometricCoordinateConvertor>();
+            return HandlerManager.ConvertGridToWorld(targetPosition);
         }
 
         private Vector2 GetBorderPositionOfGridCell(Vector2 currentPosition, Vector2 nextPosition)

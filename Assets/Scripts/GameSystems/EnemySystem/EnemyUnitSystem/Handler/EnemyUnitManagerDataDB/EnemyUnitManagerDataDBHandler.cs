@@ -37,7 +37,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
         {
             foreach (EnemyUnitManagerData data in this.GeneratedEnemyUnitDatas)
             {
-                if(data.EnemyUnitGridPosition == pos)
+                if(data.EnemyUnitGridPosition() == pos)
                 {
                     enemyUnitManagerData = data;
                     return true;
@@ -83,9 +83,10 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
         public EnemyUnitDynamicData EnemyUnitDynamicData { get; }
         public EnemyUnitFeatureInterfaceGroup EnemyUnitFeatureInterfaceGroup { get; }
         public Transform EnemyUnitTransform { get; }
-        public Vector2Int EnemyUnitGridPosition => new Vector2Int(
-            Mathf.RoundToInt(this.EnemyUnitTransform.position.x / 1f),
-            Mathf.RoundToInt(this.EnemyUnitTransform.position.y / 1f)
-            );
+        public Vector2Int EnemyUnitGridPosition()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance.GetUtilityHandler<UtilitySystem.IsometricCoordinateConvertor>();
+            return HandlerManager.ConvertWorldToGrid(this.EnemyUnitTransform.position);
+        }
     }
 }

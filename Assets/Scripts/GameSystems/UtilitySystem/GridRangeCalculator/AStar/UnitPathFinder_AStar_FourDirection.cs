@@ -161,7 +161,7 @@ namespace GameSystems.UtilitySystem
         }
 
         private readonly Vector2Int[] FourWay = {
-            new(1, 0), new(-1, 0), new(0, 1), new(0, -1)
+            new(1, 0), new(0, 1), new(-1, 0), new(0, -1)
         };
 
         public class PriorityQueue<TElement, TPriority> where TPriority : System.IComparable<TPriority>

@@ -50,7 +50,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             if (!this.myEnemyUnitManagerData.EnemyUnitDynamicData.TryGetSkillValidTargetRangeData(SkillSlotType.Skill01, out var ValidTargetRangeData)
                 || ValidTargetRangeData == null || ValidTargetRangeData.ValidTargetPositions == null || ValidTargetRangeData.ValidTargetPositions.Count <= 0) return false;
 
-            HashSet<Vector2Int> nearestTargets = this.GetNearestTarget(this.myEnemyUnitManagerData.EnemyUnitGridPosition, ValidTargetRangeData.ValidTargetPositions);
+            HashSet<Vector2Int> nearestTargets = this.GetNearestTarget(this.myEnemyUnitManagerData.EnemyUnitGridPosition(), ValidTargetRangeData.ValidTargetPositions);
 
             // 이럴일은 없겠지만 존나 오류임. 정상작동 실패.
             if (nearestTargets == null || nearestTargets.Count <= 0) return false;

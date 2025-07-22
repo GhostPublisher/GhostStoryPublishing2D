@@ -31,23 +31,20 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         // Sprite의 기본 방향을 통일하면 이곳은 그냥 두면 될듯.
         public void UpdateFlipX(Vector2Int targetedPosition)
         {
-//            this.SpriteRendererFrameObject.enabled = true;
+            Vector2Int direction = targetedPosition - this.myPlayerUnitManagerData.PlayerUnitGridPosition();
 
-            if (this.myPlayerUnitManagerData.PlayerUnitGridPosition.x == targetedPosition.x) return;
+            if (direction.x == direction.y) return;
 
-            if (this.myPlayerUnitManagerData.PlayerUnitGridPosition.x > targetedPosition.x && this.SpriteRendererMain.flipX)
-            {
-                this.SpriteRendererFrameObject.flipX = false;
-                this.SpriteRendererMain.flipX = false;
-            }
-
-            if (this.myPlayerUnitManagerData.PlayerUnitGridPosition.x < targetedPosition.x && !this.SpriteRendererMain.flipX)
+            if (direction.x > direction.y)
             {
                 this.SpriteRendererFrameObject.flipX = true;
                 this.SpriteRendererMain.flipX = true;
             }
-
-//            this.SpriteRendererFrameObject.enabled = false;
+            else if (direction.x < direction.y)
+            {
+                this.SpriteRendererFrameObject.flipX = false;
+                this.SpriteRendererMain.flipX = false;
+            }
         }
 
         public void OnPointerEnter()

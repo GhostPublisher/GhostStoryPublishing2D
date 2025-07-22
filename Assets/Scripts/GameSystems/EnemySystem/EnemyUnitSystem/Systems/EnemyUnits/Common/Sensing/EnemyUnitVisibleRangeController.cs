@@ -33,7 +33,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
         {
             if (this.VisibilityRangeCalculator == null) return;
 
-            var updatedVisibleRange = this.VisibilityRangeCalculator.GetFilteredVisibleRange_Enemy(this.myEnemyUnitManagerData.EnemyUnitGridPosition,
+            var updatedVisibleRange = this.VisibilityRangeCalculator.GetFilteredVisibleRange_Enemy(this.myEnemyUnitManagerData.EnemyUnitGridPosition(),
                 this.myEnemyUnitManagerData.EnemyUnitStaticData.VisibleSize, this.myEnemyUnitManagerData.EnemyUnitStaticData.VisibleOvercomeWeight);
 
             this.myEnemyUnitRangeData_Visible.VisibleRanges = updatedVisibleRange;

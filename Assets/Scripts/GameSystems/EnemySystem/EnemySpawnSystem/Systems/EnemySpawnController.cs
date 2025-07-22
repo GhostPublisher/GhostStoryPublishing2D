@@ -20,6 +20,8 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
         private EnemyUnitManagerDataDBHandler EnemyUnitManagerDataDBHandler;
         private PlayerUnitManagerDataDBHandler PlayerUnitManagerDataDBHandler;
 
+        private UtilitySystem.IsometricCoordinateConvertor IsometricCoordinateConvertor;
+
         private EnemySpawnData_Turn[] EnemySpawnData_Turns;
         private EnemySpawnData_Trigger[] EnemySpawnData_Triggers;
 
@@ -40,6 +42,8 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
             this.GeneratedTileDataGroupHandler = HandlerManager.GetDynamicDataHandler<GeneratedTerrainDataDBHandler>();
             this.EnemyUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<EnemyUnitManagerDataDBHandler>();
             this.PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerUnitManagerDataDBHandler>();
+
+            this.IsometricCoordinateConvertor = HandlerManager.GetUtilityHandler<UtilitySystem.IsometricCoordinateConvertor>();
         }
 
         public void AllocateStageEnemySpawnData(int stageID)
@@ -181,7 +185,7 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
             // Enemy Unit 생성 및 Hierarchy 배치.
             GameObject createdEnemyUnit = Object.Instantiate(prefab, this.EnemyUnitObjectParent);
             // 위치 배치.
-            createdEnemyUnit.transform.position = this.ConvertGridToWorld(spawnPosition);
+            createdEnemyUnit.transform.position = this.IsometricCoordinateConvertor.ConvertGridToWorld(spawnPosition);
 
             // Enemy Unit 초기 할당 성공.
             if(createdEnemyUnit.GetComponent<IEnemyUnitManager>().TryInitialSetting(out var data))
@@ -194,11 +198,6 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
             {
                 GameObject.Destroy(createdEnemyUnit);
             }
-        }
-
-        private Vector3 ConvertGridToWorld(Vector2Int girdPosition)
-        {
-            return new Vector3(girdPosition.x * 1f, girdPosition.y * 1f, 0);
         }
 
         public void ClearGameObjectAndDatas()

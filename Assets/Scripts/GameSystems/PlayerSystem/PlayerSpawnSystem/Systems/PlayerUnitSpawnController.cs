@@ -71,7 +71,7 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
             // 객체 생성
             GameObject createdPlayerUnit = Object.Instantiate(prefabData.UnitPrefab, this.PlayerUnitObjectParent);
             // 객체 위치 지정.
-            createdPlayerUnit.transform.position = this.ConvertGridToWorld(spawnPosition);
+            createdPlayerUnit.transform.localPosition = this.GetGridPositionToWorld(spawnPosition);
 
             // Player Unit 초기 할당.
             if (createdPlayerUnit.GetComponent<IPlayerUnitManager>().TryInitialSetting(out var newPlayerUnitManagerData))
@@ -101,9 +101,12 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
             }
         }
         // Convert 작업.
-        private Vector3 ConvertGridToWorld(Vector2Int girdPosition)
+        private Vector3 GetGridPositionToWorld(Vector2Int targetPosition)
         {
-            return new Vector3(girdPosition.x * 1f, girdPosition.y * 1f, 0);
+            float worldX = (targetPosition.x - targetPosition.y) * (1 / 2f);
+            float worldY = (targetPosition.x + targetPosition.y) * (0.5f / 2f);
+
+            return new Vector3(worldX, worldY, 0);
         }
     }
 }

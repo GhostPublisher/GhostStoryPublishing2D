@@ -74,7 +74,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             var BaseRange = this.GetAllRotatedDirections(this.SkillTargetingRange);
 
             var UpdateSkillTargetingRange = this.SkillRangeCalculator_AngleOcclusion.GetFilteredSkillRange_Enemy(
-                this.myEnemyUnitManagerData.EnemyUnitGridPosition, BaseRange, this.SkillTargetingOvercomeWeight);
+                this.myEnemyUnitManagerData.EnemyUnitGridPosition(), BaseRange, this.SkillTargetingOvercomeWeight);
 
             this.skillFilteredRange.FilteredRange = UpdateSkillTargetingRange;
         }
@@ -110,7 +110,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
                 for (int i = 0; i < 4; i++)
                 {
-                    result.Add(this.myEnemyUnitManagerData.EnemyUnitGridPosition + current);
+                    result.Add(this.myEnemyUnitManagerData.EnemyUnitGridPosition() + current);
                     current = new Vector2Int(-current.y, current.x); // 시계 반대 방향 90도 회전
                 }
             }

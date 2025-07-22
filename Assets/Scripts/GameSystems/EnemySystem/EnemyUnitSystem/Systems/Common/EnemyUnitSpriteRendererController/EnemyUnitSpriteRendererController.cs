@@ -28,14 +28,14 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
         public void UpdateFlipX(Vector2Int targetedPosition)
         {
-            if (this.myEnemyUnitManagerData.EnemyUnitGridPosition.x == targetedPosition.x) return;
+            if (this.myEnemyUnitManagerData.EnemyUnitGridPosition().x == targetedPosition.x) return;
 
-            if (this.myEnemyUnitManagerData.EnemyUnitGridPosition.x > targetedPosition.x && this.SpriteRendererMain.flipX)
+            if (this.myEnemyUnitManagerData.EnemyUnitGridPosition().x > targetedPosition.x && this.SpriteRendererMain.flipX)
             {
                 this.SpriteRendererMain.flipX = false;
             }
 
-            if (this.myEnemyUnitManagerData.EnemyUnitGridPosition.x < targetedPosition.x && !this.SpriteRendererMain.flipX)
+            if (this.myEnemyUnitManagerData.EnemyUnitGridPosition().x < targetedPosition.x && !this.SpriteRendererMain.flipX)
             {
                 this.SpriteRendererMain.flipX = true;
             }

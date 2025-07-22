@@ -61,7 +61,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             {
                 tempPath.Clear();
                 tempPath = this.UnitPathFinder_AStar_FourDirection.GetMovePath(
-                    this.myEnemyUnitManagerData.EnemyUnitGridPosition, targetPosition, this.myEnemyUnitManagerData.EnemyUnitStaticData.GroundOvercomeWeight);
+                    this.myEnemyUnitManagerData.EnemyUnitGridPosition(), targetPosition, this.myEnemyUnitManagerData.EnemyUnitStaticData.GroundOvercomeWeight);
 
                 if (pathCount > tempPath.Count)
                 {
@@ -101,7 +101,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
         private IEnumerator MovePlayerToTarget(Vector2Int nextPosition)
         {
-            Vector2Int currentGridPosition = this.myEnemyUnitManagerData.EnemyUnitGridPosition;
+            Vector2Int currentGridPosition = this.myEnemyUnitManagerData.EnemyUnitGridPosition();
 
             // 두 Grid 격자의 중심을 구함.
             Vector2 borderPosition = this.GetBorderPositionOfGridCell(currentGridPosition, nextPosition);
@@ -123,7 +123,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
         private IEnumerator MoveToNextPosition(Vector2 nextPosition)
         {
             Transform EnemyUnitTransform = this.myEnemyUnitManagerData.EnemyUnitTransform;
-            Vector3 nextWorldPosition = new Vector3(nextPosition.x * 1f, nextPosition.y * 1f, 0);
+            Vector3 nextWorldPosition = this.ConvertWorldToGrid(nextPosition);
 
             while (Vector3.Distance(EnemyUnitTransform.position, nextWorldPosition) > 0.01f) // 목표 지점과의 거리 체크
             {
@@ -138,6 +138,11 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             EnemyUnitTransform.position = nextWorldPosition;
         }
 
+        public Vector3 ConvertWorldToGrid(Vector2 targetPosition)
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance.GetUtilityHandler<UtilitySystem.IsometricCoordinateConvertor>();
+            return HandlerManager.ConvertGridToWorld(targetPosition);
+        }
         private Vector2 GetBorderPositionOfGridCell(Vector2 currentPosition, Vector2 nextPosition)
         {
             return currentPosition + (nextPosition - currentPosition) * 0.51f;

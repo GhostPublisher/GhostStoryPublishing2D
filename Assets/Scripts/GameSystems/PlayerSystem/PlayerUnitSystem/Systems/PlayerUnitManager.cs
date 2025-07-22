@@ -142,7 +142,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         // Player Unit의 현재 위치를 기준으로, 주변 시야 범위를 갱신합니다.
         public void UpdateVisibleRange()
         {
-            this.PlayerUnitVisibilityController.UpdateVisibleRange(this.myPlayerUnitManagerData.PlayerUnitGridPosition);
+            this.PlayerUnitVisibilityController.UpdateVisibleRange(this.myPlayerUnitManagerData.PlayerUnitGridPosition());
         }
 
         // Player Unit의 현재 위치를 기준으로, 현재 이동 가능 범위를 갱신합니다.

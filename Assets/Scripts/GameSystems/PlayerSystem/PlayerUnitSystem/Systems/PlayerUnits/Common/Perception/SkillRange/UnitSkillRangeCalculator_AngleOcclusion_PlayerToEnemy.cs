@@ -57,7 +57,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             var BaseRange = this.GetAllRotatedDirections(this.SkillTargetingRange);
 
             var UpdateSkillTargetingRange = this.SkillRangeCalculator_AngleOcclusion.GetFilteredSkillRange_Player(
-                this.myPlayerUnitManagerData.PlayerUnitGridPosition, BaseRange, this.SkillTargetingOvercomeWeight);
+                this.myPlayerUnitManagerData.PlayerUnitGridPosition(), BaseRange, this.SkillTargetingOvercomeWeight);
 
             // Enemy 위치만 가져옴.
             var targetPositions = this.GetEnemyPositions(UpdateSkillTargetingRange);
@@ -68,7 +68,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             activateFilteredSkillRangeTilemapEvent.PlayerUniqueID = this.myPlayerUnitManagerData.UniqueID;
             activateFilteredSkillRangeTilemapEvent.SkillID = this.skillID;
 
-            activateFilteredSkillRangeTilemapEvent.CurrentPosition = this.myPlayerUnitManagerData.PlayerUnitGridPosition;
+            activateFilteredSkillRangeTilemapEvent.CurrentPosition = this.myPlayerUnitManagerData.PlayerUnitGridPosition();
             activateFilteredSkillRangeTilemapEvent.FilteredSkillRange = UpdateSkillTargetingRange;
             activateFilteredSkillRangeTilemapEvent.SkillTargetPositions = targetPositions;
 
@@ -112,7 +112,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         // Target - Current 좌표 기준으로 x > 0 이면 front, y > 0 이면 left 방향이다.
         private HashSet<Vector2Int> GetBaseImpactRange(Vector2Int targetedPosition)
         {
-            Vector2Int direction = targetedPosition - this.myPlayerUnitManagerData.PlayerUnitGridPosition;
+            Vector2Int direction = targetedPosition - this.myPlayerUnitManagerData.PlayerUnitGridPosition();
 
             // 방향 기준 계산
             bool isFront = direction.x > 0;
@@ -157,7 +157,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 
                 for (int i = 0; i < 4; i++)
                 {
-                    result.Add(this.myPlayerUnitManagerData.PlayerUnitGridPosition +  current);
+                    result.Add(this.myPlayerUnitManagerData.PlayerUnitGridPosition() +  current);
                     current = new Vector2Int(-current.y, current.x); // 시계 반대 방향 90도 회전
                 }
             }

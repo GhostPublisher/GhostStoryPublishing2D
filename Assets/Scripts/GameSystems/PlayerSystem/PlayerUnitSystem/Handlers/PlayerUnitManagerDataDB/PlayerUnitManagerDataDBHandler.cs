@@ -39,7 +39,7 @@ namespace GameSystems.PlayerSystem
         {
             foreach (PlayerUnitManagerData data in this.PlayerUnitManagerDatas)
             {
-                if (data.PlayerUnitGridPosition == pos)
+                if (data.PlayerUnitGridPosition() == pos)
                 {
                     playerUnitManagerData = data;
                     return true;
@@ -87,9 +87,10 @@ namespace GameSystems.PlayerSystem
         public PlayerUnitFeatureInterfaceGroup PlayerUnitFeatureInterfaceGroup { get; }
         public Transform PlayerUnitTransform { get; }
 
-        public Vector2Int PlayerUnitGridPosition => new Vector2Int(
-            Mathf.RoundToInt(this.PlayerUnitTransform.position.x / 1f),
-            Mathf.RoundToInt(this.PlayerUnitTransform.position.y / 1f)
-            );
+        public Vector2Int PlayerUnitGridPosition()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance.GetUtilityHandler <UtilitySystem.IsometricCoordinateConvertor>();
+            return HandlerManager.ConvertWorldToGrid(this.PlayerUnitTransform.position);
+        }
     }
 }
