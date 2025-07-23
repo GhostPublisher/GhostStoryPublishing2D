@@ -31,7 +31,7 @@ namespace Example00
         [SerializeField] private int Height;
 
         [Header("지형 Tilemap")]
-        [SerializeField] private GenerateGroundTilemapEvent_Test GenerateGroundTilemapEvent_Test;
+        [SerializeField] private InitialSetStageVisualResourcesData_EventTest GenerateGroundTilemapEvent_Test;
 
         [Header("Terrain Data 가중치 설정")]
         [SerializeField] private InitialSetGeneratedTerrainDataEvent_Test InitialSetGeneratedTerrainDataEvent_Test;
@@ -61,7 +61,7 @@ namespace Example00
         }
         public void Notify_Clear_GroundTilemap()
         {
-            ClearGroundTilemapEvent ClearGroundTilemapEvent = new();
+            ClearStageVisualResourcesDataEvent ClearGroundTilemapEvent = new();
             this.EventObserverNotifier.NotifyEvent(ClearGroundTilemapEvent);
         }
 

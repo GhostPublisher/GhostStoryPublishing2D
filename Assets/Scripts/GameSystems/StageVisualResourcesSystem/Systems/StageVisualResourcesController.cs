@@ -4,11 +4,11 @@ using Foundations.Architecture.ReferencesHandler;
 
 namespace GameSystems.TerrainSystem
 {
-    public class GroundTilemapController : MonoBehaviour
+    public class StageVisualResourcesController : MonoBehaviour
     {
         private StageGroundTilemapDataDBHandler StageGroundTilemapDataDBHandler;
 
-        [SerializeField] private Transform GroundTileMapObjectParent;
+        [SerializeField] private Transform FloorTileMapObjectParent;
 
         private void Awake()
         {
@@ -16,20 +16,20 @@ namespace GameSystems.TerrainSystem
             this.StageGroundTilemapDataDBHandler = HandlerManager.GetStaticDataHandler<StageGroundTilemapDataDBHandler>();
         }
 
-        public void InitialSetGroundTilemap(int stageID)
+        public void InitialSetStageVisualResources(int stageID)
         {
             this.StageGroundTilemapDataDBHandler.TryGetStageVisualResourcesData(stageID, out var data);
 
-            this.GenerateGroundTilemap(data.GroundTileMapPrefab);
+            this.GenerateFloorTilemap(data.GroundTileMapPrefab);
         }
-        public void GenerateGroundTilemap(GameObject tilemapPrefab)
+        public void GenerateFloorTilemap(GameObject tilemapPrefab)
         {
-            Instantiate(tilemapPrefab, this.GroundTileMapObjectParent);
+            Instantiate(tilemapPrefab, this.FloorTileMapObjectParent);
         }
 
-        public void ClearGroundTilemap()
+        public void ClearFloorTilemap()
         {
-            foreach (Transform child in GroundTileMapObjectParent)
+            foreach (Transform child in FloorTileMapObjectParent)
             {
                 GameObject.Destroy(child.gameObject);
             }

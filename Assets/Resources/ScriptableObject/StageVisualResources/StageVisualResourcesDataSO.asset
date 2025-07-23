@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2a841f80c00fe94284b33976cd1b2f6, type: 3}
-  m_Name: StageGroundTileMapDataGroup
+  m_Script: {fileID: 11500000, guid: acead076123f1784281e1a24aeec172d, type: 3}
+  m_Name: StageVisualResourcesDataSO
   m_EditorClassIdentifier: 
-  StageGroundTileMapDatas:
+  StageVisualResourcesDatas:
   - StageID: 0
-    GroundTileMapPrefab: {fileID: 0}
+    GroundTileMapPrefab: {fileID: 3355634361142060409, guid: 834da2647d1563b47b5704de6e066264, type: 3}

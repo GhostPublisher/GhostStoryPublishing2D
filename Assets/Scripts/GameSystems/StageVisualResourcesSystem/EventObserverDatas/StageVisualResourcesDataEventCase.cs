@@ -7,11 +7,11 @@ using Foundations.Architecture.EventObserver;
 namespace GameSystems.TerrainSystem
 {
     [Serializable]
-    public class GenerateGroundTilemapEvent_Test : IEventData
+    public class InitialSetStageVisualResourcesData_EventTest : IEventData
     {
         public GameObject GroundTilemapGameObject;
     }
 
     [Serializable]
-    public class ClearGroundTilemapEvent : IEventData { }
+    public class ClearStageVisualResourcesDataEvent : IEventData { }
 }

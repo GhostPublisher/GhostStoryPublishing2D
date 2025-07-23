@@ -3427,7 +3427,7 @@ GameObject:
   - component: {fileID: 668749500}
   - component: {fileID: 668749499}
   m_Layer: 0
-  m_Name: GroundTilemap
+  m_Name: FloorTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3460,7 +3460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3396d3d7f53cf4c88f5c58b945527f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundTilemapController: {fileID: 668749500}
+  StageVisualResourcesController: {fileID: 668749500}
 --- !u!114 &668749500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3473,7 +3473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead3c55b7c2397046a29c8930df22566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundTileMapObjectParent: {fileID: 1887021904}
+  FloorTileMapObjectParent: {fileID: 1887021904}
 --- !u!1 &675304362
 GameObject:
   m_ObjectHideFlags: 0
