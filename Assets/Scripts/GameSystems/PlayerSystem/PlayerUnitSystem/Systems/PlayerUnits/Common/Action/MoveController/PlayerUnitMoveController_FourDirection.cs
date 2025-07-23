@@ -47,7 +47,6 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             if (!this.TryGetMovePath(this.myPlayerUnitManagerData.PlayerUnitGridPosition(), targetPosition, out var movePath))
                 return;
 
-            this.IPlayerUnitSpriteRendererController.UpdateFlipX(targetPosition);
             StartCoroutine(this.MovePlayerToTarget(movePath));
         }
         private bool TryGetMovePath(Vector2Int currentPosition, Vector2Int targetPosition, out List<Vector2Int> movePath)
@@ -67,22 +66,18 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 
         private IEnumerator MovePlayerToTarget(List<Vector2Int> movePath)
         {
-            Debug.Log($"CurrentPosition : {this.myPlayerUnitManagerData.PlayerUnitTransform.localPosition}," +
-                $" CurrentGridPosition : {this.myPlayerUnitManagerData.PlayerUnitGridPosition()}");
-            foreach (var pos in movePath)
-            {
-                Debug.Log($"movePath : {pos}");
-            }
-
             // 경로까지 이동.
             foreach (Vector2Int nextPosition in movePath)
             {
                 Vector2Int currentGridPosition = this.myPlayerUnitManagerData.PlayerUnitGridPosition();
-
                 if (nextPosition == currentGridPosition) continue;
+
                 // 두 Grid 격자의 중심을 구함.
                 Vector2 borderPosition = this.GetBorderPositionOfGridCell(currentGridPosition, nextPosition);
 
+                // 이동 방향을 향해 'FilpX' 변경.
+                this.IPlayerUnitSpriteRendererController.UpdateFlipX(nextPosition);
+                // Walk 애니메이션
                 this.IPlayerUnitAnimationController.OperateAnimation(PlayerUnitAnimationType.IsWalk);
                 // 두 Grid 격자의 중심 지점까지 이동.
                 yield return StartCoroutine(this.MoveToNextPosition(borderPosition));

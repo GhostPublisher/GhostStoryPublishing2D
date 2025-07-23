@@ -18,7 +18,7 @@ namespace GameSystems.TerrainSystem
 
         public void InitialSetGroundTilemap(int stageID)
         {
-            this.StageGroundTilemapDataDBHandler.TryGetStageGroundTileMapData(stageID, out var data);
+            this.StageGroundTilemapDataDBHandler.TryGetStageVisualResourcesData(stageID, out var data);
 
             this.GenerateGroundTilemap(data.GroundTileMapPrefab);
         }
