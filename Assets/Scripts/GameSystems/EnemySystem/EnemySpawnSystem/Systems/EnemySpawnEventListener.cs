@@ -20,15 +20,11 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
             // Stage ID에 대한 해당 Stage Enemy 생성 정보 할당.
             this.EventObserverLinker.RegisterSubscriberListener<EnemySpawnInitialSettingEvent>();
 
-            // '새로운 Turn 사건'으로 생성되는 Enemy 사건.
-            this.EventObserverLinker.RegisterSubscriberListener<EnemySpawnSettingEvent_Turn>();
             // TurnID 기반 Enemy 생성.
-            this.EventObserverLinker.RegisterSubscriberListener<EnemySpawnContinueEvent_Turn>();
+            this.EventObserverLinker.RegisterSubscriberListener<EnemySpawnEvent_Turn>();
 
-            // '특정 사건을 Trigger로 하는 사건'으로 생성되는 Enemy.
-            this.EventObserverLinker.RegisterSubscriberListener<EnemySpawnSettingEvent_Trigger>();
             // TriggerID 기반 Enemy 생성.
-            this.EventObserverLinker.RegisterSubscriberListener<EnemySpawnContinueEvent_Trigger>();
+            this.EventObserverLinker.RegisterSubscriberListener<EnemySpawnEvent_Trigger>();
 
             // 생성하던 Enemy 계속 생성.
             this.EventObserverLinker.RegisterSubscriberListener<EnemySpawnEvent_Continue>();
@@ -51,27 +47,22 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
                 // Stage ID에 대한 해당 Stage Enemy 생성 정보 할당.
                 case EnemySpawnInitialSettingEvent:
                     var data01 = (EnemySpawnInitialSettingEvent)eventData;
-                    this.EnemySpawnController.AllocateStageEnemySpawnData(data01.StageID);
-                    break;
-                // Turn의 진행에 따른 Enemy 생성.
-                case EnemySpawnSettingEvent_Turn:
-                    var data02 = (EnemySpawnSettingEvent_Turn)eventData;
-                    this.EnemySpawnController.AllocateTriggerEnemySpawnData_Turn(data02.TurnID);
+                    this.EnemySpawnController.InitialSetting(data01.StageID);
                     break;
                 // TurnID 기반 Enemy 생성.
-                case EnemySpawnContinueEvent_Turn:
-                    this.EnemySpawnController.GenerateEnemy_Turn();
+                case EnemySpawnEvent_Turn:
+                    var data02 = (EnemySpawnEvent_Turn)eventData;
+                    this.EnemySpawnController.AllocateTriggerEnemySpawnData_Turn(data02.TurnID);
+                    this.EnemySpawnController.GenerateEnemyUnit();
                     break;
-                // 유저 행동에 의한 Enemy 생성.
-                case EnemySpawnSettingEvent_Trigger:
-                    var data03 = (EnemySpawnSettingEvent_Trigger)eventData;
+                // Trigger 기반 Enemy 생성.
+                case EnemySpawnEvent_Trigger:
+                    var data03 = (EnemySpawnEvent_Trigger)eventData;
                     this.EnemySpawnController.AllocateTriggerEnemySpawnData_Trigger(data03.TriggerID);
-                    break;
-                // TriggerID 기반 Enemy 생성.
-                case EnemySpawnContinueEvent_Trigger:
-                    this.EnemySpawnController.GenerateEnemy_Trigger();
+                    this.EnemySpawnController.GenerateEnemyUnit();
                     break;
                 case EnemySpawnEvent_Continue:
+                    this.EnemySpawnController.GenerateEnemyUnit();
                     break;
                 case EnemySpawnEvent_Test:
                     EnemySpawnEvent_Test enemySpawnEvent_Test = (EnemySpawnEvent_Test)eventData;

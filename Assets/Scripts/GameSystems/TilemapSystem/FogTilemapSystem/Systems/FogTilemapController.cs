@@ -36,11 +36,7 @@ namespace GameSystems.TilemapSystem.FogTilemap
         }
         public void InitialSetting(int width, int height)
         {
-            var HandlerManager = LazyReferenceHandlerManager.Instance;
-            var TilemapDataGroup = HandlerManager.GetDynamicDataHandler<TilemapDataGroupHandler>();
-
             this.myFogTilemapData = new FogTilemapData(width, height);
-            TilemapDataGroup.FogTilemapData = this.myFogTilemapData;
 
             for (int x = 0; x < width; ++x)
             {

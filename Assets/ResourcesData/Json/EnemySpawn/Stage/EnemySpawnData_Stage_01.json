@@ -1,0 +1,19 @@
+{
+  "EnemySpawnDatas": [
+    {
+      "UnitID": 1001,
+      "EnemySpawnPositionX": 3,
+      "EnemySpawnPositionY": 5
+    },
+    {
+      "UnitID": 1000,
+      "EnemySpawnPositionX": 4,
+      "EnemySpawnPositionY": 4
+    },
+    {
+      "UnitID": 1001,
+      "EnemySpawnPositionX": 5,
+      "EnemySpawnPositionY": 5
+    }
+  ]
+}

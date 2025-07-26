@@ -8,6 +8,12 @@ using Foundations.Architecture.EventObserver;
 namespace GameSystems.TilemapSystem.SkillRangeTilemap
 {
     [Serializable]
+    public class InitialSetSkillRangeTilemapEvent : IEventData
+    {
+        public int StageID;
+    }
+
+    [Serializable]
     public class InitialSetSkillRangeTilemapEvent_Raw : IEventData
     {
         public int Width;

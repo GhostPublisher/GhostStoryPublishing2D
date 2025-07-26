@@ -32,16 +32,20 @@ namespace GameSystems.TilemapSystem.MovementTilemap
         {
             switch (eventData)
             {
+                case InitialSetMovementTilemapEvent:
+                    var data01 = (InitialSetMovementTilemapEvent)eventData;
+                    this.MovementTilemapSystem.InitialSetting(data01.StageID);
+                    break;
                 case InitialSetMovementTilemapEvent_Raw:
-                    var data01 = (InitialSetMovementTilemapEvent_Raw)eventData;
-                    this.MovementTilemapSystem.InitialSetting(data01.Width, data01.Height);
+                    var data02 = (InitialSetMovementTilemapEvent_Raw)eventData;
+                    this.MovementTilemapSystem.InitialSetting(data02.Width, data02.Height);
                     break;
                 case ActivateMovementTilemapEvent:
-                    var data02 = (ActivateMovementTilemapEvent)eventData;
-                    this.MovementTilemapSystem.ActivateMovementTilemap(data02.PlayerUniqueID, data02.CurrentPosition, data02.MoveableRange);
+                    var data03 = (ActivateMovementTilemapEvent)eventData;
+                    this.MovementTilemapSystem.ActivateMovementTilemap(data03.PlayerUniqueID, data03.CurrentPosition, data03.MoveableRange);
                     break;
                 case DisActivateMovementTilemapEvent:
-                    var data03 = (ActivateMovementTilemapEvent)eventData;
+                    var data04 = (ActivateMovementTilemapEvent)eventData;
                     this.MovementTilemapSystem.DisActivateMovementTilemap();
                     break;
                 default:

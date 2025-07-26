@@ -11,9 +11,19 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
     {
         [SerializeField] private List<StageEnemySpawnData_Trigger> StageEnemySpawnData_Triggers;
 
-        public StageEnemySpawnData_Trigger GetStageEnemySpawnData_Trigger(int stageID)
+        public bool TryGetStageEnemySpawnData_Turn(int stageID, out StageEnemySpawnData_Trigger stageEnemySpawnData_Trigger)
         {
-            return this.StageEnemySpawnData_Triggers.Find(entry => entry.StageID == stageID);
+            foreach (var data in this.StageEnemySpawnData_Triggers)
+            {
+                if (data.StageID == stageID)
+                {
+                    stageEnemySpawnData_Trigger = data;
+                    return true;
+                }
+            }
+
+            stageEnemySpawnData_Trigger = null;
+            return false;
         }
     }
 
@@ -23,5 +33,19 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
         public int StageID;
 
         public TextAsset EnemySpawnData_TriggerJsonFile;
+    }
+
+    [Serializable]
+    public class EnemySpawnData_Trigger
+    {
+        public int TriggerID;
+
+        public EnemySpawnData[] EnemySpawnDatas;
+    }
+
+    [Serializable]
+    public class EnemySpawnData_TriggerArrayWrapper
+    {
+        public EnemySpawnData_Trigger[] EnemySpawnData_Triggers;
     }
 }

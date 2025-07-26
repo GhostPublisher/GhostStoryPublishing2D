@@ -3,7 +3,7 @@ using UnityEngine;
 
 using Foundations.Architecture.EventObserver;
 
-namespace GameSystems.TerrainSystem
+namespace GameSystems.StageVisualSystem
 {
     public class StageVisualResourcesControllerEventListener : MonoBehaviour, IEventObserverListener
     {
@@ -18,6 +18,7 @@ namespace GameSystems.TerrainSystem
 
         private void OnEnable()
         {
+            this.EventObserverLinker.RegisterSubscriberListener<InitialSetStageVisualResourcesData>();
             this.EventObserverLinker.RegisterSubscriberListener<InitialSetStageVisualResourcesData_EventTest>();
             this.EventObserverLinker.RegisterSubscriberListener<ClearStageVisualResourcesDataEvent>();
         }
@@ -31,9 +32,13 @@ namespace GameSystems.TerrainSystem
         {
             switch (eventData)
             {
+                case InitialSetStageVisualResourcesData:
+                    var data01 = (InitialSetStageVisualResourcesData)eventData;
+                    this.StageVisualResourcesController.InitialSetStageVisualResources(data01.StageID);
+                    break;
                 case InitialSetStageVisualResourcesData_EventTest:
-                    var data01 = (InitialSetStageVisualResourcesData_EventTest)eventData;
-                    this.StageVisualResourcesController.GenerateFloorTilemap(data01.GroundTilemapGameObject);
+                    var data02 = (InitialSetStageVisualResourcesData_EventTest)eventData;
+                    this.StageVisualResourcesController.GenerateVisualResourcesTilemap(data02.StageVisualResourcesData);
                     break;
                 case ClearStageVisualResourcesDataEvent:
                     this.StageVisualResourcesController.ClearFloorTilemap();

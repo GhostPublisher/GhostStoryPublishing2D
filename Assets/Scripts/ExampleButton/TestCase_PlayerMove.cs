@@ -9,6 +9,7 @@ using Foundations.Architecture.EventObserver;
 using GameSystems.UtilitySystem;
 
 using GameSystems.TerrainSystem;
+using GameSystems.StageVisualSystem;
 using GameSystems.TilemapSystem.FogTilemap;
 using GameSystems.TilemapSystem.MovementTilemap;
 

@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageTerrainDatas:
   - StageID: 0
-    Width: 0
-    Height: 0
-    StageTerrainDataJsonFile: {fileID: 0}
+    Width: 10
+    Height: 10
+    StageTerrainDataJsonFile: {fileID: 4900000, guid: 16f358a4e57e6904281f585f0ee8f9f7, type: 3}
+  - StageID: 1
+    Width: 20
+    Height: 20
+    StageTerrainDataJsonFile: {fileID: 4900000, guid: 83b9bac886b48774f833a9746558ad13, type: 3}

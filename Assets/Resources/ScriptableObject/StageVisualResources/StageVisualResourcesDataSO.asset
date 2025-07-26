@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StageVisualResourcesDatas:
   - StageID: 0
-    GroundTileMapPrefab: {fileID: 3355634361142060409, guid: 834da2647d1563b47b5704de6e066264, type: 3}
+    GroundTileMapPrefab: {fileID: 3884682488701984171, guid: 8b8ec13d50721224aa7e79d525eb090c, type: 3}
+    StructureTileMapPrefab: {fileID: 0}
+  - StageID: 1
+    GroundTileMapPrefab: {fileID: 3815281452652677898, guid: 817c47f35bff26b4ebef3a4605e3dbe8, type: 3}
+    StructureTileMapPrefab: {fileID: 8848757489157790428, guid: 374f313a4c8d089478fbf48fc43e9402, type: 3}

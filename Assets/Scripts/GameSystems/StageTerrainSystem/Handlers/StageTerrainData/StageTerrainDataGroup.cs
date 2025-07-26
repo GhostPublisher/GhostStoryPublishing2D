@@ -68,6 +68,8 @@ namespace GameSystems.TerrainSystem
     public enum TerrainType
     {
         None = 0,
+        Impassable = 1,
+        Swamp = 2,
     }
 
     [Serializable]

@@ -3460,7 +3460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3396d3d7f53cf4c88f5c58b945527f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundTilemapController: {fileID: 668749500}
+  StageVisualResourcesController: {fileID: 668749500}
 --- !u!114 &668749500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3473,7 +3473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead3c55b7c2397046a29c8930df22566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundTileMapObjectParent: {fileID: 1887021904}
+  GridTransformParent: {fileID: 1887021904}
 --- !u!1 &675304362
 GameObject:
   m_ObjectHideFlags: 0
@@ -5971,6 +5971,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978425366}
   m_CullTransparentMesh: 1
+--- !u!1 &987041300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 987041301}
+  - component: {fileID: 987041303}
+  - component: {fileID: 987041302}
+  m_Layer: 0
+  m_Name: BattleSceneFlow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &987041301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987041300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2043011267}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &987041302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987041300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea76dfaa1c8c43a43a0e5113e100392e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &987041303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987041300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5933fc6c84bebe49bfb3e78347040a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BattleSceneFlowController: {fileID: 987041302}
 --- !u!1 &1007025937
 GameObject:
   m_ObjectHideFlags: 0
@@ -8533,7 +8591,10 @@ MonoBehaviour:
   Width: 10
   Height: 10
   GenerateGroundTilemapEvent_Test:
-    GroundTilemapGameObject: {fileID: 3355634361142060409, guid: 834da2647d1563b47b5704de6e066264, type: 3}
+    StageVisualResourcesData:
+      StageID: 0
+      GroundTileMapPrefab: {fileID: 0}
+      StructureTileMapPrefab: {fileID: 0}
   InitialSetGeneratedTerrainDataEvent_Test:
     Width: 10
     Height: 10
@@ -10922,6 +10983,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 987041301}
   - {fileID: 1288212182}
   - {fileID: 287144551}
   - {fileID: 2131452110}

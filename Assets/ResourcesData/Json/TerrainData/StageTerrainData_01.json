@@ -1,0 +1,3204 @@
+﻿{
+    "TerrainDatas": [
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 4,
+            "TerrainType": 1,
+            "VisibleBlockWeight": 100,
+            "GroundBlockWeight": 100,
+            "SkillBlockWeight": 100
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 0,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 4,
+            "TerrainType": 1,
+            "VisibleBlockWeight": 100,
+            "GroundBlockWeight": 100,
+            "SkillBlockWeight": 100
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 1,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 4,
+            "TerrainType": 1,
+            "VisibleBlockWeight": 50,
+            "GroundBlockWeight": 100,
+            "SkillBlockWeight": 50
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 2,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 3,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 4,
+            "TerrainType": 1,
+            "VisibleBlockWeight": 50,
+            "GroundBlockWeight": 100,
+            "SkillBlockWeight": 50
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 4,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 4,
+            "TerrainType": 1,
+            "VisibleBlockWeight": 100,
+            "GroundBlockWeight": 100,
+            "SkillBlockWeight": 100
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 5,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 4,
+            "TerrainType": 1,
+            "VisibleBlockWeight": 100,
+            "GroundBlockWeight": 100,
+            "SkillBlockWeight": 100
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 6,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 7,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 8,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 9,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 10,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 11,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 12,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 13,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 14,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 15,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 16,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 17,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 18,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 0,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 1,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 2,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 3,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 4,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 5,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 6,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 7,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 8,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 9,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 10,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 11,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 12,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 13,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 14,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 15,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 16,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 17,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 18,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        },
+        {
+            "GridPositionX": 19,
+            "GridPositionY": 19,
+            "TerrainType": 0,
+            "VisibleBlockWeight": 0,
+            "GroundBlockWeight": 0,
+            "SkillBlockWeight": 0
+        }
+    ]
+}

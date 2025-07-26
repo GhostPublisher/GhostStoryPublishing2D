@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace GameSystems.TerrainSystem
+namespace GameSystems.StageVisualSystem
 {
     [Serializable]
     [CreateAssetMenu(menuName = "ScriptableObject/StageVisualResources/StageVisualResourcesDataSO", fileName = "StageVisualResourcesDataSO")]
@@ -34,5 +34,6 @@ namespace GameSystems.TerrainSystem
         public int StageID;
 
         public GameObject GroundTileMapPrefab;
+        public GameObject StructureTileMapPrefab;
     }
 }

@@ -4,12 +4,18 @@ using UnityEngine;
 
 using Foundations.Architecture.EventObserver;
 
-namespace GameSystems.TerrainSystem
+namespace GameSystems.StageVisualSystem
 {
+    [Serializable]
+    public class InitialSetStageVisualResourcesData : IEventData
+    {
+        public int StageID;
+    }
+
     [Serializable]
     public class InitialSetStageVisualResourcesData_EventTest : IEventData
     {
-        public GameObject GroundTilemapGameObject;
+        public StageVisualResourcesData StageVisualResourcesData;
     }
 
     [Serializable]

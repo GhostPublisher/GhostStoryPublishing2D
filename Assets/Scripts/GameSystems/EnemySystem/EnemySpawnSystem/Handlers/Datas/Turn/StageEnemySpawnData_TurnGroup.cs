@@ -11,9 +11,19 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
     {
         [SerializeField] private List<StageEnemySpawnData_Turn> StageEnemySpawnData_Turns;
 
-        public StageEnemySpawnData_Turn GetStageEnemySpawnData_Turn(int stageID)
+        public bool TryGetStageEnemySpawnData_Turn(int stageID, out StageEnemySpawnData_Turn stageEnemySpawnData_Turn)
         {
-            return this.StageEnemySpawnData_Turns.Find(entry => entry.StageID == stageID);
+            foreach (var data in this.StageEnemySpawnData_Turns)
+            {
+                if (data.StageID == stageID)
+                {
+                    stageEnemySpawnData_Turn = data;
+                    return true;
+                }
+            }
+
+            stageEnemySpawnData_Turn = null;
+            return false;
         }
     }
 
@@ -23,5 +33,19 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
         public int StageID;
 
         public TextAsset EnemySpawnData_TurnJsonFile;
+    }
+
+    [Serializable]
+    public class EnemySpawnData_Turn
+    {
+        public int TurnID;
+
+        public EnemySpawnData[] EnemySpawnDatas;
+    }
+
+    [Serializable]
+    public class EnemySpawnData_TurnArrayWrapper
+    {
+        public EnemySpawnData_Turn[] EnemySpawnData_Turns;
     }
 }
