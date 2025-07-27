@@ -38,7 +38,7 @@ namespace Example00
         [SerializeField] private InitialSetGeneratedTerrainDataEvent_Test InitialSetGeneratedTerrainDataEvent_Test;
 
         [Header("Enemy 위치 설정")]
-        [SerializeField] private List<EnemySpawnEvent_Test> EnemySpawnEvent_Tests;
+        [SerializeField] private List<EnemyUnitSpawnEvent_Test> EnemySpawnEvent_Tests;
         [Header("Player 위치 설정")]
         [SerializeField] private List<PlayerUnitSpawnEvent_Test> PlayerUnitSpawnEvent_Tests;
 
@@ -130,7 +130,7 @@ namespace Example00
         // 아군 클리어.
         public void Notify_ClearPlayerData()
         {
-            PlayerUnitSpawnEvent_Clear playerUnitSpawnEvent_Clear = new();
+            PlayerUnitClearEvent playerUnitSpawnEvent_Clear = new();
 
             this.EventObserverNotifier.NotifyEvent(playerUnitSpawnEvent_Clear);
         }
@@ -147,7 +147,7 @@ namespace Example00
         // Enemy Clear
         public void Notify_ClearEnemyData()
         {
-            EnemyClearEvent enemyClearEvent = new();
+            EnemyUnitClearEvent enemyClearEvent = new();
             this.EventObserverNotifier.NotifyEvent(enemyClearEvent);
         }
 

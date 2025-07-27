@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe96c9129f93b14fb6c538ddd4cefe4, type: 3}
+  m_Name: EnemyUnitSpawnDataGroupDB_Trigger
+  m_EditorClassIdentifier: 
+  EnemyUnitSpawnDataGroup_Triggers:
+  - StageID: 0
+    EnemyUnitSpawnData_TriggerJsonFile: {fileID: 4900000, guid: 0c7d6f0187598bf48a7f70877c2c347f, type: 3}

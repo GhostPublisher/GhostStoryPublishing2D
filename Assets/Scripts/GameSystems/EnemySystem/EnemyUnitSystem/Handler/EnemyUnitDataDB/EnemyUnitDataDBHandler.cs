@@ -6,26 +6,29 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 {
     public class EnemyUnitDataDBHandler : IStaticReferenceHandler
     {
-        private EnemyPrefabResourceDataGroup EnemyPrefabResourceDataGroup;
+        private string EnemyPrefabResourceDataGroup_SOPath = "ScriptableObject/Enemy/EnemyPrefabResourceDataGroup";
 
-        public EnemyUnitDataDBHandler()
+        // EnemyPrefabResource SO 로드 시도.
+        private bool TryLoadScriptableObject(out EnemyPrefabResourceDataGroup enemyPrefabResourceDataGroup)
         {
-            this.LoadScriptableObject();
+            enemyPrefabResourceDataGroup = Resources.Load<EnemyPrefabResourceDataGroup>(this.EnemyPrefabResourceDataGroup_SOPath);
+
+            // 파일 못찾으면 false 리턴.
+            if (enemyPrefabResourceDataGroup == null) return false;
+            return true;
         }
-        private void LoadScriptableObject()
-        {
-            // EnemyPrefabResourceDataGroup
-            this.EnemyPrefabResourceDataGroup = Resources.Load<EnemyPrefabResourceDataGroup>("ScriptableObject/Enemy/EnemyPrefabResourceDataGroup");
 
-            if (this.EnemyPrefabResourceDataGroup == null)
+        public bool TryGetEnemyPrefabResourceData(int unitID, out EnemyPrefabResourceData enemyPrefabResourceData)
+        {
+            // SO를 못찾을 경우 false 리턴.
+            if (!this.TryLoadScriptableObject(out var enemyPrefabResourceDataGroup))
             {
-                Debug.LogError("[EnemyPrefabResourceDataGroup] EnemyPrefabResourceDataGroup.asset을 찾을 수 없습니다. 경로 또는 파일 확인 필요.");
+                Debug.LogError($"[EnemyUnitDataDBHandler] SO 위치 못 찾음.");
+                enemyPrefabResourceData = null;
+                return false;
             }
-        }
 
-        public EnemyPrefabResourceData GetEnemyPrefabResourceData(int unitID)
-        {
-            return this.EnemyPrefabResourceDataGroup.GetEnemyPrefabResourceData(unitID);
+            return enemyPrefabResourceDataGroup.TryGetEnemyPrefabResourceData(unitID, out enemyPrefabResourceData);
         }
     }
 }

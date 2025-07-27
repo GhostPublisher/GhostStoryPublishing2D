@@ -1,0 +1,19 @@
+{
+  "UnitSpawnDatas": [
+    {
+      "UnitID": 1001,
+      "SpawnPositionX": 3,
+      "SpawnPositionY": 5
+    },
+    {
+      "UnitID": 1000,
+      "SpawnPositionX": 4,
+      "SpawnPositionY": 4
+    },
+    {
+      "UnitID": 1001,
+      "SpawnPositionX": 5,
+      "SpawnPositionY": 5
+    }
+  ]
+}

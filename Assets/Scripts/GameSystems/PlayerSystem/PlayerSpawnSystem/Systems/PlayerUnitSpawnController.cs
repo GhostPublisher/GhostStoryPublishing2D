@@ -10,58 +10,79 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
 {
     public class PlayerUnitSpawnController : MonoBehaviour
     {
-        private PlayerSpawnDataDBHandler PlayerSpawnDataDBHandler;
+        private PlayerUnitSpawnDataDBHandler PlayerUnitSpawnDataDBHandler;
         private PlayerUnitDataDBHandler PlayerUnitDataDBHandler;
 
         private PlayerUnitManagerDataDBHandler GeneratedPlayerUnitDataGroupHandler;
 
+        private UtilitySystem.IsometricCoordinateConvertor IsometricCoordinateConvertor;
+
         [SerializeField] private Transform PlayerUnitObjectParent;
 
-        private Queue<PlayerSpawnData> playerSpawnDatas = new();
+        private PlayerUnitSpawnData_Trigger[] PlayerUnitSpawnData_Triggers;
+
+        private Queue<UnitSpawnData> playerSpawnQueue = new();
 
         private void Awake()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
 
-            this.PlayerSpawnDataDBHandler = HandlerManager.GetStaticDataHandler<PlayerSpawnDataDBHandler>();
+            this.PlayerUnitSpawnDataDBHandler = HandlerManager.GetStaticDataHandler<PlayerUnitSpawnDataDBHandler>();
             this.PlayerUnitDataDBHandler = HandlerManager.GetStaticDataHandler<PlayerUnitDataDBHandler>();
 
             this.GeneratedPlayerUnitDataGroupHandler = HandlerManager.GetDynamicDataHandler<PlayerUnitManagerDataDBHandler>();
+
+            this.IsometricCoordinateConvertor = HandlerManager.GetUtilityHandler<UtilitySystem.IsometricCoordinateConvertor>();
         }
 
-        // 특정 StageID에 의해 생성되는 PlayerSpawnData를 할당 ( 최초 한번 실행 )
-        public void AllocateStagePlayerSpawnData(int stageID)
+        public void InitialSetting(int stageID)
         {
-            this.playerSpawnDatas.Clear();
-            if (this.PlayerSpawnDataDBHandler.TryGetStagePlayerSpawnData(stageID, out var datas))
+            // 특정 StageID에 해당되는 Trigger Table을 가져옵니다.
+            if (this.PlayerUnitSpawnDataDBHandler.TryGetPlayerUnitSpawnDataGroup_Trigger(stageID, out var playerUnitSpawnData_Triggers))
+                this.PlayerUnitSpawnData_Triggers = playerUnitSpawnData_Triggers;
+
+            this.playerSpawnQueue.Clear();
+            this.GeneratePlayerUnit_StageSetting(stageID);
+        }
+
+        // 특정 TrrigerID에 대응되는 PlayerUnitSpawnData를 Queue에 할당합니다.
+        public void AllocatePlayerUnitSpawnData_Trigger(int triggerID)
+        {
+            this.playerSpawnQueue.Clear();
+            PlayerUnitSpawnData_Trigger playerUnitSpawnData_Trigger = null;
+
+            foreach (var spawnDataGroup in this.PlayerUnitSpawnData_Triggers)
             {
-                foreach (var data in datas)
+                if (spawnDataGroup.TriggerID == triggerID)
                 {
-                    this.playerSpawnDatas.Enqueue(data);
+                    playerUnitSpawnData_Trigger = spawnDataGroup;
                 }
             }
-        }
-        // 특정 TriggerID에 의해 생성되는 PlayerSpawnData를 할당. ( 조건하에 N번 호출 )
-        public void AllocatePlayerSpawnData_Trigger(int triggerID)
-        {
-            this.playerSpawnDatas.Clear();
-            if (this.PlayerSpawnDataDBHandler.TryGetTriggerPlayerSpawnData(triggerID, out var datas))
+
+            foreach (UnitSpawnData spawnData in playerUnitSpawnData_Trigger.UnitSpawnDatas)
             {
-                foreach (var data in datas)
-                {
-                    this.playerSpawnDatas.Enqueue(data);
-                }
+                this.playerSpawnQueue.Enqueue(spawnData);
             }
         }
 
+        public void GeneratePlayerUnit_StageSetting(int stageID)
+        {
+            if (!this.PlayerUnitSpawnDataDBHandler.TryGetPlayerUnitSpawnData_Stage(stageID, out var data_Stage)) return;
+
+            // 한번에 전달 -> 초반은 생성 애니메이션 보여줄 필요 없음.
+            foreach (var data in data_Stage.UnitSpawnDatas)
+            {
+                this.GeneratePlayerUnit(data.UnitID, new Vector2Int(data.SpawnPositionX, data.SpawnPositionY));
+            }
+        }
         // 할당되어 있는 PlayerSpawnData을 순서대로 호출.
         public void GeneratePlayerUnit()
         {
-            if (this.playerSpawnDatas.Count == 0) return;
+            if (this.playerSpawnQueue.Count == 0) return;
 
             // Prefab 가져오기.
-            PlayerSpawnData playerSpawnData = this.playerSpawnDatas.Dequeue();
-            this.GeneratePlayerUnit(playerSpawnData.UnitID, new Vector2Int(playerSpawnData.PlayerSpawnPositionX, playerSpawnData.PlayerSpawnPositionY));
+            UnitSpawnData playerSpawnData = this.playerSpawnQueue.Dequeue();
+            this.GeneratePlayerUnit(playerSpawnData.UnitID, new Vector2Int(playerSpawnData.SpawnPositionX, playerSpawnData.SpawnPositionY));
         }
         // 매개변수로 받은 ID와 Position에 대응되는 PlayerUnit을 배치.
         public void GeneratePlayerUnit(int unitID, Vector2Int spawnPosition)
@@ -71,7 +92,7 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
             // 객체 생성
             GameObject createdPlayerUnit = Object.Instantiate(prefabData.UnitPrefab, this.PlayerUnitObjectParent);
             // 객체 위치 지정.
-            createdPlayerUnit.transform.localPosition = this.GetGridPositionToWorld(spawnPosition);
+            createdPlayerUnit.transform.localPosition = this.IsometricCoordinateConvertor.ConvertGridToWorld(spawnPosition);
 
             // Player Unit 초기 할당.
             if (createdPlayerUnit.GetComponent<IPlayerUnitManager>().TryInitialSetting(out var newPlayerUnitManagerData))
@@ -82,8 +103,6 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
             // 이거 오류 크게 난거임. 다시 삭제해야됨.
             else
             {
-                Debug.Log($"Player 생성 오류 남");
-
                 GameObject.Destroy(createdPlayerUnit);
             }
         }
@@ -92,21 +111,13 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
         public void ClearGameObjectAndDatas()
         {
             this.GeneratedPlayerUnitDataGroupHandler.ClearPlayerUnitManagerDataGroup();
-            this.playerSpawnDatas.Clear();
+            this.playerSpawnQueue.Clear();
 
             // enemyGameObject 삭제.
             foreach (Transform child in PlayerUnitObjectParent)
             {
                 GameObject.Destroy(child.gameObject);
             }
-        }
-        // Convert 작업.
-        private Vector3 GetGridPositionToWorld(Vector2Int targetPosition)
-        {
-            float worldX = (targetPosition.x - targetPosition.y) * (1 / 2f);
-            float worldY = (targetPosition.x + targetPosition.y) * (0.5f / 2f);
-
-            return new Vector3(worldX, worldY, 0);
         }
     }
 }

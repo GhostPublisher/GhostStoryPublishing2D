@@ -19,8 +19,10 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
         {
             this.EventObserverLinker.RegisterSubscriberListener<PlayerUnitSpawnEvent_StageSetting>();
             this.EventObserverLinker.RegisterSubscriberListener<PlayerUnitSpawnEvent_Trigger>();
+
             this.EventObserverLinker.RegisterSubscriberListener<PlayerUnitSpawnEvent_Continue>();
-            this.EventObserverLinker.RegisterSubscriberListener<PlayerUnitSpawnEvent_Clear>();
+
+            this.EventObserverLinker.RegisterSubscriberListener<PlayerUnitClearEvent>();
 
             this.EventObserverLinker.RegisterSubscriberListener<PlayerUnitSpawnEvent_Test>();
         }
@@ -35,23 +37,26 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
         {
             switch (eventData)
             {
+                // Stage Setting 흐름에서 Player Unit 생성.
                 case PlayerUnitSpawnEvent_StageSetting:
-                    var data01 = (PlayerUnitSpawnEvent_StageSetting)eventData;
-                    this.PlayerUnitSpawnController.AllocateStagePlayerSpawnData(data01.StageID);
+                    var playerUnitSpawnEvent_StageSetting = (PlayerUnitSpawnEvent_StageSetting)eventData;
+                    this.PlayerUnitSpawnController.InitialSetting(playerUnitSpawnEvent_StageSetting.StageID);
                     break;
+                // Trigger 기반 Player Unit 생성.
                 case PlayerUnitSpawnEvent_Trigger:
-                    var data02 = (PlayerUnitSpawnEvent_Trigger)eventData;
-                    this.PlayerUnitSpawnController.AllocatePlayerSpawnData_Trigger(data02.TriggerID);
+                    var playerUnitSpawnEvent_Trigger = (PlayerUnitSpawnEvent_Trigger)eventData;
+                    this.PlayerUnitSpawnController.AllocatePlayerUnitSpawnData_Trigger(playerUnitSpawnEvent_Trigger.TriggerID);
+                    this.PlayerUnitSpawnController.GeneratePlayerUnit();
                     break;
                 case PlayerUnitSpawnEvent_Continue:
                     this.PlayerUnitSpawnController.GeneratePlayerUnit();
                     break;
-                case PlayerUnitSpawnEvent_Clear:
+                case PlayerUnitClearEvent:
                     this.PlayerUnitSpawnController.ClearGameObjectAndDatas();
                     break;
                 case PlayerUnitSpawnEvent_Test:
-                    var data03 = (PlayerUnitSpawnEvent_Test)eventData;
-                    this.PlayerUnitSpawnController.GeneratePlayerUnit(data03.UnitID, data03.SpawnPosition);
+                    var testData = (PlayerUnitSpawnEvent_Test)eventData;
+                    this.PlayerUnitSpawnController.GeneratePlayerUnit(testData.UnitID, testData.SpawnPosition);
                     break;
                 default:
                     break;

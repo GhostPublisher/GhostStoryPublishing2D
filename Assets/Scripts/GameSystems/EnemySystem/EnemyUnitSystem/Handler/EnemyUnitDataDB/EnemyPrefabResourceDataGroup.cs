@@ -11,9 +11,25 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
     {
         [SerializeField] private List<EnemyPrefabResourceData> EnemyPrefabResourceDatas;
 
-        public EnemyPrefabResourceData GetEnemyPrefabResourceData(int UnitID)
+        public bool TryGetEnemyPrefabResourceData(int unitID, out EnemyPrefabResourceData enemyPrefabResourceData)
         {
-            return this.EnemyPrefabResourceDatas.Find(data => data.UnitID == UnitID);
+            if (this.EnemyPrefabResourceDatas == null)
+            {
+                enemyPrefabResourceData = null;
+                return false;
+            }
+
+            foreach (var data in this.EnemyPrefabResourceDatas)
+            {
+                if(data.UnitID == unitID)
+                {
+                    enemyPrefabResourceData = data;
+                    return true;
+                }
+            }
+
+            enemyPrefabResourceData = null;
+            return false;
         }
     }
 

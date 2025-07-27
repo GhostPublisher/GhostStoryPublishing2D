@@ -42,14 +42,20 @@ namespace GameSystems.BattleSceneSystem
             TilemapSystem.SkillRangeTilemap.InitialSetSkillRangeTilemapEvent initialSetSkillRangeTilemapEvent = new();
             initialSetSkillRangeTilemapEvent.StageID = this.myBattleSceneData.StageID;
 
-            EnemySystem.EnemySpawnSystem.EnemySpawnInitialSettingEvent enemySpawnInitialSettingEvent = new();
+            EnemySystem.EnemySpawnSystem.EnemyUnitSpawnEvent_StageSetting enemySpawnInitialSettingEvent = new();
             enemySpawnInitialSettingEvent.StageID = this.myBattleSceneData.StageID;
+
+            PlayerSystem.PlayerSpawnSystem.PlayerUnitSpawnEvent_StageSetting playerUnitSpawnEvent_StageSetting = new();
+            playerUnitSpawnEvent_StageSetting.StageID = this.myBattleSceneData.StageID;
 
             this.EventObserverNotifier.NotifyEvent(initialSetGeneratedTerrainDataEvent);
             this.EventObserverNotifier.NotifyEvent(initialSetStageVisualResourcesData);
+
             this.EventObserverNotifier.NotifyEvent(fogTilemapInitialSettingEvent);
             this.EventObserverNotifier.NotifyEvent(initialSetMovementTilemapEvent);
             this.EventObserverNotifier.NotifyEvent(initialSetSkillRangeTilemapEvent);
+
+            this.EventObserverNotifier.NotifyEvent(playerUnitSpawnEvent_StageSetting);
             this.EventObserverNotifier.NotifyEvent(enemySpawnInitialSettingEvent);
         }
 

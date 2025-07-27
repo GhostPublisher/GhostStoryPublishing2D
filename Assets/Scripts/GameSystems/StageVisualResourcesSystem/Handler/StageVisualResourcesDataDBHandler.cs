@@ -33,15 +33,7 @@ namespace GameSystems.StageVisualSystem
                 return false;
             }
 
-            // SO 안에 StageID에 해당되는 데이터가 없을 경우 false 리턴.
-            if (!stageVisualResourcesDataSO.TryGetStageVisualResourcesData(stageID, out stageVisualResourcesData))
-            {
-                Debug.LogError($"[StageGroundTilemapDataDBHandler] SO 안에 StageID 해당 데이터가 없음. StageID : {stageID}");
-                stageVisualResourcesData = null;
-                return false;
-            }
-
-            return true;
+            return stageVisualResourcesDataSO.TryGetStageVisualResourcesData(stageID, out stageVisualResourcesData);
         }
     }
 }

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93398b78a39c17d4c9a8ce922eca010e, type: 3}
+  m_Name: PlayerUnitSpawnDataGroupDB_Stage
+  m_EditorClassIdentifier: 
+  PlayerUnitSpawnDataGroup_Stages:
+  - StageID: 0
+    PlayerUnitSpawnData_StageJsonFile: {fileID: 4900000, guid: 6d2032c88cfcb14438970d9b44efefcc, type: 3}
+  - StageID: 1
+    PlayerUnitSpawnData_StageJsonFile: {fileID: 4900000, guid: 3d31c297aa5944546a0743b091f2b80d, type: 3}

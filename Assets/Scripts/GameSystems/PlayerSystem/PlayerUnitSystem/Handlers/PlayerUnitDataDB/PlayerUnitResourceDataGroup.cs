@@ -13,7 +13,11 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 
         public bool TryGetPlayerUnitResourceData(int unitID, out PlayerUnitResourceData playerUnitResourceData)
         {
-            playerUnitResourceData = null;
+            if(this.PlayerUnitImageResourceDatas == null)
+            {
+               playerUnitResourceData = null;
+                return false;
+            }
 
             foreach (var data in this.PlayerUnitImageResourceDatas)
             {
@@ -24,6 +28,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
                 }
             }
 
+            playerUnitResourceData = null;
             return false;
         }
     }

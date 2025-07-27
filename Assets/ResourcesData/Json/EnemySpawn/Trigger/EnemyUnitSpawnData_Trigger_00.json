@@ -1,0 +1,49 @@
+{
+  "EnemyUnitSpawnData_Triggers": [
+    {
+      "TriggerID": 0,
+      "UnitSpawnDatas": [
+        {
+          "UnitID": 1000,
+          "SpawnPositionX": 0,
+          "SpawnPositionY": 1
+        },
+        {
+          "UnitID": 1001,
+          "SpawnPositionX": 4,
+          "SpawnPositionY": 1
+        }
+      ]
+    },
+    {
+      "TriggerID": 1,
+      "UnitSpawnDatas": [
+        {
+          "UnitID": 1002,
+          "SpawnPositionX": 0,
+          "SpawnPositionY": 2
+        },
+        {
+          "UnitID": 1003,
+          "SpawnPositionX": 4,
+          "SpawnPositionY": 2
+        }
+      ]
+    },
+    {
+      "TriggerID": 2,
+      "UnitSpawnDatas": [
+        {
+          "UnitID": 1000,
+          "SpawnPositionX": 0,
+          "SpawnPositionY": 3
+        },
+        {
+          "UnitID": 1001,
+          "SpawnPositionX": 4,
+          "SpawnPositionY": 3
+        }
+      ]
+    }
+  ]
+}

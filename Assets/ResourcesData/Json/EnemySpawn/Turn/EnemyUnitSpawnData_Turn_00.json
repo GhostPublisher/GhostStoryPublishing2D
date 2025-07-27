@@ -1,0 +1,49 @@
+{
+  "EnemyUnitSpawnData_Turns": [
+    {
+      "TurnID": 0,
+      "UnitSpawnDatas": [
+        {
+          "UnitID": 1000,
+          "SpawnPositionX": 0,
+          "SpawnPositionY": 4
+        },
+        {
+          "UnitID": 1001,
+          "SpawnPositionX": 2,
+          "SpawnPositionY": 4
+        }
+      ]
+    },
+    {
+      "TurnID": 1,
+      "UnitSpawnDatas": [
+        {
+          "UnitID": 1002,
+          "SpawnPositionX": 4,
+          "SpawnPositionY": 4
+        },
+        {
+          "UnitID": 1003,
+          "SpawnPositionX": 0,
+          "SpawnPositionY": 4
+        }
+      ]
+    },
+    {
+      "TurnID": 2,
+      "UnitSpawnDatas": [
+        {
+          "UnitID": 1000,
+          "SpawnPositionX": 2,
+          "SpawnPositionY": 4
+        },
+        {
+          "UnitID": 1001,
+          "SpawnPositionX": 4,
+          "SpawnPositionY": 4
+        }
+      ]
+    }
+  ]
+}

@@ -165,11 +165,11 @@ MonoBehaviour:
   PlayerUnitStaticData:
     UniqueID: 0
     UnitID: 2002
-    VisibleSize: 4
+    VisibleSize: 2
     VisibleOvercomeWeight: 50
     PhysicalVisionOvercomeWeight: 50
     SpiritualVisionOvercomeWeight: 50
-    GroundOvercomeWeight: 50
+    GroundOvercomeWeight: 25
     VisibleBlockWeight: 25
     PhysicalVisionBlockWeight: 25
     SpiritualVisionBlockWeight: 0
@@ -596,7 +596,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.75, y: 0}
-    oldSize: {x: 1.4, y: 0.93}
+    oldSize: {x: 1.8666667, y: 1.24}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
