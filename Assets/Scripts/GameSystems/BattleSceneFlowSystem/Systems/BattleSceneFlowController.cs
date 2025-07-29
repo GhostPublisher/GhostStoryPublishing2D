@@ -1,18 +1,36 @@
-using System.Collections.Generic;
+using System;
+using System.Collections;
 using UnityEngine;
 
 using Foundations.Architecture.EventObserver;
+using Foundations.Architecture.ReferencesHandler;
 
 namespace GameSystems.BattleSceneSystem
 {
+    public class BattleSceneHandler : IDynamicReferenceHandler
+    {
+        public IBattleSceneFlowController IBattleSceneFlowController;
+    }
 
-    public class BattleSceneFlowController : MonoBehaviour
+    public interface IBattleSceneFlowController
+    {
+        public void BattleSceneFlowControllEvent_StageSetting(int stageID);
+
+    }
+
+    public class BattleSceneFlowController : MonoBehaviour, IBattleSceneFlowController
     {
         private IEventObserverNotifier EventObserverNotifier;
 
         private BattleSceneData myBattleSceneData;
 
-        public void InitialSetting(int stageID)
+        private void Awake()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            HandlerManager.GetDynamicDataHandler<BattleSceneHandler>().IBattleSceneFlowController = this;
+        }
+
+        public void BattleSceneFlowControllEvent_StageSetting(int stageID)
         {
             this.EventObserverNotifier = new EventObserverNotifier();
 
@@ -27,43 +45,67 @@ namespace GameSystems.BattleSceneSystem
 
         public void OperateStageSetting()
         {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var FogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().IFogTilemapController;
+            var EnemyUnitSpawnController = HandlerManager.GetDynamicDataHandler<EnemySystem.EnemySystemHandler>().IEnemyUnitSpawnController;
+            var PlayerUnitSpawnContorller = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerSystemHandler>().IPlayerUnitSpawnController;
+
             TerrainSystem.InitialSetGeneratedTerrainDataEvent initialSetGeneratedTerrainDataEvent = new();
             initialSetGeneratedTerrainDataEvent.StageID = this.myBattleSceneData.StageID;
 
             StageVisualSystem.InitialSetStageVisualResourcesData initialSetStageVisualResourcesData = new();
             initialSetStageVisualResourcesData.StageID = this.myBattleSceneData.StageID;
 
-            TilemapSystem.FogTilemap.FogTilemapInitialSettingEvent fogTilemapInitialSettingEvent = new();
-            fogTilemapInitialSettingEvent.StageID = this.myBattleSceneData.StageID;
-
             TilemapSystem.MovementTilemap.InitialSetMovementTilemapEvent initialSetMovementTilemapEvent = new();
             initialSetMovementTilemapEvent.StageID = this.myBattleSceneData.StageID;
 
             TilemapSystem.SkillRangeTilemap.InitialSetSkillRangeTilemapEvent initialSetSkillRangeTilemapEvent = new();
             initialSetSkillRangeTilemapEvent.StageID = this.myBattleSceneData.StageID;
-
-            EnemySystem.EnemySpawnSystem.EnemyUnitSpawnEvent_StageSetting enemySpawnInitialSettingEvent = new();
-            enemySpawnInitialSettingEvent.StageID = this.myBattleSceneData.StageID;
-
-            PlayerSystem.PlayerSpawnSystem.PlayerUnitSpawnEvent_StageSetting playerUnitSpawnEvent_StageSetting = new();
-            playerUnitSpawnEvent_StageSetting.StageID = this.myBattleSceneData.StageID;
-
+            
             this.EventObserverNotifier.NotifyEvent(initialSetGeneratedTerrainDataEvent);
             this.EventObserverNotifier.NotifyEvent(initialSetStageVisualResourcesData);
 
-            this.EventObserverNotifier.NotifyEvent(fogTilemapInitialSettingEvent);
             this.EventObserverNotifier.NotifyEvent(initialSetMovementTilemapEvent);
             this.EventObserverNotifier.NotifyEvent(initialSetSkillRangeTilemapEvent);
 
-            this.EventObserverNotifier.NotifyEvent(playerUnitSpawnEvent_StageSetting);
-            this.EventObserverNotifier.NotifyEvent(enemySpawnInitialSettingEvent);
+            FogTilemapController.InitialSetting(this.myBattleSceneData.StageID);
+            FogTilemapController.UpdateFogVisibility();
+
+            EnemyUnitSpawnController.InitialSetting(this.myBattleSceneData.StageID);
+            EnemyUnitSpawnController.AllocateEnemyUnitSpawnData_Stage();
+            EnemyUnitSpawnController.GenerateEnemyUnit_Queue();
+
+            PlayerUnitSpawnContorller.InitialSetting(this.myBattleSceneData.StageID);
+            PlayerUnitSpawnContorller.AllocatePlayerUnitSpawnData_Stage();
+            PlayerUnitSpawnContorller.GeneratePlayerUnit_Queue();
         }
 
         public void OperateTurnStartSetting()
         {
-            // Unit들은 값 초기화 -> Unit 생성 순
+            // Turn 증가
+            ++this.myBattleSceneData.TurnID;
+
+            this.StopAllCoroutines();
+            this.StartCoroutine(this.OperateTurnStartSetting_Coroutine());
+        }
+
+        private IEnumerator OperateTurnStartSetting_Coroutine()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var EnemyUnitSpawnController = HandlerManager.GetDynamicDataHandler<EnemySystem.EnemySystemHandler>().IEnemyUnitSpawnController;
+
+            // Turn기반 Enemy 생성 요청 -> 작업 수행 시, 수행완료까지 대기.
+            if (EnemyUnitSpawnController.TryAllocateEnemyUnitSpawnData_Turn(this.myBattleSceneData.TurnID))
+            {
+                EnemyUnitSpawnController.StopAllCoroutines_Refer();
+                yield return StartCoroutine(EnemyUnitSpawnController.GenerateEnemyUnit_Queue_Coroutine());
+            }
+
+            // DB 하나 더 만들어주자...
         }
     }
+
+    [Serializable]
     public class BattleSceneData
     {
         public int StageID;
@@ -74,5 +116,15 @@ namespace GameSystems.BattleSceneSystem
             StageID = stageID;
             TurnID = 0;
         }
+    }
+
+    [Serializable]
+    public enum BattleSceneFlowType
+    {
+        StageSetting,
+        TurnStartOperation,
+        PlayerTurn,
+        EnemeyTurn,
+        TurnEndOperation,
     }
 }

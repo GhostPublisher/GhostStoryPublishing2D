@@ -1,4 +1,4 @@
-﻿
+﻿/*
 using UnityEngine;
 
 using Foundations.Architecture.EventObserver;
@@ -39,4 +39,4 @@ namespace Example00
             this.EventObserverNotifier.NotifyEvent(ClearFogTilemapEvent);
         }
     }
-}
+}*/

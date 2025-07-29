@@ -10,11 +10,11 @@ using GameSystems.UtilitySystem;
 
 using GameSystems.TerrainSystem;
 using GameSystems.StageVisualSystem;
+using GameSystems.TilemapSystem;
 using GameSystems.TilemapSystem.FogTilemap;
 using GameSystems.TilemapSystem.MovementTilemap;
 
 using GameSystems.EnemySystem.EnemyVisibilitySystem;
-using GameSystems.EnemySystem.EnemySpawnSystem;
 
 using GameSystems.PlayerSystem.PlayerSpawnSystem;
 using GameSystems.PlayerSystem.PlayerUnitSystem;
@@ -38,9 +38,9 @@ namespace Example00
         [SerializeField] private InitialSetGeneratedTerrainDataEvent_Test InitialSetGeneratedTerrainDataEvent_Test;
 
         [Header("Enemy 위치 설정")]
-        [SerializeField] private List<EnemyUnitSpawnEvent_Test> EnemySpawnEvent_Tests;
+        [SerializeField] private List<UnitSpawnEvent_Test> EnemySpawnEvent_Tests;
         [Header("Player 위치 설정")]
-        [SerializeField] private List<PlayerUnitSpawnEvent_Test> PlayerUnitSpawnEvent_Tests;
+        [SerializeField] private List<UnitSpawnEvent_Test> PlayerUnitSpawnEvent_Tests;
 
         [Header("스케너 설정")]
         [SerializeField] private ScannerTestData ScannerTestData;
@@ -82,29 +82,23 @@ namespace Example00
         // Fog Tilemap 할당 / 삭제 / Hide / Show
         public void Notify_Allocate_FogTilemap()
         {
-            InitialSetFogTilemapEvent_Raw InitialSetFogTilemapEvent_Raw = new();
-            InitialSetFogTilemapEvent_Raw.Width = this.Width;
-            InitialSetFogTilemapEvent_Raw.Height = this.Height;
-
-            this.EventObserverNotifier.NotifyEvent(InitialSetFogTilemapEvent_Raw);
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController.InitialSetting(this.Width, this.Height);
         }
         public void Notify_Clear_FogTilemap()
         {
-            ClearFogTilemapEvent ClearFogTilemapEvent = new();
-
-            this.EventObserverNotifier.NotifyEvent(ClearFogTilemapEvent);            
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController.ClearFogData();
         }
         public void Notify_Hide_FogTilemap()
         {
-            HideAllFogTilemap HideAllFogTilemap = new();
-
-            this.EventObserverNotifier.NotifyEvent(HideAllFogTilemap);
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController.HideAllFog_Test();
         }
         public void Notify_Show_FogTilemap()
         {
-            ShowAllFogTilemap ShowAllFogTilemap = new();
-
-            this.EventObserverNotifier.NotifyEvent(ShowAllFogTilemap);
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController.ShowAllFog_Test();
         }
 
 
@@ -122,33 +116,54 @@ namespace Example00
         // 아군 생성
         public void Notify_SpawnPlayerDatas()
         {
-            foreach (var data in this.PlayerUnitSpawnEvent_Tests)
+            StartCoroutine(this.SpawnPlayers());
+        }
+        private IEnumerator SpawnPlayers()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitSpawnController = HandlerManager.GetDynamicDataHandler<GameSystems.PlayerSystem.PlayerSystemHandler>().IPlayerUnitSpawnController;
+
+            // Raw 데이터를 통한 Enemy 생성.            
+            foreach (var data in this.EnemySpawnEvent_Tests)
             {
-                this.EventObserverNotifier.NotifyEvent(data);
+                PlayerUnitSpawnController.StopAllCoroutines_Refer();
+                yield return StartCoroutine(PlayerUnitSpawnController.GeneratePlayerUnit_Coroutine(data.UnitID, data.SpawnPosition));
             }
         }
         // 아군 클리어.
         public void Notify_ClearPlayerData()
         {
-            PlayerUnitClearEvent playerUnitSpawnEvent_Clear = new();
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitSpawnController = HandlerManager.GetDynamicDataHandler<GameSystems.PlayerSystem.PlayerSystemHandler>().IPlayerUnitSpawnController;
 
-            this.EventObserverNotifier.NotifyEvent(playerUnitSpawnEvent_Clear);
+            PlayerUnitSpawnController.ClearPlayerUnitAndDatas();
         }
 
 
         // enemy 생성.
         public void Notify_SpawnEnemyDatas()
         {
-            foreach(var data in this.EnemySpawnEvent_Tests)
+            StartCoroutine(this.SpawnEnemys());
+        }
+        private IEnumerator SpawnEnemys()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var EnemyUnitSpawnController = HandlerManager.GetDynamicDataHandler<GameSystems.EnemySystem.EnemySystemHandler>().IEnemyUnitSpawnController;
+
+            // Raw 데이터를 통한 Enemy 생성.            
+            foreach (var data in this.EnemySpawnEvent_Tests)
             {
-                this.EventObserverNotifier.NotifyEvent(data);
+                EnemyUnitSpawnController.StopAllCoroutines_Refer();
+                yield return StartCoroutine(EnemyUnitSpawnController.GenerateEnemyUnit_Coroutine(data.UnitID, data.SpawnPosition));
             }
         }
         // Enemy Clear
         public void Notify_ClearEnemyData()
         {
-            EnemyUnitClearEvent enemyClearEvent = new();
-            this.EventObserverNotifier.NotifyEvent(enemyClearEvent);
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var EnemyUnitSpawnController = HandlerManager.GetDynamicDataHandler<GameSystems.EnemySystem.EnemySystemHandler>().IEnemyUnitSpawnController;
+
+            EnemyUnitSpawnController.ClearEnemyUnitAndDatas();
         }
 
 
@@ -162,14 +177,14 @@ namespace Example00
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
             var FogVisibleRangeCalculator = HandlerManager.GetUtilityHandler<VisibilityRangeCalculator>();
+            var IFogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController;
 
             foreach (Vector2Int target in this.TargetMoves)
             {
                 var newVisibleRange = FogVisibleRangeCalculator.GetFilteredVisibleRange_Player(target, this.ScannerTestData.VisibleSize, this.ScannerTestData.VisibleOvercomeWeight);
 
-                UpdateScanerVisibleData_ForFogVisibility data01 = new();
-                data01.ScannerUniqueID = this.ScannerTestData.ScannerID;
-                data01.VisibleRange = newVisibleRange;
+                IFogTilemapController.UpdateScannerVisibleData_ForFogVisibility(this.ScannerTestData.ScannerID, newVisibleRange);
+                IFogTilemapController.UpdateFogVisibility();
 
                 UpdateScanerVisibleData_ForEnemyVisibility data02 = new();
                 data02.ScannerUniqueID = this.ScannerTestData.ScannerID;
@@ -177,7 +192,6 @@ namespace Example00
                 data02.PhysicalVisionOvercomeWeight = this.ScannerTestData.PhysicalVisionOvercomeWeight;
                 data02.SpiritualVisionOvercomeWeight = this.ScannerTestData.SpiritualVisionOvercomeWeight;
 
-                this.EventObserverNotifier.NotifyEvent(data01);
                 this.EventObserverNotifier.NotifyEvent(data02);
 
                 yield return new WaitForSeconds(1f);
@@ -185,10 +199,11 @@ namespace Example00
         }
         public void Notify_ClearScanner()
         {
-            RemoveScanerVisibleData_ForFogVisibility removeScanerVisibleData_ForFogVisibility = new();
-            removeScanerVisibleData_ForFogVisibility.ScannerUniqueID = this.ScannerTestData.ScannerID;
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var IFogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController;
 
-            this.EventObserverNotifier.NotifyEvent(removeScanerVisibleData_ForFogVisibility);
+            IFogTilemapController.RemoveScannerVisibleData_ForFogVisibility(this.ScannerTestData.ScannerID);
+            IFogTilemapController.UpdateFogVisibility();
         }
 
 
@@ -264,4 +279,13 @@ namespace Example00
         [SerializeField] public int PhysicalVisionOvercomeWeight;
         [SerializeField] public int SpiritualVisionOvercomeWeight;
     }
+
+    [System.Serializable]
+    public class UnitSpawnEvent_Test
+    {
+        [SerializeField] public int UnitID;
+        [SerializeField] public Vector2Int SpawnPosition;
+    }
+
+
 }

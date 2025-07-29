@@ -77,6 +77,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 
     public enum PlayerUnitAnimationType
     {
+        Spawn,
         Idle,
         IsWalk,
 

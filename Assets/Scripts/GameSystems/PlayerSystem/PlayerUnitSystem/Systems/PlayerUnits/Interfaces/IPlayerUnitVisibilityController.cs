@@ -6,5 +6,6 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
     {
         public void InitialSetting(PlayerUnitManagerData generatedPlayerUnitData);
         public void UpdateVisibleRange(Vector2Int targetPosition);
+        public void UpdateVisibleRange();
     }
 }

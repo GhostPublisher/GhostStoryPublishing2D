@@ -23,6 +23,7 @@ namespace GameSystems.UIUXSystem
         // 생성된 Player Units에 해당되는 PlayerUnitIcon 갱신
         public void UpdateGeneratedPlayerUnitIconUIUX()
         {
+//            Debug.Log($"asaA");
             this.PlayerUnitIconGroupUIUXGenerator.UpdateGeneratedPlayerUnitIconUIUX();
         }
         public void ClearGeneratedPlayerUnitIconUIUX()

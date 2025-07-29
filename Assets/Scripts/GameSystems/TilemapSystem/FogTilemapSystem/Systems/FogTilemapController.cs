@@ -11,7 +11,31 @@ using GameSystems.TerrainSystem;
 
 namespace GameSystems.TilemapSystem.FogTilemap
 {
-    public class FogTilemapController : MonoBehaviour
+    public interface IFogTilemapController
+    {
+        public void InitialSetting(int stageID);
+        // Test 수행 용, Private로 존재해도 됨.
+        public void InitialSetting(int width, int height);
+
+        public void UpdatePlayerVisibleData_ForFogVisibility(int uniqueID, HashSet<Vector2Int> newVisibleRange);
+        public void RemovePlayerVisibleData_ForFogVisibility(int uniqueID);
+
+        public void UpdateScannerVisibleData_ForFogVisibility(int uniqueID, HashSet<Vector2Int> newVisibleRange);
+        public void RemoveScannerVisibleData_ForFogVisibility(int uniqueID);
+
+        public void UpdateScannerRawVisibleData_ForFogVisibility(int uniqueID, Vector2Int targetPosition, int visibleSize, int visibleOvercomeWeight);
+
+        public void UpdateFogVisibility();
+
+        public void ClearFogData();
+
+        public void HideAllFog_Test();
+        public void ShowAllFog_Test();
+    }
+
+    // '시야 기능'을 사용하는 '객체'의 UniqueID와 '시야' 기능을 갖는다.
+
+    public class FogTilemapController : MonoBehaviour, IFogTilemapController
     {
         [SerializeField] private Tilemap FogTilemap;
 
@@ -22,7 +46,16 @@ namespace GameSystems.TilemapSystem.FogTilemap
         private Dictionary<int, HashSet<Vector2Int>> playerUnitVisibilityDatas = new();
         private Dictionary<int, HashSet<Vector2Int>> scannerVisibilityDatas = new();
 
-        private FogTilemapData myFogTilemapData = null;
+        private FogTilemapData myFogTilemapData = new();
+
+        private void Awake()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var TilemapDataHandler = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>();
+
+            TilemapDataHandler.IFogTilemapController = this;
+            TilemapDataHandler.FogTilemapData = this.myFogTilemapData;
+        }
 
         public void InitialSetting(int stageID)
         {
@@ -31,12 +64,11 @@ namespace GameSystems.TilemapSystem.FogTilemap
 
             // 만약, Stage 정보가 없으면 임시로 0, 0을 리턴해줌.
             StageTileSpawnDataDBHandler.TryGetStageTerrainSize(stageID, out int width, out int height);
-
             this.InitialSetting(width, height);
         }
         public void InitialSetting(int width, int height)
         {
-            this.myFogTilemapData = new FogTilemapData(width, height);
+            this.myFogTilemapData.InitialSetting(width, height);
 
             for (int x = 0; x < width; ++x)
             {
@@ -96,7 +128,7 @@ namespace GameSystems.TilemapSystem.FogTilemap
                 }
             }
 
-            // 3. Visible 처리
+            // Player 시야 Visible 처리
             foreach (var list in playerUnitVisibilityDatas.Values)
             {
                 foreach(var pos in list)
@@ -105,7 +137,7 @@ namespace GameSystems.TilemapSystem.FogTilemap
                     if (!this.myFogTilemapData.TryGetFogState(pos.x, pos.y, out FogState fogState)) continue;
 
                     this.myFogTilemapData.SetFogState(pos.x, pos.y, FogState.Visible);
-                    FogTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), null);
+                    this.FogTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), null);
                 }
             }
 
@@ -118,7 +150,7 @@ namespace GameSystems.TilemapSystem.FogTilemap
                     if (!this.myFogTilemapData.TryGetFogState(pos.x, pos.y, out FogState fogState)) continue;
 
                     this.myFogTilemapData.SetFogState(pos.x, pos.y, FogState.Visible);
-                    FogTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), null);
+                    this.FogTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), null);
                 }
             }
 
@@ -135,12 +167,12 @@ namespace GameSystems.TilemapSystem.FogTilemap
             this.FogTilemap.ClearAllTiles();
         }
 
-        public void HideAllFog()
+        public void HideAllFog_Test()
         {
             // 전부 비활성화.
             this.FogTilemap.ClearAllTiles();
         }
-        public void ShowAllFog()
+        public void ShowAllFog_Test()
         {
             var length = this.myFogTilemapData.GetLength();
 

@@ -1,153 +1,229 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 using Foundations.Architecture.ReferencesHandler;
 
-using GameSystems.TerrainSystem;
-using GameSystems.EnemySystem.EnemyUnitSystem;
-using GameSystems.PlayerSystem;
-
 namespace GameSystems.EnemySystem.EnemySpawnSystem
 {
-    public class EnemyUnitSpawnController : MonoBehaviour
+    public interface IEnemyUnitSpawnController
     {
-        private EnemyUnitSpawnDataDBHandler EnemyUnitSpawnDataDBHandler;
-        private EnemyUnitDataDBHandler EnemyUnitDataDBHandler;
+        // 초기 셋팅 ( 필드 멤버 셋팅 등 )
+        public void InitialSetting(int stageID);
 
-        private GeneratedTerrainDataDBHandler GeneratedTileDataGroupHandler;
-        private EnemyUnitManagerDataDBHandler EnemyUnitManagerDataDBHandler;
-        private PlayerUnitManagerDataDBHandler PlayerUnitManagerDataDBHandler;
+        // stageID 기반 Enemy Unit 생성 데이터 할당
+        public void AllocateEnemyUnitSpawnData_Stage();
+        // turnID 기반 Enemy Unit 생성 데이터 할당
+        public bool TryAllocateEnemyUnitSpawnData_Turn(int turnID);
+        // triggerID 기반 Enemy Unit 생성 데이터 할당
+        public bool TryAllocateEnemyUnitSpawnData_Trigger(int triggerID);
 
-        private UtilitySystem.IsometricCoordinateConvertor IsometricCoordinateConvertor;
+        // Queue를 사용한 EnemyUnit 생성 요청
+        public void GenerateEnemyUnit_Queue();
+        // Queue를 사용한 EnemyUnit 생성 요청 ( 내부 코루틴 대기 )
+        public IEnumerator GenerateEnemyUnit_Queue_Coroutine();
 
+        // EnemyUnit 생성 요청.
+        public void GenerateEnemyUnit(int unitID, Vector2Int spawnPosition);
+        // EnemyUnit 생성 요청 ( 내부 코루틴 대기 )
+        public IEnumerator GenerateEnemyUnit_Coroutine(int unitID, Vector2Int spawnPosition);
+
+        public void StopAllCoroutines_Refer();
+
+        // 모든 EnemyUnit 객체 삭제 요청.
+        public void ClearEnemyUnitAndDatas();
+    }
+
+    public class EnemyUnitSpawnController : MonoBehaviour, IEnemyUnitSpawnController
+    {
         [SerializeField] private Transform EnemyUnitObjectParent;
 
+        private EnemyUnitSpawnData_Stage EnemyUnitSpawnData_Stage;
         private EnemyUnitSpawnData_Turn[] EnemySpawnData_Turns;
         private EnemyUnitSpawnData_Trigger[] EnemySpawnData_Triggers;
 
-        private Queue<UnitSpawnData> enemySpawnQueue = new();        
+        private Queue<UnitSpawnData> enemySpawnQueue = new();
 
         private void Awake()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-
-            this.EnemyUnitSpawnDataDBHandler = HandlerManager.GetStaticDataHandler<EnemyUnitSpawnDataDBHandler>();
-            this.EnemyUnitDataDBHandler = HandlerManager.GetStaticDataHandler<EnemyUnitDataDBHandler>();
-
-            this.GeneratedTileDataGroupHandler = HandlerManager.GetDynamicDataHandler<GeneratedTerrainDataDBHandler>();
-            this.EnemyUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<EnemyUnitManagerDataDBHandler>();
-            this.PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerUnitManagerDataDBHandler>();
-
-            this.IsometricCoordinateConvertor = HandlerManager.GetUtilityHandler<UtilitySystem.IsometricCoordinateConvertor>();
+            HandlerManager.GetDynamicDataHandler<EnemySystemHandler>().IEnemyUnitSpawnController = this;
         }
 
+        // 초기 셋팅 ( 필드 멤버 셋팅 등 )
         public void InitialSetting(int stageID)
         {
-            // 특정 StageID에 해당되는 Turn Table을 가져옵니다.
-            if (this.EnemyUnitSpawnDataDBHandler.TryGetEnemyUnitSpawnDataGroup_Turn(stageID, out var enemySpawnData_Turns))
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var EnemyUnitSpawnDataDBHandler = HandlerManager.GetStaticDataHandler<EnemyUnitSpawnDataDBHandler>();
+
+            // 특정 StageID에 해당되는 StageID 기반 적 유닛 생성 Table을 가져옵니다.
+            if (EnemyUnitSpawnDataDBHandler.TryGetEnemySpawnData_Stage(stageID, out var enemyUnitSpawnData_Stage))
+                this.EnemyUnitSpawnData_Stage = enemyUnitSpawnData_Stage;
+
+            // 특정 StageID에 해당되는 Turn 기반 적 유닛 생성 Table을 가져옵니다.
+            if (EnemyUnitSpawnDataDBHandler.TryGetEnemyUnitSpawnDataGroup_Turn(stageID, out var enemySpawnData_Turns))
                 this.EnemySpawnData_Turns = enemySpawnData_Turns;
 
-            // 특정 StageID에 해당되는 Trigger Table을 가져옵니다.
-            if (this.EnemyUnitSpawnDataDBHandler.TryGetEnemyUnitSpawnDataGroup_Trigger(stageID, out var enemySpawnData_Triggers))
+            // 특정 StageID에 해당되는 Trigger 기반 적 유닛 생성 Table을 가져옵니다.
+            if (EnemyUnitSpawnDataDBHandler.TryGetEnemyUnitSpawnDataGroup_Trigger(stageID, out var enemySpawnData_Triggers))
                 this.EnemySpawnData_Triggers = enemySpawnData_Triggers;
-
-            this.enemySpawnQueue.Clear();
-            this.GenerateEnemyUnit_StageSetting(stageID);
         }
-        // 특정 TrrigerID에 대응되는 EnemyUnitSpawnData를 Queue에 할당합니다.
-        public void AllocateEnemyUnitSpawnData_Turn(int turnID)
+
+
+        // StageID에 대응되는 EnemyUnitSpawnData를 Queue에 할당합니다.
+        public void AllocateEnemyUnitSpawnData_Stage()
         {
             this.enemySpawnQueue.Clear();
-            EnemyUnitSpawnData_Turn enemyUnitSpawnData_Turn = null;
+            foreach (UnitSpawnData spawnData in this.EnemyUnitSpawnData_Stage.UnitSpawnDatas)
+            {
+                this.enemySpawnQueue.Enqueue(spawnData);
+            }
+        }
+        // 특정 TrrigerID에 대응되는 EnemyUnitSpawnData를 Queue에 할당합니다.
+        public bool TryAllocateEnemyUnitSpawnData_Turn(int turnID)
+        {
+            if (this.EnemySpawnData_Turns == null) return false;
 
+            // DB에 TurnID에 대응되는 '적 유닛 생성 데이터'가 있는지 탐색.
             foreach (var spawnDataGroup in this.EnemySpawnData_Turns)
             {
+                // 있으면, Queue에 데이터 할당.
                 if (spawnDataGroup.TurnID == turnID)
                 {
-                    enemyUnitSpawnData_Turn = spawnDataGroup;
+                    this.enemySpawnQueue.Clear();
+
+                    foreach (UnitSpawnData spawnData in spawnDataGroup.UnitSpawnDatas)
+                    {
+                        this.enemySpawnQueue.Enqueue(spawnData);
+                    }
+
+                    return true;
                 }
             }
 
-            foreach (UnitSpawnData spawnData in enemyUnitSpawnData_Turn.UnitSpawnDatas)
-            {
-                this.enemySpawnQueue.Enqueue(spawnData);
-            }
+            // 없으면, TurnID에 대응되는 데이터가 없다는 뜻을 리턴.
+            return false;
         }
         // 특정 TrrigerID에 대응되는 EnemyUnitSpawnData를 Queue에 할당합니다.
-        public void AllocateEnemyUnitSpawnData_Trigger(int triggerID)
+        public bool TryAllocateEnemyUnitSpawnData_Trigger(int triggerID)
         {
-            this.enemySpawnQueue.Clear();
-            EnemyUnitSpawnData_Trigger enemyUnitSpawnData_Trigger = null;
+            if (this.EnemySpawnData_Triggers == null) return false;
 
+            // DB에 TriggerID에 대응되는 '적 유닛 생성 데이터'가 있는지 탐색.
             foreach (var spawnDataGroup in this.EnemySpawnData_Triggers)
             {
+                // 있으면, Queue에 데이터 할당.
                 if (spawnDataGroup.TriggerID == triggerID)
                 {
-                    enemyUnitSpawnData_Trigger = spawnDataGroup;
+                    this.enemySpawnQueue.Clear();   
+
+                    foreach (UnitSpawnData spawnData in spawnDataGroup.UnitSpawnDatas)
+                    {
+                        this.enemySpawnQueue.Enqueue(spawnData);
+                    }
                 }
+
+                return true;
             }
 
-            foreach (UnitSpawnData spawnData in enemyUnitSpawnData_Trigger.UnitSpawnDatas)
-            {
-                this.enemySpawnQueue.Enqueue(spawnData);
-            }
+            // 없으면, TriggerID에 대응되는 데이터가 없다는 뜻을 리턴.
+            return false;
         }
 
 
-        // Stage 시작에 의한 Stage 기반 Enemy 생성.
-        public void GenerateEnemyUnit_StageSetting(int stageID)
+        public void GenerateEnemyUnit_Queue()
         {
-            if (!this.EnemyUnitSpawnDataDBHandler.TryGetEnemySpawnData_Stage(stageID, out var data_Stage)) return;
-
-            // 한번에 전달 -> 초반은 생성 애니메이션 보여줄 필요 없음.
-            foreach (var data in data_Stage.UnitSpawnDatas)
-            {
-                this.GenerateEnemyUnit(data.UnitID, new Vector2Int(data.SpawnPositionX, data.SpawnPositionY));
-            }
-
-        }
-        // 해당 위치 좌표에 Enemy와 동일 좌표에 존재할 수 없는 객체가 있을 시, 생성 안함.
-        public void GenerateEnemyUnit()
-        {
-            if (this.enemySpawnQueue.Count == 0) return;
-
-            UnitSpawnData newSpawnData = null;
             while (this.enemySpawnQueue.Count > 0)
             {
                 // 생성할 Unit의 ID 및 Position 가져오기.
-                newSpawnData = enemySpawnQueue.Dequeue();
+                var newSpawnData = this.enemySpawnQueue.Dequeue();
+                Vector2Int spawnPosition = new Vector2Int(newSpawnData.SpawnPositionX, newSpawnData.SpawnPositionY);
 
-                // 객체가 생성될 위치값이 비어있으면 생성.
-                if (this.IsEmpty(new Vector2Int(newSpawnData.SpawnPositionX, newSpawnData.SpawnPositionY))) break;
+                // 객체가 생성될 위치값이 비어있지 않으면 넘어감..
+                if (!this.IsEmpty(spawnPosition)) continue;
+
+                this.GenerateEnemyUnit(newSpawnData.UnitID, spawnPosition);
             }
-
-            this.GenerateEnemyUnit(newSpawnData.UnitID, new Vector2Int(newSpawnData.SpawnPositionX, newSpawnData.SpawnPositionY));
         }
+        public IEnumerator GenerateEnemyUnit_Queue_Coroutine()
+        {
+            while (this.enemySpawnQueue.Count > 0)
+            {
+                // 생성할 Unit의 ID 및 Position 가져오기.
+                var newSpawnData = enemySpawnQueue.Dequeue();
+                Vector2Int spawnPosition = new Vector2Int(newSpawnData.SpawnPositionX, newSpawnData.SpawnPositionY);
+
+                // 객체가 생성될 위치값이 비어있지 않으면 넘어감..
+                if (!this.IsEmpty(spawnPosition)) continue;
+
+                yield return this.GenerateEnemyUnit_Coroutine(newSpawnData.UnitID, spawnPosition);
+                
+                // 잠시 대기.
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        // 코루틴이 아닌 생성. ( 생성 Animation 무시 )
         public void GenerateEnemyUnit(int unitID, Vector2Int spawnPosition)
         {
-            if (!this.EnemyUnitDataDBHandler.TryGetEnemyPrefabResourceData(unitID, out var prefabData)) return;
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var EnemyUnitDataDBHandler = HandlerManager.GetStaticDataHandler<EnemyUnitSystem.EnemyUnitDataDBHandler>();
+            var IsometricCoordinateConvertor = HandlerManager.GetUtilityHandler<UtilitySystem.IsometricCoordinateConvertor>();
+
+            // UnitID에 대응되는 Prefab이 없으면 넘어감.
+            if (!EnemyUnitDataDBHandler.TryGetEnemyPrefabResourceData(unitID, out var prefabData)) return;
+
+            Debug.Log($"ID : {unitID}, pos : {spawnPosition}");
 
             // Enemy Unit 생성 및 Hierarchy 배치.
             GameObject createdEnemyUnit = Object.Instantiate(prefabData.EnemyPrefab, this.EnemyUnitObjectParent);
             // 위치 배치.
-            createdEnemyUnit.transform.position = this.IsometricCoordinateConvertor.ConvertGridToWorld(spawnPosition);
+            createdEnemyUnit.transform.position = IsometricCoordinateConvertor.ConvertGridToWorld(spawnPosition);
 
-            // Enemy Unit 초기 할당 성공.
-            if(createdEnemyUnit.GetComponent<IEnemyUnitManager>().TryInitialSetting(out var data))
-            {
-                // Enemy 관리 데이터에 할당.
-                this.EnemyUnitManagerDataDBHandler.AddEnemyUnitManagerData(data);
-            }
-            // 이거 오류 크게 난거임. 다시 삭제해야됨.
-            else
-            {
-                GameObject.Destroy(createdEnemyUnit);
-            }
+            // 초기 셋팅 호출 후 끝.
+            createdEnemyUnit.GetComponent<EnemyUnitSystem.IEnemyUnitManager>().OperateEnemyUnitInitialSetting();
+        }
+        // 코루틴 생성. ( 애니메이션 대기 )
+        public IEnumerator GenerateEnemyUnit_Coroutine(int unitID, Vector2Int spawnPosition)
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var EnemyUnitDataDBHandler = HandlerManager.GetStaticDataHandler<EnemyUnitSystem.EnemyUnitDataDBHandler>();
+            var IsometricCoordinateConvertor = HandlerManager.GetUtilityHandler<UtilitySystem.IsometricCoordinateConvertor>();
+
+            // UnitID에 대응되는 Prefab이 없으면 넘어감.
+            if (!EnemyUnitDataDBHandler.TryGetEnemyPrefabResourceData(unitID, out var prefabData)) yield break;
+
+            // Enemy Unit 생성 및 Hierarchy 배치.
+            GameObject createdEnemyUnit = Object.Instantiate(prefabData.EnemyPrefab, this.EnemyUnitObjectParent);
+            var enemyUnitManager = createdEnemyUnit.GetComponent<EnemyUnitSystem.IEnemyUnitManager>();
+            // 위치 배치.
+            createdEnemyUnit.transform.position = IsometricCoordinateConvertor.ConvertGridToWorld(spawnPosition);
+
+            // 1프레임 대기. ( 객체 생성되는 시점까지 대기 후, 생성 Coroutine 호출. ) 
+            yield return null;
+
+            // Enemy 초기 셋팅 값 넘기기.
+            // 여기서 Enemy 객체의 생성 코루틴 대기.
+            enemyUnitManager.StopAllCoroutines();
+            yield return StartCoroutine(enemyUnitManager.OperateEnemyUnitInitialSetting_Coroutine());
+
+            // 1프레임 대기. ( 그냥 안전성 )
+            yield return null;
         }
 
-        public void ClearGameObjectAndDatas()
+
+        public void StopAllCoroutines_Refer()
         {
-            this.EnemyUnitManagerDataDBHandler.ClearEnemyUnitManagerDataGroup();
+            this.StopAllCoroutines();
+        }
+
+        // 생성된 모든 EnemyUnit GameObject를 삭제 및 관련 데이터 삭제.
+        public void ClearEnemyUnitAndDatas()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var EnemyUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<EnemyUnitSystem.EnemyUnitManagerDataDBHandler>();
+
+            EnemyUnitManagerDataDBHandler.ClearEnemyUnitManagerDataGroup();
             this.enemySpawnQueue.Clear();
 
             // enemyGameObject 삭제.
@@ -156,27 +232,35 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
                 GameObject.Destroy(child.gameObject);
             }
         }
-        
+
+
+        // 해당 위치 좌표에 Enemy와 동일 좌표에 존재할 수 없는 객체가 있을 시, 생성 안함.
         // 없으면 True, 있으면 false
         private bool IsEmpty(Vector2Int pos)
         {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var GeneratedTileDataGroupHandler = HandlerManager.GetDynamicDataHandler<TerrainSystem.GeneratedTerrainDataDBHandler>();
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
+            var EnemyUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<EnemyUnitSystem.EnemyUnitManagerDataDBHandler>();
+
             // 존재할 수 없는 위치값인지 확인. ( 해당 위치의 tile 값을 가져올 수 없으면, 해당 위치는 배치 불가능한 곳임 )
-            if (this.GeneratedTileDataGroupHandler.TryGetGeneratedTerrainData(pos, out var _))
+            if (!GeneratedTileDataGroupHandler.TryGetGeneratedTerrainData(pos, out var _))
             {
                 return false;
             }
 
-            if(this.PlayerUnitManagerDataDBHandler.TryGetPlayerUnitManagerData(pos, out var _))
+            if (PlayerUnitManagerDataDBHandler.TryGetPlayerUnitManagerData(pos, out var _))
             {
                 return false;
             }
 
-            if (this.EnemyUnitManagerDataDBHandler.TryGetEnemyUnitManagerData(pos, out var _))
+            if (EnemyUnitManagerDataDBHandler.TryGetEnemyUnitManagerData(pos, out var _))
             {
                 return false;
             }
 
             return true;
         }
+
     }
 }

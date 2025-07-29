@@ -36,8 +36,6 @@ namespace GameSystems.UIUXSystem
 
             this.EventObserverLinker.RegisterSubscriberListener<PlayerMovementTilemap_CancelOrOperated>();
             this.EventObserverLinker.RegisterSubscriberListener<PlayerSkillRangeTilemap_CancelOrOperated>();
-
-
         }
 
         private void OnDisable()

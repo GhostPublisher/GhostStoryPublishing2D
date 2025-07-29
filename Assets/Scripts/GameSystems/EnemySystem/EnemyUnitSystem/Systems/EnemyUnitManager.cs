@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 
 using UnityEngine;
 
@@ -9,10 +9,14 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 {
     public interface IEnemyUnitManager
     {
-        public bool TryInitialSetting(out EnemyUnitManagerData enemyUnitManagerData);
         public void OperateNewTurnSetting();
         public void OperateEnemyAI();
         public void OperateDie();
+
+        public void OperateEnemyUnitInitialSetting();
+        public IEnumerator OperateEnemyUnitInitialSetting_Coroutine();
+
+        public void StopAllCoroutines();
     }
 
     public class EnemyUnitManager : MonoBehaviour, IEnemyUnitManager
@@ -53,8 +57,61 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             EnemyUnitManagerDataDBHandler.RemoveEnemyUnitManagerData(this.myEnemyUnitManagerData);
         }
 
-        public bool TryInitialSetting(out EnemyUnitManagerData enemyUnitManagerData)
+        public void StopAllCoroutines_Refer()
         {
+            this.StopAllCoroutines();
+        }
+
+        public void OperateEnemyUnitInitialSetting()
+        {
+            this.InitialSetting();
+
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
+
+            // 해당 위치 시야 갱신.
+            if (PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
+            {
+                foreach (var data in playerUnitManagerDatas)
+                {
+                    data.PlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController.UpdateVisibleRange();
+                }
+            }
+        }
+
+        public IEnumerator OperateEnemyUnitInitialSetting_Coroutine()
+        {
+            this.InitialSetting();
+
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
+            var FogTilemapData = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().FogTilemapData;
+
+            // 해당 위치 시야 갱신.
+            if (PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
+            {
+                foreach(var data in playerUnitManagerDatas)
+                {
+                    data.PlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController.UpdateVisibleRange();
+                }
+            }
+
+            // 플레이어의 시야 안에 존재할 시, 카메라 포커싱 작업 수행.
+            if(FogTilemapData.TryGetFogState(this.myEnemyUnitManagerData.EnemyUnitGridPosition(), out var fogStage) && fogStage == TilemapSystem.FogTilemap.FogState.Visible)
+            {
+                // 카메라 포커싱. 부분
+
+                yield return StartCoroutine(this.EnemyUnitAnimationController.PlayAndWaitAnimation(EnemyUnitAnimationType.Spawn));
+            }            
+        }
+
+
+
+        private void InitialSetting()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var EnemyUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<EnemyUnitManagerDataDBHandler>();
+
             this.UniqueID = this.gameObject.GetInstanceID();
 
             // PlugIn 조립.
@@ -74,16 +131,12 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             this.myEnemyUnitFeatureInterfaceGroup.EnemyHitReactionController = this.EnemyHitReactionController;
             this.myEnemyUnitFeatureInterfaceGroup.EnemyUnitEffectController = this.EnemyUnitEffectController;
 
-            enemyUnitManagerData = new EnemyUnitManagerData(this.UniqueID, this.myEnemyUnitStaticData, this.myEnemyUnitDynamicData, this.myEnemyUnitFeatureInterfaceGroup, this.transform);
+            this.myEnemyUnitManagerData = new EnemyUnitManagerData(this.UniqueID, this.myEnemyUnitStaticData, this.myEnemyUnitDynamicData, this.myEnemyUnitFeatureInterfaceGroup, this.transform);
+            EnemyUnitManagerDataDBHandler.AddEnemyUnitManagerData(this.myEnemyUnitManagerData);
 
-            // 뭔가 오류날게 없나? 일단 이걸로 명시.
-            if (enemyUnitManagerData == null) return false;
-
-            this.myEnemyUnitManagerData = enemyUnitManagerData;
-            this.AdditionalSetting();
-            return true;
+            this.SubObjectInitialSetting();
         }
-        private void AdditionalSetting()
+        private void SubObjectInitialSetting()
         {
             this.EnemyUnitStatusController.InitialSetting(this.myEnemyUnitManagerData);
 

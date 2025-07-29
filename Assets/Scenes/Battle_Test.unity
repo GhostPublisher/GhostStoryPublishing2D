@@ -2068,7 +2068,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 483963701}
-  - component: {fileID: 483963702}
   - component: {fileID: 483963703}
   m_Layer: 0
   m_Name: FogTilemap
@@ -2092,19 +2091,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 969726197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &483963702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 483963700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4561ddffd3e6724caecdca76f2ca92b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FogTilemapController: {fileID: 483963703}
 --- !u!114 &483963703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5292,7 +5278,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 869030714}
-  - component: {fileID: 869030715}
   - component: {fileID: 869030716}
   m_Layer: 0
   m_Name: EnemySpawner
@@ -5316,19 +5301,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 287144551}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &869030715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869030713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df16a51480dd4e14dbae90646f5c6f0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemySpawnController: {fileID: 869030716}
 --- !u!114 &869030716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5352,7 +5324,6 @@ GameObject:
   m_Component:
   - component: {fileID: 877499523}
   - component: {fileID: 877499525}
-  - component: {fileID: 877499524}
   m_Layer: 0
   m_Name: PlayerSpawner
   m_TagString: Untagged
@@ -5375,19 +5346,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2131452110}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &877499524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877499522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f7f4ce6f540ee4428e15a900095135b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerUnitSpawnController: {fileID: 877499525}
 --- !u!114 &877499525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5980,7 +5938,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 987041301}
-  - component: {fileID: 987041303}
   - component: {fileID: 987041302}
   m_Layer: 0
   m_Name: BattleSceneFlow
@@ -6016,19 +5973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea76dfaa1c8c43a43a0e5113e100392e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &987041303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 987041300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5933fc6c84bebe49bfb3e78347040a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BattleSceneFlowController: {fileID: 987041302}
 --- !u!1 &1007025937
 GameObject:
   m_ObjectHideFlags: 0

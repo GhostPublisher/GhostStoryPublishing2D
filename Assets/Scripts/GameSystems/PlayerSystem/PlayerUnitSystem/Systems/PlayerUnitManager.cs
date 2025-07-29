@@ -1,17 +1,20 @@
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
 using Foundations.Architecture.ReferencesHandler;
 
-using GameSystems.PlayerSystem;
-
 namespace GameSystems.PlayerSystem.PlayerUnitSystem
 {
     public interface IPlayerUnitManager
     {
-        public bool TryInitialSetting(out PlayerUnitManagerData PlayerUnitManagerData);
         public void OperateDie();
+
+        public void OperatePlayerUnitInitialSetting();
+        public IEnumerator OperatePlayerUnitInitialSetting_Coroutine();
+
+        public void StopAllCoroutines();
     }
 
     public class PlayerUnitManager : MonoBehaviour, IPlayerUnitManager
@@ -56,16 +59,40 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             PlayerUnitManagerDataDBHandler.RemovePlayerUnitManagerData(this.myPlayerUnitManagerData);
         }
 
-        public bool TryInitialSetting(out PlayerUnitManagerData playerUnitManagerData)
+
+        public void OperatePlayerUnitInitialSetting()
         {
+            this.InitialSetting();
+
+            this.PlayerUnitVisibilityController.UpdateVisibleRange(this.myPlayerUnitManagerData.PlayerUnitGridPosition());
+        }
+
+        public IEnumerator OperatePlayerUnitInitialSetting_Coroutine()
+        {
+            this.InitialSetting();
+
+            // 해당 위치의 시야 작업 수행.
+            this.PlayerUnitVisibilityController.UpdateVisibleRange(this.myPlayerUnitManagerData.PlayerUnitGridPosition());
+
+            // 카메라 포커싱.
+            // 생성 애니메이션 재생.
+            yield return StartCoroutine(this.PlayerUnitAnimationController.PlayAndWaitAnimation(PlayerUnitAnimationType.Spawn));
+
+        }
+
+        public void InitialSetting()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerUnitManagerDataDBHandler>();
+
             this.UniqueID = this.gameObject.GetInstanceID();
 
+            // PlugIn 조립.
             this.PlayerUnitMoveRangeCalculator = this.PlayerUnitInterfaceComponentContainer.GetComponent<IPlayerUnitMoveRangeCalculator>();
             this.PlayerUnitMoveController = this.PlayerUnitInterfaceComponentContainer.GetComponent<IPlayerUnitMoveController>();
 
             this.PlayerUnitSkillRangeCalculators = new();
             this.PlayerSkillControllers = new();
-
             foreach (var component in this.PlayerUnitSkillInterfaceComponentContainer.GetComponents<MonoBehaviour>())
             {
                 if (component is IPlayerUnitSkillRangeCalculator playerUnitSkillRangeCalculator)
@@ -100,16 +127,12 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
                 this.PlayerUnitFeatureInterfaceGroup.PlayerUnitSkillRangeCalculators.Add(interfaceMember.Key, interfaceMember.Value);
             }
 
-            playerUnitManagerData = new PlayerUnitManagerData(this.UniqueID, this.PlayerUnitStaticData, this.PlayerUnitDynamicData, this.PlayerUnitFeatureInterfaceGroup, this.transform);
+            this.myPlayerUnitManagerData = new PlayerUnitManagerData(this.UniqueID, this.PlayerUnitStaticData, this.PlayerUnitDynamicData, this.PlayerUnitFeatureInterfaceGroup, this.transform);
+            PlayerUnitManagerDataDBHandler.AddPlayerUnitManagerData(this.myPlayerUnitManagerData);
 
-            // 뭔가 오류날게 없나? 일단 이걸로 명시.
-            if (playerUnitManagerData == null) return false;
-
-            this.myPlayerUnitManagerData = playerUnitManagerData;
-            this.AdditionalSetting();
-            return true;
+            this.SubObjectInitialSetting();
         }
-        private void AdditionalSetting()
+        private void SubObjectInitialSetting()
         {
             this.PlayerUnitStatusController.InitialSetting(this.myPlayerUnitManagerData);
 
@@ -134,9 +157,6 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             {
                 comp.InitialSetting(this.myPlayerUnitManagerData);
             }
-
-            // 생성과 동시에 시야값 갱신
-            this.UpdateVisibleRange();
         }
 
         // Player Unit의 현재 위치를 기준으로, 주변 시야 범위를 갱신합니다.

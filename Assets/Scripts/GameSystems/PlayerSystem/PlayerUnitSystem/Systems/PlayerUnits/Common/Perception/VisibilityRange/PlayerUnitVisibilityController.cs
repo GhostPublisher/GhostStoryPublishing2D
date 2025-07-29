@@ -4,6 +4,7 @@ using Foundations.Architecture.EventObserver;
 using Foundations.Architecture.ReferencesHandler;
 using GameSystems.UtilitySystem;
 
+using GameSystems.TilemapSystem;
 using GameSystems.TilemapSystem.FogTilemap;
 using GameSystems.EnemySystem.EnemyVisibilitySystem;
 
@@ -14,13 +15,17 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
     {
         private IEventObserverNotifier EventObserverNotifier;
 
+        private IFogTilemapController IFogTilemapController;
+
         private VisibilityRangeCalculator VisibilityRangeCalculator;
 
-        private PlayerUnitManagerData playerUnitManagerData;
+        private PlayerUnitManagerData myPlayerUnitManagerData;
 
         private void Awake()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
+            this.IFogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController;
+
             this.VisibilityRangeCalculator = HandlerManager.GetUtilityHandler<VisibilityRangeCalculator>();
 
             this.EventObserverNotifier = new EventObserverNotifier();
@@ -28,39 +33,39 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 
         public void InitialSetting(PlayerUnitManagerData playerUnitManagerData)
         {
-            this.playerUnitManagerData = playerUnitManagerData;
+            this.myPlayerUnitManagerData = playerUnitManagerData;
         }
 
         private void OnDestroy()
         {
-            RemovePlayerVisibleData_ForFogVisibility removePlayerVisibleData_ForFogVisibility = new();
-            removePlayerVisibleData_ForFogVisibility.PlayerUniqueID = this.playerUnitManagerData.UniqueID;
+            IFogTilemapController.RemovePlayerVisibleData_ForFogVisibility(this.myPlayerUnitManagerData.UniqueID);
 
             RemovePlayerVisibleData_ForEnemyVisibility removePlayerVisibleData_ForEnemyVisibility = new();
-            removePlayerVisibleData_ForEnemyVisibility.PlayerUniqueID = this.playerUnitManagerData.UniqueID;
+            removePlayerVisibleData_ForEnemyVisibility.PlayerUniqueID = this.myPlayerUnitManagerData.UniqueID;
 
-            this.EventObserverNotifier.NotifyEvent(removePlayerVisibleData_ForFogVisibility);
             this.EventObserverNotifier.NotifyEvent(removePlayerVisibleData_ForEnemyVisibility);
         }
 
+        public void UpdateVisibleRange()
+        {
+            this.UpdateVisibleRange(this.myPlayerUnitManagerData.PlayerUnitGridPosition());
+        }
         public void UpdateVisibleRange(Vector2Int targetPosition)
         {
             if (this.VisibilityRangeCalculator == null) return;
 
             var updatedVisibleRange = this.VisibilityRangeCalculator.GetFilteredVisibleRange_Player(targetPosition,
-                this.playerUnitManagerData.PlayerUnitStaticData.VisibleSize, this.playerUnitManagerData.PlayerUnitStaticData.VisibleOvercomeWeight);
+                this.myPlayerUnitManagerData.PlayerUnitStaticData.VisibleSize, this.myPlayerUnitManagerData.PlayerUnitStaticData.VisibleOvercomeWeight);
 
-            UpdatePlayerVisibleData_ForFogVisibility UpdatePlayerVisibleData_ForFogVisibility = new();
-            UpdatePlayerVisibleData_ForFogVisibility.PlayerUniqueID = this.playerUnitManagerData.UniqueID;
-            UpdatePlayerVisibleData_ForFogVisibility.VisibleRange = updatedVisibleRange;
+            IFogTilemapController.UpdatePlayerVisibleData_ForFogVisibility(this.myPlayerUnitManagerData.UniqueID, updatedVisibleRange);
+            IFogTilemapController.UpdateFogVisibility();
 
             UpdatePlayerVisibleData_ForEnemyVisibility UpdatePlayerVisibleData_ForEnemyVisibility = new();
-            UpdatePlayerVisibleData_ForEnemyVisibility.PlayerUniqueID = this.playerUnitManagerData.UniqueID;
+            UpdatePlayerVisibleData_ForEnemyVisibility.PlayerUniqueID = this.myPlayerUnitManagerData.UniqueID;
             UpdatePlayerVisibleData_ForEnemyVisibility.VisibleRange = updatedVisibleRange;
-            UpdatePlayerVisibleData_ForEnemyVisibility.PhysicalVisionOvercomeWeight = this.playerUnitManagerData.PlayerUnitStaticData.PhysicalVisionOvercomeWeight;
-            UpdatePlayerVisibleData_ForEnemyVisibility.SpiritualVisionOvercomeWeight = this.playerUnitManagerData.PlayerUnitStaticData.SpiritualVisionOvercomeWeight;
+            UpdatePlayerVisibleData_ForEnemyVisibility.PhysicalVisionOvercomeWeight = this.myPlayerUnitManagerData.PlayerUnitStaticData.PhysicalVisionOvercomeWeight;
+            UpdatePlayerVisibleData_ForEnemyVisibility.SpiritualVisionOvercomeWeight = this.myPlayerUnitManagerData.PlayerUnitStaticData.SpiritualVisionOvercomeWeight;
 
-            this.EventObserverNotifier.NotifyEvent(UpdatePlayerVisibleData_ForFogVisibility);
             this.EventObserverNotifier.NotifyEvent(UpdatePlayerVisibleData_ForEnemyVisibility);
         }
     }

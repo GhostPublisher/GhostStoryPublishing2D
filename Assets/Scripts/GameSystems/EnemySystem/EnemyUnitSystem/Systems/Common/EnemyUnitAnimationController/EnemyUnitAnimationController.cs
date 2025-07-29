@@ -79,6 +79,8 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
     public enum EnemyUnitAnimationType
     {
+        Spawn,
+
         Idle,
         IsWalk,
 

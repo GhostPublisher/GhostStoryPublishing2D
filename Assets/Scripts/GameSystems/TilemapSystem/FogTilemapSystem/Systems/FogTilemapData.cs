@@ -6,13 +6,13 @@
     {
         private FogState[,] fogStates;
 
-        public FogTilemapData(int width, int height)
+        public void InitialSetting(int width, int height)
         {
             this.fogStates = new FogState[width, height];
 
-            for(int x = 0; x < width; ++x)
+            for (int x = 0; x < width; ++x)
             {
-                for(int y = 0; y < height; ++y)
+                for (int y = 0; y < height; ++y)
                 {
                     this.fogStates[x, y] = FogState.Hidden;
                 }
@@ -24,6 +24,10 @@
             return (this.fogStates.GetLength(0), this.fogStates.GetLength(1));
         }
 
+        public bool TryGetFogState(UnityEngine.Vector2Int girdPosition, out FogState FogState)
+        {
+            return TryGetFogState(girdPosition.x, girdPosition.y, out FogState);
+        }
         public bool TryGetFogState(int x, int y, out FogState FogState)
         {
             FogState = FogState.None;

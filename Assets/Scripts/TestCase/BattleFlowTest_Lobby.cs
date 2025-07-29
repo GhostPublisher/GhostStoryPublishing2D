@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using TMPro;
 
-using Foundations.Architecture.EventObserver;
+using Foundations.Architecture.ReferencesHandler;
 
 namespace GameSystems.TestCase
 {
     public class BattleFlowTest_Lobby : MonoBehaviour
     {
-        private IEventObserverNotifier EventObserverNotifier;
-
         [Header("UI References")]
         [SerializeField] private TMP_InputField stageInputField;
         [SerializeField] private TMP_Text stageDisplayText;
@@ -20,11 +16,6 @@ namespace GameSystems.TestCase
         [SerializeField] private string BattleSceneName;
 
         private int currentStageID = 0;
-
-        private void Awake()
-        {
-            this.EventObserverNotifier = new EventObserverNotifier();
-        }
 
         public void OnLoadStageClicked()
         {
@@ -59,12 +50,11 @@ namespace GameSystems.TestCase
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var BattleSceneHandler = HandlerManager.GetDynamicDataHandler<BattleSceneSystem.BattleSceneHandler>();
+
             Debug.Log($"ÇöÀç StageID : {this.currentStageID}");
-
-            var data = new BattleSceneSystem.InitialSetBattleSceneFlowControllerEvent();
-            data.StageID = this.currentStageID;
-
-            this.EventObserverNotifier.NotifyEvent(data);
+            BattleSceneHandler.IBattleSceneFlowController.BattleSceneFlowControllEvent_StageSetting(this.currentStageID);
         }
     }
 }
