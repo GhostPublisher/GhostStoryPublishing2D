@@ -51,10 +51,10 @@ namespace GameSystems.TestCase
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-            var BattleSceneHandler = HandlerManager.GetDynamicDataHandler<BattleSceneSystem.BattleSceneHandler>();
+            var BattleSceneHandler = HandlerManager.GetDynamicDataHandler<BattleSceneSystem.BattleSceneSystemHandler>();
 
             Debug.Log($"ÇöÀç StageID : {this.currentStageID}");
-            BattleSceneHandler.IBattleSceneFlowController.BattleSceneFlowControllEvent_StageSetting(this.currentStageID);
+            BattleSceneHandler.IBattleSceneFlowController.OperateBattleSceneFlow_StageSetting(this.currentStageID);
         }
     }
 }

@@ -16,8 +16,12 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 
         public IPlayerUnitHitReactionController PlayerUnitHitReactionController;
         public IPlayerUnitEffectController PlayerUnitEffectController;
-        public IPlayerUnitVisibilityController PlayerUnitVisibilityController;
 
+        public IPlayerUnitVisibilityController PlayerUnitVisibilityController;
+        public IPlayerUnitMoveRangeCalculator IPlayerUnitMoveRangeCalculator;
         public Dictionary<int, IPlayerUnitSkillRangeCalculator> PlayerUnitSkillRangeCalculators = new();
+
+        public IPlayerUnitMoveController IPlayerUnitMoveController;
+        public Dictionary<int, IPlayerSkillController> IPlayerSkillControllers = new();
     }
 }

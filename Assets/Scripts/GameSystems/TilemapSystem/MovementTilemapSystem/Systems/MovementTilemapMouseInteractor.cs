@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+using Foundations.Architecture.ReferencesHandler;
 using Foundations.Architecture.EventObserver;
 
 using GameSystems.PlayerSystem.PlayerUnitSystem;
@@ -50,7 +51,7 @@ namespace GameSystems.TilemapSystem.MovementTilemap
             // 좌표가 동일하면 넘어가기.
             if (this.currentGridPosition != gridPos)
             {
-                Debug.Log($"MousePos : {cellPos}, GirdPos : {gridPos}");
+//                Debug.Log($"MousePos : {cellPos}, GirdPos : {gridPos}");
 
                 // 좌표가 변경되었을 경우.
                 // 이전 좌표 값이 활성화된 상태였을 경우, PointerExit.
@@ -81,25 +82,25 @@ namespace GameSystems.TilemapSystem.MovementTilemap
 
         private void RequestMoveToTargetPosition_PlayerUnit_OnMouseClickUpEvent(Vector2Int targetPosition)
         {
-            MoveToTargetPosition_PlayerUnit moveToTargetPosition_PlayerUnit = new();
-            moveToTargetPosition_PlayerUnit.PlayerUniqueID = this.currentPlayerUniqueID;
-            moveToTargetPosition_PlayerUnit.TargetPosition = targetPosition;
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
 
-            UIUXSystem.PlayerSkillRangeTilemap_CancelOrOperated PlayerSkillRangeTilemap_Cancel = new();
-            PlayerSkillRangeTilemap_Cancel.PlayerUniqueID = this.currentPlayerUniqueID;
-
-            this.EventObserverNotifier.NotifyEvent(PlayerSkillRangeTilemap_Cancel);
-            this.EventObserverNotifier.NotifyEvent(moveToTargetPosition_PlayerUnit);
+            // Player Move 요청.
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
+            if(PlayerUnitManagerDataDBHandler.TryGetPlayerUnitManagerData(this.currentPlayerUniqueID, out var playerUnitManagerData))
+            {
+                playerUnitManagerData.PlayerUnitFeatureInterfaceGroup.PlayerUnitManager.OperateMove(this.currentPlayerUniqueID, targetPosition);
+            }
 
             this.MovementTilemapSystem.DisActivateMovementTilemap();
         }
 
         private void RequestMovementTilemapCancelEvent()
         {
-            UIUXSystem.PlayerMovementTilemap_CancelOrOperated PlayerMovementTilemap_Cancel = new();
-            PlayerMovementTilemap_Cancel.PlayerUniqueID = this.currentPlayerUniqueID;
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<GameSystems.UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
 
-            this.EventObserverNotifier.NotifyEvent(PlayerMovementTilemap_Cancel);
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Show_PlayerUnitBehaviourPanel(this.currentPlayerUniqueID);
+
             this.MovementTilemapSystem.DisActivateMovementTilemap();
         }
 

@@ -133,7 +133,7 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
             // SO 안에 StageID에 해당되는 데이터가 없을 경우 false 리턴.
             if (!enemyUnitSpawnDataGroupDB_Trigger.TryGetEnemyUnitSpawnDataGroup_Trigger(stageID, out var enemyUnitSpawnDataGroup_Trigger))
             {
-                Debug.LogWarning($"[EnemySpawnDataDBHandler] SO 안에 StageID 해당 데이터가 없음. StageID : {stageID}");
+//                Debug.LogWarning($"[EnemySpawnDataDBHandler] SO 안에 StageID 해당 데이터가 없음. StageID : {stageID}");
                 enemyUnitSpawnData_Triggers = null;
                 return false;
             }

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+using Foundations.Architecture.ReferencesHandler;
 using Foundations.Architecture.EventObserver;
 
 namespace GameSystems.PlayerSystem.PlayerUnitSystem
@@ -37,11 +38,10 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         {
             this.PlayerUnitSpriteRendererController.OnPointerUp();
 
-            UIUXSystem.PlayerUnitSpriteUX_ClickUpEvent eventData01 = new();
-            eventData01.UniqueID = this.myUniqueID;
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<GameSystems.UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
 
-            this.EventObserverNotifer.NotifyEvent(eventData01);
-            // 유닛을 클릭하였을 때는 모든 작업 중지 -> Icon 그룹 Show all + 해당 UnitID를 출력.
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Show_PlayerUnitBehaviourPanel(this.myUniqueID);
         }
     }
 }

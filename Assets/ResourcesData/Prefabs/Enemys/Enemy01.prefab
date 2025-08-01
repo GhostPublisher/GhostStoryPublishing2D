@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9008066693413812275}
-  - component: {fileID: 8042410738188090276}
   - component: {fileID: 874206516513873118}
   m_Layer: 0
   m_Name: Enemy01
@@ -36,19 +35,6 @@ Transform:
   - {fileID: 933914119605625426}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8042410738188090276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2332438589004003702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf0c9cfdfda1734689b549207d9ace9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyUnitManager: {fileID: 874206516513873118}
 --- !u!114 &874206516513873118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,7 +56,7 @@ MonoBehaviour:
   myEnemyUnitStaticData:
     UniqueID: 0
     UnitID: 1000
-    VisibleSize: 4
+    VisibleSize: 2
     VisibleOvercomeWeight: 50
     PhysicalVisionOvercomeWeight: 50
     SpiritualVisionOvercomeWeight: 50
@@ -85,6 +71,12 @@ MonoBehaviour:
     Skill01ActionCost: 1
     Skill02ActionCost: 1
     Skill03ActionCost: 1
+  myEnemyUnitDynamicData:
+    UniqueID: 0
+    CurrentMoveCost: 0
+    CurrentSkillCost: 0
+    CurrentHPCost: 0
+    IsOperationOver: 0
 --- !u!1 &6263279799525629935
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +368,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 10
   m_Sprite: {fileID: 88809120, guid: d22d94bc21f2f914488ca1da47eeb71b, type: 3}
   m_Color: {r: 0.9019608, g: 0.5882353, b: 0.29411763, a: 1}
   m_FlipX: 0

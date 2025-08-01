@@ -46,12 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8772ccb4223f361468444565df726995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillID: 0
+  skillID: 0
   SkillTargetingRange:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   SkillTargetingOvercomeWeight: 0
-  SkillImpactRange: []
+  SkillImpactDirection: 0
+  SkillImpactOffset: []
   SkillImpactOvercomeWeight: 0
 --- !u!114 &2919196606594195611
 MonoBehaviour:
@@ -65,13 +66,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8772ccb4223f361468444565df726995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillID: 1
+  skillID: 0
   SkillTargetingRange:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 2, y: 0}
   SkillTargetingOvercomeWeight: 0
-  SkillImpactRange: []
+  SkillImpactDirection: 0
+  SkillImpactOffset: []
   SkillImpactOvercomeWeight: 0
 --- !u!114 &3778978390507127472
 MonoBehaviour:
@@ -85,11 +87,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8772ccb4223f361468444565df726995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillID: 2
+  skillID: 0
   SkillTargetingRange:
   - {x: 2, y: 0}
   SkillTargetingOvercomeWeight: 0
-  SkillImpactRange: []
+  SkillImpactDirection: 0
+  SkillImpactOffset: []
   SkillImpactOvercomeWeight: 0
 --- !u!1 &238675742432465408
 GameObject:
@@ -184,7 +187,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6909498724832648513}
-  - component: {fileID: 5662906431368266258}
   - component: {fileID: -1583922485430409284}
   - component: {fileID: 1424791270727681455}
   - component: {fileID: 138386626735366911}
@@ -215,19 +217,6 @@ Transform:
   - {fileID: 4626221511540130001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5662906431368266258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2315471362883489614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4df71b91f1ad50f44a5180b3c5f4a6be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerUnitManager: {fileID: -1583922485430409284}
 --- !u!114 &-1583922485430409284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,43 +229,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce499fbe960b11741817a7084a8838f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUnitMouseInteractor: {fileID: 2510720839208096046}
+  PlayerUnitStatusController: {fileID: 0}
   PlayerUnitSpriteRendererController: {fileID: 138386626735366911}
+  PlayerUnitAnimationController: {fileID: 0}
+  PlayerUnitHitReactionController: {fileID: 0}
+  PlayerUnitEffectController: {fileID: 0}
   PlayerUnitVisibilityController: {fileID: 1424791270727681455}
+  PlayerUnitMouseInteractor: {fileID: 2510720839208096046}
   PlayerUnitInterfaceComponentContainer: {fileID: 2315471362883489614}
   PlayerUnitSkillInterfaceComponentContainer: {fileID: 140097329192189987}
-  PlayerUnitDynamicDataGroup:
-    UnitID: 2000
-    VisibleSize: 2
-    VisibleOvercomeWeight: 50
-    PhysicalVisionOvercomeWeight: 25
-    SpiritualVisionOvercomeWeight: 25
-    GroundOvercomeWeight: 25
-    MoveCost:
-      Default: 2
-      Max: 2
-      Current: 2
-    MoveRegenCost:
-      Default: 0
-      Max: 0
-      Current: 0
+  PlayerUnitStaticData:
+    UniqueID: 0
+    UnitID: 0
+    VisibleSize: 0
+    VisibleOvercomeWeight: 0
+    PhysicalVisionOvercomeWeight: 0
+    SpiritualVisionOvercomeWeight: 0
+    GroundOvercomeWeight: 0
     VisibleBlockWeight: 0
     PhysicalVisionBlockWeight: 0
     SpiritualVisionBlockWeight: 0
-    UnitHP:
-      Default: 0
-      Max: 0
-      Current: 0
-    SkillCost:
-      Default: 0
-      Max: 0
-      Current: 0
-    SkillRegenCost:
-      Default: 0
-      Max: 0
-      Current: 0
     CommandBlockWeight: 0
     SkillBlockWeight: 0
+    DefaultHPCost: 0
+    MaxHPCost: 0
+    DefaultHPRegenCost: 0
+    MaxHPRegenCost: 0
+    DefaultMoveCost: 0
+    MaxMoveCost: 0
+    DefaultMoveRegenCost: 0
+    MaxMoveRegenCost: 0
+    DefaultSkillCost: 0
+    MaxSkillCost: 0
+    DefaultSkillRegenCost: 0
+    MaxSkillRegenCost: 0
 --- !u!114 &1424791270727681455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,10 +287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ba38358ac29ce4eaabbafe8a195d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteRendererBorderObject: {fileID: 238675742432465408}
+  SpriteRendererFrameObject: {fileID: 0}
   SpriteRendererMain: {fileID: 6025220830028104903}
   SpriteBaseColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   SpritePointerDownColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  SpriteHittedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &5564550509278166868
 MonoBehaviour:
   m_ObjectHideFlags: 0

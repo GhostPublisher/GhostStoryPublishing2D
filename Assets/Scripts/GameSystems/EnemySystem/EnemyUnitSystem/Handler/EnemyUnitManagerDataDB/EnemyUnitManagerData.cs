@@ -94,6 +94,8 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
             this.SkillFilteredRangeDatas = new();
             this.SkillValidTargetRangeDatas = new();
+
+            this.IsOperationOver = false;
         }
 
         // Dictionary<Type, IEnemyUnitRangeData>

@@ -23,12 +23,13 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         private PlayerUnitManagerData myPlayerUnitManagerData;
 
         [SerializeField] private int SkillID_;
-        [SerializeField] private int SkillCost;
+        [SerializeField] private int SkillCost_;
 
         [SerializeField] private float HitTriggerTime;
         [SerializeField] private int DefaultDamage;
 
         public int SkillID => this.SkillID_;
+        public int SkillCost => this.SkillCost_;
 
         public void InitialSetting(PlayerUnitManagerData playerUnitManagerData)
         {
@@ -42,20 +43,23 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             this.playerUnitAnimationController = this.myPlayerUnitManagerData.PlayerUnitFeatureInterfaceGroup.PlayerUnitAnimationController;
         }
 
-        public void OperateSkill(Vector2Int targetedPosition)
-        {
-            this.StopAllCoroutines();
-
-            this.StartCoroutine(this.SkillOperation(targetedPosition));
-        }
-
-        private IEnumerator SkillOperation(Vector2Int targetedPosition)
+        public IEnumerator OperateSkill_Coroutine(Vector2Int targetedPosition)
         {
             HashSet<Vector2Int> appliedUnitPositions = this.myPlayerUnitManagerData.PlayerUnitFeatureInterfaceGroup.PlayerUnitSkillRangeCalculators[this.SkillID_].GetSkillAppliedRange(targetedPosition);
 
             yield return this.StartCoroutine(this.StartSkillOperation(targetedPosition, appliedUnitPositions));
 
-            this.myPlayerUnitManagerData.PlayerUnitDynamicData.CurrentSkillCost -= this.SkillCost;
+            // Skill Cost 감소.
+            this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current -= this.myPlayerUnitManagerData.PlayerUnitStaticData.GetSkillCost(this.SkillID_);
+
+            // 다 끝나면, Player Unit Action UIUX 갱신 및 상호작용 가능 명시.
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
+
+            // Player Cost 값에 따른 PlayerUnitActionUIUXHandler 업데이트하라는 코드. 
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Update_PlayerUnit_ActionableState();
+            // Player Action UIUX 상호작용 가능 명시.
+            PlayerUnitActionUIUXHandler.IsInteractived = true;
         }
 
         // 언젠간 HashSet<Vector2Int> 가 아닌, HashSet<IHitReactionController> 가 넘어올거 같긴함.

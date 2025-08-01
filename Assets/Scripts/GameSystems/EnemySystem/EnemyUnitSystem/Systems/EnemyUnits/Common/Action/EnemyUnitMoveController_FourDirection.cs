@@ -4,19 +4,13 @@ using System.Collections;
 using UnityEngine;
 
 using Foundations.Architecture.ReferencesHandler;
-using Foundations.Architecture.EventObserver;
 
 using GameSystems.UtilitySystem;
 
-using GameSystems.PlayerSystem.PlayerUnitSystem;
-
 namespace GameSystems.EnemySystem.EnemyUnitSystem
 {
-
     public class EnemyUnitMoveController_FourDirection : MonoBehaviour, IEnemyUnitMoveController
     {
-        private IEventObserverNotifier EventObserverNotifier;
-
         // 로직 수행을 위한 유틸 클래스.
         private UnitPathFinder_AStar_FourDirection UnitPathFinder_AStar_FourDirection;
 
@@ -30,8 +24,6 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
             this.UnitPathFinder_AStar_FourDirection = HandlerManager.GetUtilityHandler<UnitPathFinder_AStar_FourDirection>();
-
-            this.EventObserverNotifier = new EventObserverNotifier();
         }
 
         public void InitialSetting(EnemyUnitManagerData enemyUnitManagerData)
@@ -41,12 +33,13 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             this.EnemyUnitAnimationController = this.myEnemyUnitManagerData.EnemyUnitFeatureInterfaceGroup.EnemyUnitAnimationController;
         }
 
-        public bool TryOperateMoveToTarget_NearestTarget()
+        public bool TryGetNextPosition_NearestTarget(out Vector2Int nextPosition)
         {
             // 모든 포지션 가져옴. ( 못 가져오면 심한 오류이지만, 오류 난다면 앞에서 먼저 남 )
             if (!this.myEnemyUnitManagerData.EnemyUnitDynamicData.TryGetEnemyUnitCurrentDetectedData<EnemyUnitCurrentMemoryData_PlayerUnit>(out var detectedPlayerUnitPositions))
             {
                 // 해당 행동을 정상 작동 못했단 것을 리턴.
+                nextPosition = Vector2Int.zero;
                 return false;
             }         
 
@@ -76,15 +69,15 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             {
                 // 해당 행동을 정상 작동할 필요가 없다는 것임.
                 // 다음 우선순위 행동으로 넘어가도록 false 리턴.
+                nextPosition = Vector2Int.zero;
                 return false;
             }
 
-            StopAllCoroutines();
-            StartCoroutine(this.OperateMoveBehaviour(resultPath.Item2[1]));
+            nextPosition = resultPath.Item2[1];
             return true;
         }
 
-        private IEnumerator OperateMoveBehaviour(Vector2Int nextPosition)
+        public IEnumerator OperateMoveBehaviour(Vector2Int nextPosition)
         {
             yield return StartCoroutine(this.MovePlayerToTarget(nextPosition));
 
@@ -94,9 +87,6 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             // 장애물 관련 작업을 수행하라고 호출해야 되는 부분.
             // 장애물 관련 작업을 수행하라는 OperateObstacle_ToEnemy(enemyUniqueID, enemyPosition);
             // 해당 위치에 장애물이 있으면 장애물 OperateObstacle_ToEnemy(enemyUniqueID, enemyPosition);을 호출하고, 해당 장애물의 코루틴이 마무리되고 Enemy의 작업을 수행하도록 만들자.
-
-            // 내 Enemy AI의 다음 작업 수행.
-            this.myEnemyUnitManagerData.EnemyUnitFeatureInterfaceGroup.EnemyUnitManager.OperateEnemyAI();
         }
 
         private IEnumerator MovePlayerToTarget(Vector2Int nextPosition)
@@ -150,8 +140,16 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
         private void NotifyPlayerVisibility()
         {
-            UpdatePlayerUnitVisibleRange UpdatePlayerUnitVisibleRange = new();
-            this.EventObserverNotifier.NotifyEvent(UpdatePlayerUnitVisibleRange);
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<GameSystems.PlayerSystem.PlayerUnitManagerDataDBHandler>();
+
+            if (PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
+            {
+                foreach (var data in playerUnitManagerDatas)
+                {
+                    data.PlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController.UpdateVisibleRange();
+                }
+            }
         }
     }
 }

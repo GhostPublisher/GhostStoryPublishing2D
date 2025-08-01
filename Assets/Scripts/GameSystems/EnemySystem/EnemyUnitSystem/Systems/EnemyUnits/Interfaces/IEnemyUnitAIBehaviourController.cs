@@ -1,4 +1,6 @@
-﻿namespace GameSystems.EnemySystem.EnemyUnitSystem
+﻿using System.Collections;
+
+namespace GameSystems.EnemySystem.EnemyUnitSystem
 {
     // Enemy AI에 대한 고찰.
 
@@ -23,7 +25,6 @@
     {
         public void InitialSetting(EnemyUnitManagerData enemyUnitManagerData);
         // 행동 판단을 위한 데이터 갱신.
-        public void UpdateSensingAndPerceptionData();
-        public void DecideAIOperation();
+        public IEnumerator OperateEnemyAI_Coroutine();
     }
 }

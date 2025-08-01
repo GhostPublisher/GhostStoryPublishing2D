@@ -76,35 +76,45 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             }
         }
 
-        // true : 행동을 수행한 것, false : 수행할 행동이 없는 것.
-        public void DecideAIOperation()
+        public IEnumerator OperateEnemyAI_Coroutine()
         {
-            // 공격 가능한 범위 안에 존재하면 공격해라.
-            if (this.IsOperationAvailable_Skill01Operation())
+            // 행동 판단을 위한 데이터 갱신.
+            this.UpdateSensingAndPerceptionData();
+
+            while (!this.myEnemyUnitManagerData.EnemyUnitDynamicData.IsOperationOver)
             {
-                // 정상적으로 작업이 수행되었을 경우, 해당 행위를 수행하도록 함. <---> 반대로 정삭적으로 수행되지 않았을 경우, 다음 행위를 수행하도록 넘김.
-                if (this.myEnemyUnitManagerData.EnemyUnitFeatureInterfaceGroup.EnemyUnitSkillControllers[SkillSlotType.Skill01] is Enemy_Can_Skill01 skillController)
+                Debug.Log($"UniqueID : {this.myEnemyUnitManagerData.UniqueID}, MoveCost :{this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentMoveCost}, SkillCost : {this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentSkillCost}");
+
+                // 공격 가능한 범위 안에 존재하면 공격해라.
+                if (this.IsOperationAvailable_Skill01Operation())
                 {
-                    // 공격 수행.
-                    skillController.TryOperateSkillToTarget_NearestTarget();
-                    Debug.Log($"탐지된 적을 공격하는 작업 수행.");
-                    return;
+                    // 정상적으로 작업이 수행되었을 경우, 해당 행위를 수행하도록 함. <---> 반대로 정삭적으로 수행되지 않았을 경우, 다음 행위를 수행하도록 넘김.
+                    if (this.myEnemyUnitManagerData.EnemyUnitFeatureInterfaceGroup.EnemyUnitSkillControllers[SkillSlotType.Skill01] is Enemy_Can_Skill01 skillController)
+                    {
+                        // 공격 수행.
+                        Debug.Log($"탐지된 적을 공격하는 작업 수행.");
+                        yield return skillController.OperateSkill_Coroutine();
+                        continue;
+                    }
                 }
+
+                // 시야에 들어온 대상으로 이동해라.
+                if (this.IsOperationAvailable_MoveToTarget())
+                {
+                    var EnemyUnitMoveController = this.myEnemyUnitManagerData.EnemyUnitFeatureInterfaceGroup.EnemyUnitMoveController;
+                    // 정상적으로 작업이 수행되었을 경우, 해당 행위를 수행하도록 함. <---> 반대로 정삭적으로 수행되지 않았을 경우, 다음 행위를 수행하도록 넘김.
+                    if (EnemyUnitMoveController.TryGetNextPosition_NearestTarget(out var nextPosition))
+                    {
+                        Debug.Log($"탐지된 적 위치로 이동하는 작업 수행");
+                        yield return EnemyUnitMoveController.OperateMoveBehaviour(nextPosition);
+                        continue;
+                    }
+                }
+
+                this.myEnemyUnitManagerData.EnemyUnitDynamicData.IsOperationOver = true;
             }
 
-            // 시야에 들어온 대상으로 이동해라.
-            if (this.IsOperationAvailable_MoveToTarget())
-            {
-                // 정상적으로 작업이 수행되었을 경우, 해당 행위를 수행하도록 함. <---> 반대로 정삭적으로 수행되지 않았을 경우, 다음 행위를 수행하도록 넘김.
-                if (this.myEnemyUnitManagerData.EnemyUnitFeatureInterfaceGroup.EnemyUnitMoveController.TryOperateMoveToTarget_NearestTarget())
-                {
-                    Debug.Log($"탐지된 적 위치로 이동하는 작업 수행");
-                    return;
-                }
-            }
-
-
-            this.StartCoroutine(this.WaitNotifyEnd());
+            yield return null;
         }
 
         // 행동 판단을 위한 데이터 갱신.
@@ -141,14 +151,6 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             if (validTargetRange == null || validTargetRange.ValidTargetPositions == null || validTargetRange.ValidTargetPositions.Count <= 0) return false;
 
             return true;
-        }
-
-        private IEnumerator WaitNotifyEnd()
-        {
-            yield return null;
-
-            this.myEnemyUnitManagerData.EnemyUnitDynamicData.IsOperationOver = true;
-            this.myEnemyUnitManagerData.EnemyUnitFeatureInterfaceGroup.EnemyUnitManager.OperateEnemyAI();
         }
     }
 }

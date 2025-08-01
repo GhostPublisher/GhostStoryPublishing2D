@@ -9,9 +9,8 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
     {
         [SerializeField] public int UniqueID;
 
-        [SerializeField] public int CurrentMoveCost;
-        [SerializeField] public int CurrentSkillCost;
-        [SerializeField] public int CurrentHPCost;
+        [SerializeField] public int HPCost_Current;
+        [SerializeField] public int BehaviourCost_Current;
     }
 
 }

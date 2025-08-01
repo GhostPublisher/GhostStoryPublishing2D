@@ -3,6 +3,7 @@ using System;
 using Foundations.Architecture.ReferencesHandler;
 
 using GameSystems.EnemySystem.EnemySpawnSystem;
+using GameSystems.EnemySystem.EnemyAISequenceSystem;
 
 namespace GameSystems.EnemySystem
 {
@@ -11,6 +12,7 @@ namespace GameSystems.EnemySystem
     {
         public IEnemyUnitSpawnController IEnemyUnitSpawnController { get; set; }
 
+        public IEnemyAISequencer IEnemyAISequencer { get; set; }
 
     }
 }

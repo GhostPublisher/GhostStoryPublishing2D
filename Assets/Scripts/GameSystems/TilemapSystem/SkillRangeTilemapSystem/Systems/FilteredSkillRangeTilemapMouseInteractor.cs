@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+using Foundations.Architecture.ReferencesHandler;
 using Foundations.Architecture.EventObserver;
 
 using GameSystems.PlayerSystem.PlayerUnitSystem;
@@ -12,8 +13,6 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
 {
     public class FilteredSkillRangeTilemapMouseInteractor : MonoBehaviour
     {
-        private IEventObserverNotifier EventObserverNotifier;
-
         private ISkillRangeTilemapSystem SkillRangeTilemapSystem;
 
         [SerializeField] private Tilemap FilteredSkillRangeTilemap;
@@ -25,11 +24,6 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
 
         private bool isActivated = false;
         private Vector2Int currentGridPosition;
-
-        private void Awake()
-        {
-            this.EventObserverNotifier = new EventObserverNotifier();
-        }
 
         public void InitialSetting(ISkillRangeTilemapSystem SkillRangeTilemapSystem)
         {
@@ -104,37 +98,41 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
         private void RequestActivateSkillImpactRange_OnMousePointerEnter(Vector2Int skillTargetPosition)
         {
             // 특정 지점에 '스킬'이 작동하였을 경우, Impact 범위를 계산 -> Impact Tilemap에 요청. 하는 Notify를 보냄.
-            UpdateSkillImpactRange_PlayerUnit updateSkillImpactRange_PlayerUnit = new();
-            updateSkillImpactRange_PlayerUnit.PlayerUniqueID = this.currentPlayerUniqueID;
-            updateSkillImpactRange_PlayerUnit.SkillID = this.currentSkillID;
-            updateSkillImpactRange_PlayerUnit.TargetedPosition = skillTargetPosition;
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<GameSystems.PlayerSystem.PlayerUnitManagerDataDBHandler>();
 
-            this.EventObserverNotifier.NotifyEvent(updateSkillImpactRange_PlayerUnit);
+            // 특정 지점에 Impact 범위 표시.
+            if(PlayerUnitManagerDataDBHandler.TryGetPlayerUnitManagerData(this.currentPlayerUniqueID, out var playerUnitManagerData))
+            {
+                if (playerUnitManagerData.PlayerUnitFeatureInterfaceGroup.PlayerUnitSkillRangeCalculators.TryGetValue(this.currentSkillID, out var playerUnitSkillRangeCalculator))
+                {
+                    playerUnitSkillRangeCalculator.UpdateSkillImpactRange(skillTargetPosition);
+                }
+            }
         }
 
         private void RequestOperateSkill_OnMouseClickUpEvent(Vector2Int skillTargetPosition)
         {
+            // UI 필드 멤버 갱신.
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+           
             // 특정 지점에 '스킬' 작동.
-            OperateSkill_PlayerUnit operateSkill_PlayerUnit = new();
-            operateSkill_PlayerUnit.PlayerUniqueID = this.currentPlayerUniqueID;
-            operateSkill_PlayerUnit.SkillID = this.currentSkillID;
-            operateSkill_PlayerUnit.TargetedPosition = skillTargetPosition;
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<GameSystems.PlayerSystem.PlayerUnitManagerDataDBHandler>();
 
-            UIUXSystem.PlayerSkillRangeTilemap_CancelOrOperated PlayerSkillRangeTilemap_Cancel = new();
-            PlayerSkillRangeTilemap_Cancel.PlayerUniqueID = this.currentPlayerUniqueID;
-
-            this.EventObserverNotifier.NotifyEvent(PlayerSkillRangeTilemap_Cancel);
-            this.EventObserverNotifier.NotifyEvent(operateSkill_PlayerUnit);
-
+            if (PlayerUnitManagerDataDBHandler.TryGetPlayerUnitManagerData(this.currentPlayerUniqueID, out var playerUnitManagerData))
+            {
+                playerUnitManagerData.PlayerUnitFeatureInterfaceGroup.PlayerUnitManager.OperateSkill(this.currentPlayerUniqueID, this.currentSkillID, skillTargetPosition);
+            }
+            
             this.SkillRangeTilemapSystem.DisActivateSkillRangeTilemap();
         }
 
         private void RequestSkillRangeTilemapCancelEvent()
         {
-            UIUXSystem.PlayerSkillRangeTilemap_CancelOrOperated PlayerSkillRangeTilemap_Cancel = new();
-            PlayerSkillRangeTilemap_Cancel.PlayerUniqueID = this.currentPlayerUniqueID;
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
 
-            this.EventObserverNotifier.NotifyEvent(PlayerSkillRangeTilemap_Cancel);
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Show_PlayerUnitBehaviourPanel(this.currentPlayerUniqueID);
 
             this.SkillRangeTilemapSystem.DisActivateSkillRangeTilemap();
         }

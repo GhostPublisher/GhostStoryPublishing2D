@@ -79,7 +79,7 @@ namespace GameSystems.UtilitySystem
             float elapsedTime = 0f;
 
             Vector2 startPosition = UITranform_.anchoredPosition;
-            Vector2 endPosition = UIAnimationData_.EndPosition;
+            Vector2 endPosition = UIAnimationData_.TargetPosition;
 
             // 애니메이션이 끝날 때까지 루프를 실행합니다.
             while (elapsedTime < UIAnimationData_.AnimationTime)
@@ -101,7 +101,7 @@ namespace GameSystems.UtilitySystem
             }
 
             // 애니메이션이 끝난 후, 정확한 끝 위치로 설정합니다.
-            UITranform_.anchoredPosition = UIAnimationData_.EndPosition;
+            UITranform_.anchoredPosition = UIAnimationData_.TargetPosition;
         }
     }
 
@@ -109,7 +109,7 @@ namespace GameSystems.UtilitySystem
     public class UIAnimationData
     {
         [SerializeField] public Vector2 StartPosition;
-        [SerializeField] public Vector2 EndPosition;
+        [SerializeField] public Vector2 TargetPosition;
         [SerializeField] public float AnimationTime;
         [SerializeField] public AnimationCurve AnimatinoCurve;
     }

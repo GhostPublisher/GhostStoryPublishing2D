@@ -9,12 +9,14 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 {
     public interface IPlayerUnitManager
     {
-        public void OperateDie();
-
         public void OperatePlayerUnitInitialSetting();
         public IEnumerator OperatePlayerUnitInitialSetting_Coroutine();
 
-        public void StopAllCoroutines();
+        public void OperateMove(int uniqueID, Vector2Int targetPosition);
+        public void OperateSkill(int uniqueID, int skillID, Vector2Int targetedPosition);
+        public void OperateDie();
+
+        public void OperateTurnEndSetting();
     }
 
     public class PlayerUnitManager : MonoBehaviour, IPlayerUnitManager
@@ -47,37 +49,20 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         private int UniqueID;
         // Player Unit 데이터 + 인터페이스 + Transform;
         private PlayerUnitManagerData myPlayerUnitManagerData;
-        [SerializeField] private PlayerUnitStaticData PlayerUnitStaticData;
-        private PlayerUnitDynamicData PlayerUnitDynamicData;
-        private PlayerUnitFeatureInterfaceGroup PlayerUnitFeatureInterfaceGroup;
+        [SerializeField] private PlayerUnitStaticData myPlayerUnitStaticData;
+        [SerializeField] private PlayerUnitDynamicData myPlayerUnitDynamicData;
+        private PlayerUnitFeatureInterfaceGroup myPlayerUnitFeatureInterfaceGroup;
+
 
         private void OnDestroy()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
             var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerUnitManagerDataDBHandler>();
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
 
             PlayerUnitManagerDataDBHandler.RemovePlayerUnitManagerData(this.myPlayerUnitManagerData);
-        }
 
-
-        public void OperatePlayerUnitInitialSetting()
-        {
-            this.InitialSetting();
-
-            this.PlayerUnitVisibilityController.UpdateVisibleRange(this.myPlayerUnitManagerData.PlayerUnitGridPosition());
-        }
-
-        public IEnumerator OperatePlayerUnitInitialSetting_Coroutine()
-        {
-            this.InitialSetting();
-
-            // 해당 위치의 시야 작업 수행.
-            this.PlayerUnitVisibilityController.UpdateVisibleRange(this.myPlayerUnitManagerData.PlayerUnitGridPosition());
-
-            // 카메라 포커싱.
-            // 생성 애니메이션 재생.
-            yield return StartCoroutine(this.PlayerUnitAnimationController.PlayAndWaitAnimation(PlayerUnitAnimationType.Spawn));
-
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Update_PlayerUnitIconUIUX();
         }
 
         public void InitialSetting()
@@ -107,27 +92,33 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             }
 
             // PlayerUnitDynamicData
-            this.PlayerUnitDynamicData = new();
+            this.myPlayerUnitDynamicData = new();
 
             // PlayerUnitFeatureInterfaceGroup
-            this.PlayerUnitFeatureInterfaceGroup = new();
-            this.PlayerUnitFeatureInterfaceGroup.PlayerUnitManager = this;
-            this.PlayerUnitFeatureInterfaceGroup.PlayerUnitStatusController = this.PlayerUnitStatusController;
+            this.myPlayerUnitFeatureInterfaceGroup = new();
+            this.myPlayerUnitFeatureInterfaceGroup.PlayerUnitManager = this;
+            this.myPlayerUnitFeatureInterfaceGroup.PlayerUnitStatusController = this.PlayerUnitStatusController;
 
-            this.PlayerUnitFeatureInterfaceGroup.PlayerUnitSpriteRendererController = this.PlayerUnitSpriteRendererController;
-            this.PlayerUnitFeatureInterfaceGroup.PlayerUnitAnimationController = this.PlayerUnitAnimationController;
+            this.myPlayerUnitFeatureInterfaceGroup.PlayerUnitSpriteRendererController = this.PlayerUnitSpriteRendererController;
+            this.myPlayerUnitFeatureInterfaceGroup.PlayerUnitAnimationController = this.PlayerUnitAnimationController;
 
-            this.PlayerUnitFeatureInterfaceGroup.PlayerUnitHitReactionController = this.PlayerUnitHitReactionController;
-            this.PlayerUnitFeatureInterfaceGroup.PlayerUnitEffectController = this.PlayerUnitEffectController;
+            this.myPlayerUnitFeatureInterfaceGroup.PlayerUnitHitReactionController = this.PlayerUnitHitReactionController;
+            this.myPlayerUnitFeatureInterfaceGroup.PlayerUnitEffectController = this.PlayerUnitEffectController;
 
-            this.PlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController = this.PlayerUnitVisibilityController;
-
-            foreach(var interfaceMember in this.PlayerUnitSkillRangeCalculators)
+            this.myPlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController = this.PlayerUnitVisibilityController;
+            this.myPlayerUnitFeatureInterfaceGroup.IPlayerUnitMoveRangeCalculator = this.PlayerUnitMoveRangeCalculator;
+            foreach (var interfaceMember in this.PlayerUnitSkillRangeCalculators)
             {
-                this.PlayerUnitFeatureInterfaceGroup.PlayerUnitSkillRangeCalculators.Add(interfaceMember.Key, interfaceMember.Value);
+                this.myPlayerUnitFeatureInterfaceGroup.PlayerUnitSkillRangeCalculators.Add(interfaceMember.Key, interfaceMember.Value);
             }
 
-            this.myPlayerUnitManagerData = new PlayerUnitManagerData(this.UniqueID, this.PlayerUnitStaticData, this.PlayerUnitDynamicData, this.PlayerUnitFeatureInterfaceGroup, this.transform);
+            this.myPlayerUnitFeatureInterfaceGroup.IPlayerUnitMoveController = this.PlayerUnitMoveController;
+            foreach (var interfaceMember in this.PlayerSkillControllers)
+            {
+                this.myPlayerUnitFeatureInterfaceGroup.IPlayerSkillControllers.Add(interfaceMember.Key, interfaceMember.Value);
+            }
+
+            this.myPlayerUnitManagerData = new PlayerUnitManagerData(this.UniqueID, this.myPlayerUnitStaticData, this.myPlayerUnitDynamicData, this.myPlayerUnitFeatureInterfaceGroup, this.transform);
             PlayerUnitManagerDataDBHandler.AddPlayerUnitManagerData(this.myPlayerUnitManagerData);
 
             this.SubObjectInitialSetting();
@@ -159,57 +150,77 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             }
         }
 
-        // Player Unit의 현재 위치를 기준으로, 주변 시야 범위를 갱신합니다.
-        public void UpdateVisibleRange()
+        public void OperatePlayerUnitInitialSetting()
         {
+            this.InitialSetting();
+
             this.PlayerUnitVisibilityController.UpdateVisibleRange(this.myPlayerUnitManagerData.PlayerUnitGridPosition());
         }
-
-        // Player Unit의 현재 위치를 기준으로, 현재 이동 가능 범위를 갱신합니다.
-        public void UpdateMoveableRange(int playerUniqueID)
+        public IEnumerator OperatePlayerUnitInitialSetting_Coroutine()
         {
-            if (this.UniqueID != playerUniqueID) return;
+            this.InitialSetting();
 
-            this.PlayerUnitMoveRangeCalculator.UpdateMoveableRange();
+            // 해당 위치의 시야 작업 수행.
+            this.PlayerUnitVisibilityController.UpdateVisibleRange(this.myPlayerUnitManagerData.PlayerUnitGridPosition());
+
+            // 카메라 포커싱.
+            // 생성 애니메이션 재생.
+            yield return StartCoroutine(this.PlayerUnitAnimationController.PlayAndWaitAnimation(PlayerUnitAnimationType.Spawn));
+
         }
+
+
         // Player의 Unit의 현재 위치를 기준으로, 전달받은 '목표' 위치'까지 A* 기반 이동 수행.
         // '목표 위치'는 '현재 위치'로 부터 이동 가능한 거리값 안에 존재함.
-        public void OperatePlayerUnitMove(int playerUniqueID, Vector2Int targetPosition)
+        public void OperateMove(int uniqueID, Vector2Int targetPosition)
         {
-            if (this.UniqueID != playerUniqueID) return;
+            if (this.UniqueID != uniqueID) return;
 
-            this.PlayerUnitMoveController.OperatePlayerUnitMove(targetPosition);
+            this.StopAllCoroutines();
+            this.StartCoroutine(this.PlayerUnitMoveController.OperateMove_Coroutine(targetPosition));
+
+
+            // 다 끝나면, Player Unit Action UIUX 갱신 및 상호작용 가능 명시.
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
+
+            // Player Cost 값에 따른 PlayerUnitActionUIUXHandler 업데이트하라는 코드. 
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Update_PlayerUnitIconUIUX();
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Update_PlayerUnit_ActionableState();
+            // Player Action UIUX 상호작용 가능 명시.
+            PlayerUnitActionUIUXHandler.IsInteractived = true;
         }
 
-        // Player의 현재 위치에 기반하여, Skill의 Targeting 가능 범위를 구한 뒤, Notify 합니다.
-        public void UpdateSkillTargetingRange(int playerUniqueID, int skillID)
-        {
-            if(this.UniqueID != playerUniqueID) return;
-            if (!this.PlayerUnitSkillRangeCalculators.TryGetValue(skillID, out var playerUnitSkillRangeCalculator)) return;
-
-            playerUnitSkillRangeCalculator.UpdateSkillTargetingRange();
-        }
-        // Target 된 지점을 기준으로, Skill의 Impact 범위를 구한 뒤, Notify합니다.
-        public void UpdateSkillImpactRange(int playerUniqueID, int skillID, Vector2Int targetedPosition)
-        {
-            if (this.UniqueID != playerUniqueID) return;
-            if (!this.PlayerUnitSkillRangeCalculators.TryGetValue(skillID, out var playerUnitSkillRangeCalculator)) return;
-
-            playerUnitSkillRangeCalculator.UpdateSkillImpactRange(targetedPosition);
-        }
         // Target 된 지점을 기준으로 Player의 Skill을 동작합니다.
-        public void OperateSkill(int playerUniqueID, int skillID, Vector2Int targetedPosition)
+        public void OperateSkill(int uniqueID, int skillID, Vector2Int targetedPosition)
         {
-//            Debug.Log($"OperateSkill - playerUniqueID : {playerUniqueID}. skillID : {skillID}. targetedPosition : {targetedPosition}");
-            if (this.UniqueID != playerUniqueID) return;
-            if (!this.PlayerSkillControllers.TryGetValue(skillID, out var playerSkillControllers)) return;
+            if (this.UniqueID != uniqueID) return;
+            if (!this.PlayerSkillControllers.TryGetValue(skillID, out var playerSkillController)) return;
 
-            playerSkillControllers.OperateSkill(targetedPosition);
+            this.StopAllCoroutines();
+            this.StartCoroutine(playerSkillController.OperateSkill_Coroutine(targetedPosition));
+
+
+            // 다 끝나면, Player Unit Action UIUX 갱신 및 상호작용 가능 명시.
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
+
+            // Player Cost 값에 따른 PlayerUnitActionUIUXHandler 업데이트하라는 코드. 
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Update_PlayerUnitIconUIUX();
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Update_PlayerUnit_ActionableState();
+            // Player Action UIUX 상호작용 가능 명시.
+            PlayerUnitActionUIUXHandler.IsInteractived = true;
         }
-
+        // Player 죽는 작업?
         public void OperateDie()
         {
             Destroy(this.gameObject);
+        }
+
+        public void OperateTurnEndSetting()
+        {
+            // 이곳에서 이동 코스트 및 스킬 코스트를 초기화.
+            this.myPlayerUnitDynamicData.BehaviourCost_Current = this.myPlayerUnitStaticData.BehaviourCost_Default;
         }
     }
 }

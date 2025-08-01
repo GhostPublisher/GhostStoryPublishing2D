@@ -173,7 +173,7 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
             // UnitID에 대응되는 Prefab이 없으면 넘어감.
             if (!EnemyUnitDataDBHandler.TryGetEnemyPrefabResourceData(unitID, out var prefabData)) return;
 
-            Debug.Log($"ID : {unitID}, pos : {spawnPosition}");
+//            Debug.Log($"ID : {unitID}, pos : {spawnPosition}");
 
             // Enemy Unit 생성 및 Hierarchy 배치.
             GameObject createdEnemyUnit = Object.Instantiate(prefabData.EnemyPrefab, this.EnemyUnitObjectParent);
@@ -204,10 +204,9 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
 
             // Enemy 초기 셋팅 값 넘기기.
             // 여기서 Enemy 객체의 생성 코루틴 대기.
-            enemyUnitManager.StopAllCoroutines();
             yield return StartCoroutine(enemyUnitManager.OperateEnemyUnitInitialSetting_Coroutine());
 
-            // 1프레임 대기. ( 그냥 안전성 )
+            // 1프레임 대기. ( 그냥 안전성     )
             yield return null;
         }
 

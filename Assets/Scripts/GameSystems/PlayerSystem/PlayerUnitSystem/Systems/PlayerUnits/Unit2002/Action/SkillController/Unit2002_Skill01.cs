@@ -19,7 +19,6 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         private PlayerUnitManagerData myPlayerUnitManagerData;
 
         [SerializeField] private int SkillID_;
-        [SerializeField] private int SkillCost;
 
         [SerializeField] private float HitTriggerTime;
         [SerializeField] private int DefaultDamage;
@@ -37,20 +36,12 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             this.PlayerUnitAnimationController = this.myPlayerUnitManagerData.PlayerUnitFeatureInterfaceGroup.PlayerUnitAnimationController;
         }
 
-        public void OperateSkill(Vector2Int targetedPosition)
-        {
-            this.StopAllCoroutines();
-
-            this.StartCoroutine(this.SkillOperation(targetedPosition));
-        }
-
-        private IEnumerator SkillOperation(Vector2Int targetedPosition)
+        public IEnumerator OperateSkill_Coroutine(Vector2Int targetedPosition)
         {
             yield return this.StartCoroutine(this.StartSkillOperation(targetedPosition));
 
-            Debug.Log($"CurrentSkillCost : {this.myPlayerUnitManagerData.PlayerUnitDynamicData.CurrentSkillCost} -> {this.myPlayerUnitManagerData.PlayerUnitDynamicData.CurrentSkillCost - this.SkillCost}");
-
-            this.myPlayerUnitManagerData.PlayerUnitDynamicData.CurrentSkillCost -= this.SkillCost;
+            // Skill Cost 감소.
+            this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current -= this.myPlayerUnitManagerData.PlayerUnitStaticData.GetSkillCost(this.SkillID_);
         }
 
 

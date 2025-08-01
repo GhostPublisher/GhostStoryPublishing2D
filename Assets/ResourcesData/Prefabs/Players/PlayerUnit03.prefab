@@ -93,7 +93,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6909498724832648513}
-  - component: {fileID: -2574563722096564451}
   - component: {fileID: -1583922485430409284}
   - component: {fileID: 4314384865373680905}
   - component: {fileID: 138386626735366911}
@@ -128,19 +127,6 @@ Transform:
   - {fileID: 484536451123542233}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2574563722096564451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2315471362883489614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4df71b91f1ad50f44a5180b3c5f4a6be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerUnitManager: {fileID: -1583922485430409284}
 --- !u!114 &-1583922485430409284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +148,7 @@ MonoBehaviour:
   PlayerUnitMouseInteractor: {fileID: 2510720839208096046}
   PlayerUnitInterfaceComponentContainer: {fileID: 2315471362883489614}
   PlayerUnitSkillInterfaceComponentContainer: {fileID: 3589078819805358063}
-  PlayerUnitStaticData:
+  myPlayerUnitStaticData:
     UniqueID: 0
     UnitID: 2002
     VisibleSize: 2
@@ -173,20 +159,21 @@ MonoBehaviour:
     VisibleBlockWeight: 25
     PhysicalVisionBlockWeight: 25
     SpiritualVisionBlockWeight: 0
-    CommandBlockWeight: 0
-    SkillBlockWeight: 0
-    DefaultHPCost: 10
-    MaxHPCost: 10
-    DefaultHPRegenCost: 10
-    MaxHPRegenCost: 10
-    DefaultMoveCost: 2
-    MaxMoveCost: 2
-    DefaultMoveRegenCost: 2
-    MaxMoveRegenCost: 2
-    DefaultSkillCost: 2
-    MaxSkillCost: 2
-    DefaultSkillRegenCost: 0
-    MaxSkillRegenCost: 0
+    SkillBlockWeight: 25
+    HPCost_Default: 5
+    BehaviourCost_Default: 3
+    MoveCost: 1
+    SkillCostDatas:
+    - SkillID: 6
+      SkillCost: 1
+    - SkillID: 7
+      SkillCost: 2
+    - SkillID: 8
+      SkillCost: 2
+  myPlayerUnitDynamicData:
+    UniqueID: 0
+    HPCost_Current: 0
+    BehaviourCost_Current: 0
 --- !u!114 &4314384865373680905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +390,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillID_: 6
-  SkillCost: 1
   HitTriggerTime: 0.8
   DefaultDamage: 1
 --- !u!114 &7866564818761666411
@@ -419,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillID_: 7
-  SkillCost: 2
+  SkillCost_: 2
   HitTriggerTime: 0.6
   DefaultDamage: 1
 --- !u!114 &2737857230503392483
@@ -435,7 +421,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillID_: 8
-  SkillCost: 2
   HitTriggerTime: 0.5
   SkillEffectID: 0
   EffectTriggerTime: 0.8

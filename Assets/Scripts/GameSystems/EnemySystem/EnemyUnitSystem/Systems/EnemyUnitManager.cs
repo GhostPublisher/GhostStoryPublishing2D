@@ -2,27 +2,23 @@ using System.Collections;
 
 using UnityEngine;
 
-using Foundations.Architecture.EventObserver;
 using Foundations.Architecture.ReferencesHandler;
 
 namespace GameSystems.EnemySystem.EnemyUnitSystem
 {
     public interface IEnemyUnitManager
     {
-        public void OperateNewTurnSetting();
-        public void OperateEnemyAI();
-        public void OperateDie();
-
         public void OperateEnemyUnitInitialSetting();
         public IEnumerator OperateEnemyUnitInitialSetting_Coroutine();
 
-        public void StopAllCoroutines();
+        public IEnumerator OperateEnemyAI_Coroutine();
+        public void OperateDie();
+
+        public void OperateTurnEndSetting();
     }
 
     public class EnemyUnitManager : MonoBehaviour, IEnemyUnitManager
     {
-        private IEventObserverNotifier EventObserverNotifer;
-
         // 공통적으로 사용.
         [SerializeField] private EnemyUnitStatusController EnemyUnitStatusController;
 
@@ -41,13 +37,8 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
         // Enemy Unit 데이터 + 인터페이스 + Transform;
         private EnemyUnitManagerData myEnemyUnitManagerData;
         [SerializeField] private EnemyUnitStaticData myEnemyUnitStaticData;
-        private EnemyUnitDynamicData myEnemyUnitDynamicData;
+        [SerializeField] private EnemyUnitDynamicData myEnemyUnitDynamicData;
         private EnemyUnitFeatureInterfaceGroup myEnemyUnitFeatureInterfaceGroup;
-
-        private void Awake()
-        {
-            this.EventObserverNotifer = new EventObserverNotifier();
-        }
 
         private void OnDestroy()
         {
@@ -56,56 +47,6 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
             EnemyUnitManagerDataDBHandler.RemoveEnemyUnitManagerData(this.myEnemyUnitManagerData);
         }
-
-        public void StopAllCoroutines_Refer()
-        {
-            this.StopAllCoroutines();
-        }
-
-        public void OperateEnemyUnitInitialSetting()
-        {
-            this.InitialSetting();
-
-            var HandlerManager = LazyReferenceHandlerManager.Instance;
-            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
-
-            // 해당 위치 시야 갱신.
-            if (PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
-            {
-                foreach (var data in playerUnitManagerDatas)
-                {
-                    data.PlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController.UpdateVisibleRange();
-                }
-            }
-        }
-
-        public IEnumerator OperateEnemyUnitInitialSetting_Coroutine()
-        {
-            this.InitialSetting();
-
-            var HandlerManager = LazyReferenceHandlerManager.Instance;
-            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
-            var FogTilemapData = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().FogTilemapData;
-
-            // 해당 위치 시야 갱신.
-            if (PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
-            {
-                foreach(var data in playerUnitManagerDatas)
-                {
-                    data.PlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController.UpdateVisibleRange();
-                }
-            }
-
-            // 플레이어의 시야 안에 존재할 시, 카메라 포커싱 작업 수행.
-            if(FogTilemapData.TryGetFogState(this.myEnemyUnitManagerData.EnemyUnitGridPosition(), out var fogStage) && fogStage == TilemapSystem.FogTilemap.FogState.Visible)
-            {
-                // 카메라 포커싱. 부분
-
-                yield return StartCoroutine(this.EnemyUnitAnimationController.PlayAndWaitAnimation(EnemyUnitAnimationType.Spawn));
-            }            
-        }
-
-
 
         private void InitialSetting()
         {
@@ -148,46 +89,59 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             this.EnemyAIBehaviourController.InitialSetting(this.myEnemyUnitManagerData);
         }
 
-        public void OperateEnemyAI(int enemyUniqueID)
+        public void OperateEnemyUnitInitialSetting()
         {
-            // AI 작업 지속.
-            if (this.UniqueID != enemyUniqueID) return;
+            this.InitialSetting();
 
-            // 다음 AI 작업 요청.
-            if (this.myEnemyUnitDynamicData.IsOperationOver)
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
+
+            // 해당 위치 시야 갱신.
+            if (PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
             {
-                // 다음 EnemyAI 작업을 하도록 Notify.
-                this.EventObserverNotifer.NotifyEvent(new EnemyAISequenceSystem.ExecuteEnemyAI());
-                return;
+                foreach (var data in playerUnitManagerDatas)
+                {
+                    data.PlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController.UpdateVisibleRange();
+                }
             }
-
-            // 행동 판단을 위한 데이터 갱신.
-            this.EnemyAIBehaviourController.UpdateSensingAndPerceptionData();
-            // 행동 판단 및 실행.
-            this.EnemyAIBehaviourController.DecideAIOperation();
         }
-        public void OperateEnemyAI()
+        public IEnumerator OperateEnemyUnitInitialSetting_Coroutine()
         {
-            // 다음 AI 작업 요청.
-            if (this.myEnemyUnitDynamicData.IsOperationOver)
+            this.InitialSetting();
+
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
+            var FogTilemapData = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().FogTilemapData;
+
+            // 해당 위치 시야 갱신.
+            if (PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
             {
-                // 다음 EnemyAI 작업을 하도록 Notify.
-                this.EventObserverNotifer.NotifyEvent(new EnemyAISequenceSystem.ExecuteEnemyAI());
-                return;
+                foreach(var data in playerUnitManagerDatas)
+                {
+                    data.PlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController.UpdateVisibleRange();
+                }
             }
 
-            // 행동 판단을 위한 데이터 갱신.
-            this.EnemyAIBehaviourController.UpdateSensingAndPerceptionData();
-            // 행동 판단 및 실행.
-            this.EnemyAIBehaviourController.DecideAIOperation();
+            // 플레이어의 시야 안에 존재할 시, 카메라 포커싱 작업 수행.
+            if(FogTilemapData.TryGetFogState(this.myEnemyUnitManagerData.EnemyUnitGridPosition(), out var fogStage) && fogStage == TilemapSystem.FogTilemap.FogState.Visible)
+            {
+                // 카메라 포커싱. 부분
+
+                yield return StartCoroutine(this.EnemyUnitAnimationController.PlayAndWaitAnimation(EnemyUnitAnimationType.Spawn));
+            }            
+        }
+
+
+        public IEnumerator OperateEnemyAI_Coroutine()
+        {
+            yield return this.EnemyAIBehaviourController.OperateEnemyAI_Coroutine();
         }
 
         public void OperateDie()
         {
             Destroy(this.gameObject);
         }
-
-        public void OperateNewTurnSetting()
+        public void OperateTurnEndSetting()
         {
             // 이곳에서 이동 코스트 및 스킬 코스트를 초기화.
             this.myEnemyUnitDynamicData.CurrentSkillCost = this.myEnemyUnitStaticData.DefaultSkillCost;

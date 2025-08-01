@@ -15,3 +15,5 @@ MonoBehaviour:
   EnemyUnitSpawnDataGroup_Turns:
   - StageID: 0
     EnemyUnitSpawnData_TurnJsonFile: {fileID: 4900000, guid: 6b3494bd30ff8184b84104781a147b35, type: 3}
+  - StageID: 1
+    EnemyUnitSpawnData_TurnJsonFile: {fileID: 4900000, guid: f776698af0174c2449a3184e357cf002, type: 3}

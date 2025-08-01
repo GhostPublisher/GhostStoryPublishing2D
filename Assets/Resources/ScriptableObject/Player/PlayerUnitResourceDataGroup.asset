@@ -17,7 +17,7 @@ MonoBehaviour:
     UnitPrefab: {fileID: 2315471362883489614, guid: 8b263c31ebc65f3408b0a61b73ff5657, type: 3}
     UnitSpriteImage: {fileID: 21300000, guid: 0e50cf0d95157e14f991211aa2ec0095, type: 3}
   - UnitID: 2001
-    UnitPrefab: {fileID: 2315471362883489614, guid: a1728f5c38721f249ac45f5bbda54fd8, type: 3}
+    UnitPrefab: {fileID: 2315471362883489614, guid: 45bc99a976bb11c45877a4a17f0c6116, type: 3}
     UnitSpriteImage: {fileID: 21300000, guid: 3ee27f07939d60c4eb8aa452b88f3344, type: 3}
   - UnitID: 2002
     UnitPrefab: {fileID: 2315471362883489614, guid: 3a317443f0f6583429fa0d8102e4ee97, type: 3}

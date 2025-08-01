@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 
 using Foundations.Architecture.EventObserver;
 
@@ -19,4 +19,4 @@ namespace GameSystems.EnemySystem.EnemyAISequenceSystem
     // 불특정 이유로 인해 종료된 EnemyAI 흐름에 재 진입.
     [Serializable]
     public class CurrentOperatedEnemy_OperationContinue : IEventData { }
-}
+}*/

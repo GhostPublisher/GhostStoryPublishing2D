@@ -143,6 +143,7 @@ namespace Example00
         // enemy 생성.
         public void Notify_SpawnEnemyDatas()
         {
+            this.StopAllCoroutines();
             StartCoroutine(this.SpawnEnemys());
         }
         private IEnumerator SpawnEnemys()
@@ -153,7 +154,6 @@ namespace Example00
             // Raw 데이터를 통한 Enemy 생성.            
             foreach (var data in this.EnemySpawnEvent_Tests)
             {
-                EnemyUnitSpawnController.StopAllCoroutines_Refer();
                 yield return StartCoroutine(EnemyUnitSpawnController.GenerateEnemyUnit_Coroutine(data.UnitID, data.SpawnPosition));
             }
         }
@@ -210,63 +210,65 @@ namespace Example00
         // Player Unit을 통한 시야 갱신
         public void Notify_UpdatePlayerVisible()
         {
-            UpdatePlayerUnitVisibleRange UpdatePlayerUnitVisibleRange = new();
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<GameSystems.PlayerSystem.PlayerUnitManagerDataDBHandler>();
 
-            this.EventObserverNotifier.NotifyEvent(UpdatePlayerUnitVisibleRange);
+            if(PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
+            {
+                foreach (var data in playerUnitManagerDatas)
+                {
+                    data.PlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController.UpdateVisibleRange();
+                }
+            }
         }
 
         // Player Unit Action Panel 활성화 / 갱신 / 초기화
         public void Notify_DisplayPlayerUnitActionPanelUIUX()
         {
-            ActivatePlayerUnitActionPanelUI DisplayPlayerUnitActionPanelUI = new();
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<GameSystems.UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
 
-            this.EventObserverNotifier.NotifyEvent(DisplayPlayerUnitActionPanelUI);
+            StartCoroutine(PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Show_PlayerUnitActionPanel());
         }
         // Player Unit Action Panel 갱신
         public void Notify_UpdatePlayerUnitActionPanelUIUX()
         {
-            UpdatePlayerUnitAcitionPanelUI UpdatePlayerUnitAcitionPanelUI = new();
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<GameSystems.UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
 
-            this.EventObserverNotifier.NotifyEvent(UpdatePlayerUnitAcitionPanelUI);
+            this.StartCoroutine(PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Show_PlayerUnitActionPanel());
         }
         // Player Unit Action Panel 초기화
         public void Notify_ClearPlayerUnitAcitionPanelUI()
         {
-            ClearPlayerUnitAcitionPanelUI ClearPlayerUnitAcitionPanelUI = new();
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<GameSystems.UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
 
-            this.EventObserverNotifier.NotifyEvent(ClearPlayerUnitAcitionPanelUI);
-        }
-
-        // 단일 AI 실행 테스트
-        public void Notify_OperateAI()
-        {
-            GameSystems.EnemySystem.EnemyUnitSystem.OperateEnemyAI_Raw OperateEnemyAI_Raw = new();
-            OperateEnemyAI_Raw.UniqueID = this.testEnemyUniqueID;
-
-            this.EventObserverNotifier.NotifyEvent(OperateEnemyAI_Raw);
-        }
-        // Enemy AI 들만, 새로운 턴이 시작되었을 때의 값으로 초기화.
-        public void Notify_OperateNewTurnSetting()
-        {
-            GameSystems.EnemySystem.EnemyUnitSystem.OperateNewTurnSetting OperateNewTurnSetting = new();
-
-            this.EventObserverNotifier.NotifyEvent(OperateNewTurnSetting);
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Clear_PlayerUnitActionPanel();
         }
 
         // 모든 AI 순차 실행.
         public void Notify_OperateAISequencer()
         {
-            GameSystems.EnemySystem.EnemyAISequenceSystem.AllocateEnemyAISequence AllocateEnemyAISequence = new();
-            GameSystems.EnemySystem.EnemyAISequenceSystem.ExecuteEnemyAI ExecuteEnemyAI = new();
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var IEnemyAISequencer = HandlerManager.GetDynamicDataHandler<GameSystems.EnemySystem.EnemySystemHandler>().IEnemyAISequencer;
 
-            this.EventObserverNotifier.NotifyEvent(AllocateEnemyAISequence);
-            this.EventObserverNotifier.NotifyEvent(ExecuteEnemyAI);
+            // Enemy 순서 명시 -> Enemy 순차 실행 + 대기
+            IEnemyAISequencer.AllocateEnemyAISequence();
+            StartCoroutine(IEnemyAISequencer.ExecuteEnemyAI_Coroutine());
         }
         public void Notify_OperateNewTurnSetting_Sequencer()
         {
-            GameSystems.EnemySystem.EnemyAISequenceSystem.OperateNewTurnSetting OperateNewTurnSetting = new();
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var EnemyUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<GameSystems.EnemySystem.EnemyUnitSystem.EnemyUnitManagerDataDBHandler>();
 
-            this.EventObserverNotifier.NotifyEvent(OperateNewTurnSetting);
+            if(EnemyUnitManagerDataDBHandler.TryGetAll(out var enemyUnitManagerDatas))
+            {
+                foreach (var enemyUnitManager in enemyUnitManagerDatas)
+                {
+                    enemyUnitManager.EnemyUnitFeatureInterfaceGroup.EnemyUnitManager.OperateTurnEndSetting();
+                }
+            }
         }
     }
 

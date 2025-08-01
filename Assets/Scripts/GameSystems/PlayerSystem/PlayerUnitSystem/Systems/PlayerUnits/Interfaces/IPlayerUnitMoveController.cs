@@ -1,4 +1,6 @@
-﻿
+﻿using System.Collections;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace GameSystems.PlayerSystem.PlayerUnitSystem
@@ -7,7 +9,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
     {
         public void InitialSetting(PlayerUnitManagerData playerUnitManagerData);
 
-        public void OperatePlayerUnitMove(Vector2Int targetPosition);
+        public IEnumerator OperateMove_Coroutine(Vector2Int targetPosition);
 
         public void MoveForce(Vector2Int forceDirection);
     }

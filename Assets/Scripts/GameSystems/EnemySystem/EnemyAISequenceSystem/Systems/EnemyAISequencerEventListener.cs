@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 
 using Foundations.Architecture.EventObserver;
 
@@ -42,11 +42,7 @@ namespace GameSystems.EnemySystem.EnemyAISequenceSystem
                     break;
                 // 새로운 Turn이 시작되었을 떄, EnemyAISequenceSystem 초기화
                 case OperateNewTurnSetting:
-                    this.EnemyAISequencer.OperateNewTurnSettting();
-                    break;
-                // 불특정 이유로 인해 종료된 EnemyAI 흐름에 재 진입.
-                case CurrentOperatedEnemy_OperationContinue:
-                    this.EnemyAISequencer.CurrentOperatedEnemy_OperationContinue();
+                    this.EnemyAISequencer.OperateTurnEndSettting();
                     break;
                 default:
                     break;
@@ -54,4 +50,4 @@ namespace GameSystems.EnemySystem.EnemyAISequenceSystem
         }
 
     }
-}
+}*/

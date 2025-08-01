@@ -106,12 +106,15 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             // 마지막에 정확하게 targetAlpha 적용
             color.a = 0;
             this.SpriteRendererMain.color = color;
+            this.SpriteRendererMain.sortingOrder = 0;
 
             this.isActivated = false;
         }
         public IEnumerator ShowOperation()
         {
             if (this.SpriteRendererMain == null) yield break;
+
+            this.SpriteRendererMain.sortingOrder = 120;
 
             Color color = this.SpriteRendererMain.color;
             float startAlpha = color.a;

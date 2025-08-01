@@ -77,9 +77,8 @@ namespace GameSystems.PlayerSystem
             this.PlayerUnitDynamicData.UniqueID = this.UniqueID;
             this.PlayerUnitFeatureInterfaceGroup.UniqueID = this.UniqueID;
 
-            this.PlayerUnitDynamicData.CurrentHPCost = this.PlayerUnitStaticData.DefaultHPCost;
-            this.PlayerUnitDynamicData.CurrentMoveCost = this.PlayerUnitStaticData.DefaultMoveCost;
-            this.PlayerUnitDynamicData.CurrentSkillCost = this.PlayerUnitStaticData.DefaultSkillCost;
+            this.PlayerUnitDynamicData.HPCost_Current = this.PlayerUnitStaticData.HPCost_Default;
+            this.PlayerUnitDynamicData.BehaviourCost_Current = this.PlayerUnitStaticData.BehaviourCost_Default;
         }
 
         public PlayerUnitStaticData PlayerUnitStaticData { get; }

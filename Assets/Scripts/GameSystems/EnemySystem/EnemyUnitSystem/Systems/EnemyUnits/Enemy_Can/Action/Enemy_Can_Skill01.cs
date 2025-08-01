@@ -41,35 +41,52 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             this.EnemyUnitAnimationController = this.myEnemyUnitManagerData.EnemyUnitFeatureInterfaceGroup.EnemyUnitAnimationController;
         }
 
+        // 스킬 수행.
+        public IEnumerator OperateSkill_Coroutine()
+        {
+            // 정상적으로 가까운 객체 위치값들 가져온 경우.
+            if (this.TryGetNearestTarget(out var vector2Ints))
+            {
+                // 가장 먼저 탐색된 객체 공격.
+                yield return StartCoroutine(this.OperateSkill(vector2Ints.First()));
+            }
+        }
+
         // 스킬 01의 인지한 적을 공격.
-        // 가장 가까운 순으로 공격.
-        public bool TryOperateSkillToTarget_NearestTarget()
+        // 가장 가까운 순으로 공격. 
+        public bool TryGetNearestTarget(out HashSet<Vector2Int> nearestTargets)
         {
             // 스킬 01 공격 범위 내, 유효한 좌표 값을 가져오는 작업.
             // 해당 데이터 정보를 가져올 수 없거나, 데이터가 유효하지 않을 경우 '공격' 작업 실패 리턴.
             if (!this.myEnemyUnitManagerData.EnemyUnitDynamicData.TryGetSkillValidTargetRangeData(SkillSlotType.Skill01, out var ValidTargetRangeData)
-                || ValidTargetRangeData == null || ValidTargetRangeData.ValidTargetPositions == null || ValidTargetRangeData.ValidTargetPositions.Count <= 0) return false;
-
-            HashSet<Vector2Int> nearestTargets = this.GetNearestTarget(this.myEnemyUnitManagerData.EnemyUnitGridPosition(), ValidTargetRangeData.ValidTargetPositions);
-
-            // 이럴일은 없겠지만 존나 오류임. 정상작동 실패.
-            if (nearestTargets == null || nearestTargets.Count <= 0) return false;
-            // 가장 가까운 대상이 1개일 때, 바로 공격.
-            else if (nearestTargets.Count == 1)
+                || ValidTargetRangeData == null || ValidTargetRangeData.ValidTargetPositions == null || ValidTargetRangeData.ValidTargetPositions.Count <= 0)
             {
-                StopAllCoroutines();
-                StartCoroutine(this.OperateSkill(nearestTargets.First()));
+                nearestTargets = null;
+                return false;
             }
-            // 추가 비교 조건 수행.
+
+            var tempNearestTargets = this.GetNearestTarget(this.myEnemyUnitManagerData.EnemyUnitGridPosition(), ValidTargetRangeData.ValidTargetPositions);
+            // 이럴일은 없겠지만 존나 오류임. 정상작동 실패.
+            if (tempNearestTargets == null || tempNearestTargets.Count <= 0)
+            {
+                nearestTargets = null;
+                return false;
+            }
+            // 가장 가까운 대상이 1개일 때, 바로 공격.
+            else if (tempNearestTargets.Count == 1)
+            {
+                nearestTargets = tempNearestTargets;
+                return true;
+            }
+            // 같은 거리에 있는 애들이 존재시, 추가 비교 수행. ( 일단 그냥 함 )
             else
             {
-                // 일단 그냥 앞에꺼 씀.
-                StopAllCoroutines();
-                StartCoroutine(this.OperateSkill(nearestTargets.First()));
+                nearestTargets = tempNearestTargets;
+                return true;
             }
-
-            return true;
         }
+
+
         // currentPosition 위치 기준으로, validTargetPositions 들 중 가장 가까운 거리에 있는 좌표 반환.
         // 동일한 거리가 있을 경우 모두 리턴.
         private HashSet<Vector2Int> GetNearestTarget(Vector2Int currentPosition, HashSet<Vector2Int> validTargetPositions)
@@ -110,7 +127,6 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             yield return StartCoroutine(this.StartSkillOperation(targetPosition));
 
             this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentSkillCost -= this.SkillCost;
-            this.myEnemyUnitManagerData.EnemyUnitFeatureInterfaceGroup.EnemyUnitManager.OperateEnemyAI();
         }
 
         private IEnumerator StartSkillOperation(Vector2Int targetedPosition)

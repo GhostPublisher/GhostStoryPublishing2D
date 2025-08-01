@@ -17,9 +17,9 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 
         public void ApplyDamage(int rawDamage)
         {
-            this.myPlayerUnitDynamicData.CurrentHPCost = Mathf.Max(0, this.myPlayerUnitDynamicData.CurrentHPCost - rawDamage);
+            this.myPlayerUnitDynamicData.HPCost_Current = Mathf.Max(0, this.myPlayerUnitDynamicData.HPCost_Current - rawDamage);
         }
 
-        public bool IsDead => this.myPlayerUnitDynamicData.CurrentHPCost <= 0;
+        public bool IsDead => this.myPlayerUnitDynamicData.HPCost_Current <= 0;
     }
 }

@@ -7,43 +7,41 @@ using Foundations.Architecture.ReferencesHandler;
 
 namespace GameSystems.BattleSceneSystem
 {
-    public class BattleSceneHandler : IDynamicReferenceHandler
-    {
-        public IBattleSceneFlowController IBattleSceneFlowController;
-    }
-
     public interface IBattleSceneFlowController
     {
-        public void BattleSceneFlowControllEvent_StageSetting(int stageID);
-
+        public void OperateBattleSceneFlow_StageSetting(int stageID);
+        public void OperateBattleSceneFlow_TurnStartSetting();
+        public void OperateBattleSceneFlow_PlayerTurnStartSetting();
+        public void OperateBattleSceneFlow_PlayerTurnEndSetting();
+        public void OperateBattleSceneFlow_EnemyTurnStartSetting();
+        public void OperateBattleSceneFlow_TurnEndSetting();
     }
 
     public class BattleSceneFlowController : MonoBehaviour, IBattleSceneFlowController
     {
         private IEventObserverNotifier EventObserverNotifier;
 
-        private BattleSceneData myBattleSceneData;
+        private BattleSceneData myBattleSceneData = new();
 
         private void Awake()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-            HandlerManager.GetDynamicDataHandler<BattleSceneHandler>().IBattleSceneFlowController = this;
-        }
+            var BattleSceneSystemHandler = HandlerManager.GetDynamicDataHandler<BattleSceneSystemHandler>();
 
-        public void BattleSceneFlowControllEvent_StageSetting(int stageID)
-        {
+            BattleSceneSystemHandler.IBattleSceneFlowController = this;
+            BattleSceneSystemHandler.BattleSceneData = this.myBattleSceneData;
+
             this.EventObserverNotifier = new EventObserverNotifier();
-
-            this.myBattleSceneData = new(stageID);
-
-            // StageSetting 수행.
-            this.OperateStageSetting();
-
-            // Turn Start Setting 수행.
-            this.OperateTurnStartSetting();
         }
 
-        public void OperateStageSetting()
+        public void OperateBattleSceneFlow_StageSetting(int stageID)
+        {
+            this.myBattleSceneData.StageID = stageID;
+
+            this.StopAllCoroutines();
+            this.StartCoroutine(this.OperateBattleSceneFlow_StageSetting_Coroutine());
+        }
+        public IEnumerator OperateBattleSceneFlow_StageSetting_Coroutine()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
             var FogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().IFogTilemapController;
@@ -61,15 +59,15 @@ namespace GameSystems.BattleSceneSystem
 
             TilemapSystem.SkillRangeTilemap.InitialSetSkillRangeTilemapEvent initialSetSkillRangeTilemapEvent = new();
             initialSetSkillRangeTilemapEvent.StageID = this.myBattleSceneData.StageID;
-            
+
+            FogTilemapController.InitialSetting(this.myBattleSceneData.StageID);
+            FogTilemapController.UpdateFogVisibility();
+
             this.EventObserverNotifier.NotifyEvent(initialSetGeneratedTerrainDataEvent);
             this.EventObserverNotifier.NotifyEvent(initialSetStageVisualResourcesData);
 
             this.EventObserverNotifier.NotifyEvent(initialSetMovementTilemapEvent);
             this.EventObserverNotifier.NotifyEvent(initialSetSkillRangeTilemapEvent);
-
-            FogTilemapController.InitialSetting(this.myBattleSceneData.StageID);
-            FogTilemapController.UpdateFogVisibility();
 
             EnemyUnitSpawnController.InitialSetting(this.myBattleSceneData.StageID);
             EnemyUnitSpawnController.AllocateEnemyUnitSpawnData_Stage();
@@ -78,44 +76,153 @@ namespace GameSystems.BattleSceneSystem
             PlayerUnitSpawnContorller.InitialSetting(this.myBattleSceneData.StageID);
             PlayerUnitSpawnContorller.AllocatePlayerUnitSpawnData_Stage();
             PlayerUnitSpawnContorller.GeneratePlayerUnit_Queue();
+
+            yield return null;
+
+            // 다음 Flow 흐름 수행 요청.
+            this.OperateBattleSceneFlow_TurnStartSetting();
         }
 
-        public void OperateTurnStartSetting()
+        // Turn 시작 흐름.
+        public void OperateBattleSceneFlow_TurnStartSetting()
         {
             // Turn 증가
             ++this.myBattleSceneData.TurnID;
 
             this.StopAllCoroutines();
-            this.StartCoroutine(this.OperateTurnStartSetting_Coroutine());
+            this.StartCoroutine(this.OperateBattleSceneFlow_TurnStartSetting_Coroutine());
         }
-
-        private IEnumerator OperateTurnStartSetting_Coroutine()
+        private IEnumerator OperateBattleSceneFlow_TurnStartSetting_Coroutine()
         {
+            // StageSetting 안전하게 끝나는 것 대기.
+            yield return new WaitForSeconds(0.2f);
+
             var HandlerManager = LazyReferenceHandlerManager.Instance;
             var EnemyUnitSpawnController = HandlerManager.GetDynamicDataHandler<EnemySystem.EnemySystemHandler>().IEnemyUnitSpawnController;
 
             // Turn기반 Enemy 생성 요청 -> 작업 수행 시, 수행완료까지 대기.
             if (EnemyUnitSpawnController.TryAllocateEnemyUnitSpawnData_Turn(this.myBattleSceneData.TurnID))
             {
-                EnemyUnitSpawnController.StopAllCoroutines_Refer();
                 yield return StartCoroutine(EnemyUnitSpawnController.GenerateEnemyUnit_Queue_Coroutine());
             }
 
-            // DB 하나 더 만들어주자...
+            // Player 용 DB 하나 더 만들어주자...
+
+            // 안전하게 1프레임 대기.
+            yield return null;
+
+            // 다음 Flow 흐름 수행 요청.
+            this.OperateBattleSceneFlow_PlayerTurnStartSetting();
+        }
+
+        // Player Turn 시작 흐름.
+        public void OperateBattleSceneFlow_PlayerTurnStartSetting()
+        {
+            this.StopAllCoroutines();
+            this.StartCoroutine(this.OperateBattleSceneFlow_PlayerTurnSetting_Coroutine());
+        }
+        private IEnumerator OperateBattleSceneFlow_PlayerTurnSetting_Coroutine()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
+
+            // PlayerTurnSetting에 관한 해당 Panel 활성화 UIUX 작업 수행.
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Update_PlayerUnitIconUIUX();
+            PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Update_PlayerUnit_ActionableState();
+            yield return this.StartCoroutine(PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Show_PlayerUnitActionPanel());
+
+            yield return null;
+        }
+
+        // Player Turn 종료 흐름.
+        public void OperateBattleSceneFlow_PlayerTurnEndSetting()
+        {
+            this.StopAllCoroutines();
+            this.StartCoroutine(this.OperateBattleSceneFlow_PlayerTurnEndSetting_Coroutine());
+        }
+        private IEnumerator OperateBattleSceneFlow_PlayerTurnEndSetting_Coroutine()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var PlayerUnitActionUIUXHandler = HandlerManager.GetDynamicDataHandler<UIUXSystem.UIUXSystemHandler>().PlayerUnitActionUIUXHandler;
+
+            // PlayerTurnSetting에 관한 해당 Panel UIUX 비활성화 작업 수행.
+            yield return this.StartCoroutine(PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Hide_PlayerUnitActionPanel());
+
+            // 다음 Flow 흐름 수행 요청.
+            this.OperateBattleSceneFlow_EnemyTurnStartSetting();
+        }
+
+        // Enmey Turn 시작 호출.
+        public void OperateBattleSceneFlow_EnemyTurnStartSetting()
+        {
+            this.StopAllCoroutines();
+            this.StartCoroutine(this.OperateBattleSceneFlow_EnemyTurnStartSetting_Coroutine());
+        }
+        private IEnumerator OperateBattleSceneFlow_EnemyTurnStartSetting_Coroutine()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var IEnemyAISequencer = HandlerManager.GetDynamicDataHandler<EnemySystem.EnemySystemHandler>().IEnemyAISequencer;
+
+            // Enemy UIUX 출력.
+
+            // Enemy 순서 명시 -> Enemy 순차 실행 + 대기
+            IEnemyAISequencer.AllocateEnemyAISequence();
+            yield return StartCoroutine(IEnemyAISequencer.ExecuteEnemyAI_Coroutine());
+
+            // Enemy UIUX 종료.
+
+            // Turn End Setting으로 넘기기.
+            this.OperateBattleSceneFlow_TurnEndSetting();
+        }
+
+        // Turn 종료 흐름.
+        public void OperateBattleSceneFlow_TurnEndSetting()
+        {
+            this.StopAllCoroutines();
+            this.StartCoroutine(this.OperateBattleSceneFlow_TurnEndSetting_Coroutine());
+        }
+        private IEnumerator OperateBattleSceneFlow_TurnEndSetting_Coroutine()
+        {
+            var HandlerManager = LazyReferenceHandlerManager.Instance;
+            var EnemyUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<GameSystems.EnemySystem.EnemyUnitSystem.EnemyUnitManagerDataDBHandler>();
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<GameSystems.PlayerSystem.PlayerUnitManagerDataDBHandler>();
+
+
+            // Enemy 값 초기화.
+            if (EnemyUnitManagerDataDBHandler.TryGetAll(out var enemyUnitManagerDatas))
+            {
+                foreach (var enemyUnitManager in enemyUnitManagerDatas)
+                {
+                    enemyUnitManager.EnemyUnitFeatureInterfaceGroup.EnemyUnitManager.OperateTurnEndSetting();
+                }
+            }
+
+            // Player 값 초기화.
+            if (PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
+            {
+                foreach (var playerUnitManager in playerUnitManagerDatas)
+                {
+                    playerUnitManager.PlayerUnitFeatureInterfaceGroup.PlayerUnitManager.OperateTurnEndSetting();
+                }
+            }
+
+            yield return null;
+
+            this.OperateBattleSceneFlow_TurnStartSetting();
         }
     }
 
     [Serializable]
     public class BattleSceneData
     {
-        public int StageID;
-        public int TurnID;
-
-        public BattleSceneData(int stageID)
+        public BattleSceneData()
         {
-            StageID = stageID;
-            TurnID = 0;
+            this.StageID = 0;
+            this.TurnID = 0;
         }
+
+        public int StageID { get; set; }
+        public int TurnID { get; set; }
     }
 
     [Serializable]

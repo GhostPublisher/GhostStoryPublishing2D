@@ -1,0 +1,19 @@
+{
+  "EnemyUnitSpawnData_Turns": [
+    {
+      "TurnID": 2,
+      "UnitSpawnDatas": [
+        {
+          "UnitID": 1000,
+          "SpawnPositionX": 6,
+          "SpawnPositionY": 2
+        },
+        {
+          "UnitID": 1001,
+          "SpawnPositionX": 6,
+          "SpawnPositionY": 3
+        }
+      ]
+    }
+  ]
+}

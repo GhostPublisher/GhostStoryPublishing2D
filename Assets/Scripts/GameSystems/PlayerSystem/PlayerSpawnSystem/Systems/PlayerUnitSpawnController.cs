@@ -170,7 +170,6 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
             yield return null;
 
             // PlayerUnit 초기 셋팅 요청. -> 생성 작업 대기.
-            playerUnitManager.StopAllCoroutines();
             yield return StartCoroutine(playerUnitManager.OperatePlayerUnitInitialSetting_Coroutine());
 
             // 1프레임 대기. ( 그냥 안전성 )
