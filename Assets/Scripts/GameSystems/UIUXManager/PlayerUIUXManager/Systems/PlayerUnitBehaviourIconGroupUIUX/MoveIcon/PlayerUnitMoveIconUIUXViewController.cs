@@ -51,7 +51,7 @@ namespace GameSystems.UIUXSystem
 
         public void Update_MoveActionableState()
         {
-            this.isBlocked = this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current < this.myPlayerUnitManagerData.PlayerUnitStaticData.MoveCost;
+            this.isBlocked = this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current < this.myPlayerUnitManagerData.PlayerUnitStaticData.MoveActionCost;
         }
 
         public void OnPointerEnter(PointerEventData eventData)

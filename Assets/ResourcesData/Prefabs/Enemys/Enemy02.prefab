@@ -68,6 +68,7 @@ MonoBehaviour:
     DefaultHPCost: 1
     DefaultMoveCost: 2
     DefaultSkillCost: 2
+    MoveActionCost: 1
     Skill01ActionCost: 1
     Skill02ActionCost: 1
     Skill03ActionCost: 1

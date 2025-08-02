@@ -50,7 +50,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             yield return this.StartCoroutine(this.StartSkillOperation(targetedPosition, appliedUnitPositions));
 
             // Skill Cost 감소.
-            this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current -= this.myPlayerUnitManagerData.PlayerUnitStaticData.GetSkillCost(this.SkillID_);
+            this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current -= this.myPlayerUnitManagerData.PlayerUnitStaticData.GetSkillActionCost(this.SkillID_);
 
             // 다 끝나면, Player Unit Action UIUX 갱신 및 상호작용 가능 명시.
             var HandlerManager = LazyReferenceHandlerManager.Instance;

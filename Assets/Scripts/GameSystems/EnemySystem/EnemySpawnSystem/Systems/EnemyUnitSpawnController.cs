@@ -18,17 +18,11 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
         // triggerID 기반 Enemy Unit 생성 데이터 할당
         public bool TryAllocateEnemyUnitSpawnData_Trigger(int triggerID);
 
-        // Queue를 사용한 EnemyUnit 생성 요청
-        public void GenerateEnemyUnit_Queue();
         // Queue를 사용한 EnemyUnit 생성 요청 ( 내부 코루틴 대기 )
         public IEnumerator GenerateEnemyUnit_Queue_Coroutine();
 
-        // EnemyUnit 생성 요청.
-        public void GenerateEnemyUnit(int unitID, Vector2Int spawnPosition);
         // EnemyUnit 생성 요청 ( 내부 코루틴 대기 )
         public IEnumerator GenerateEnemyUnit_Coroutine(int unitID, Vector2Int spawnPosition);
-
-        public void StopAllCoroutines_Refer();
 
         // 모든 EnemyUnit 객체 삭제 요청.
         public void ClearEnemyUnitAndDatas();
@@ -130,21 +124,6 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
             return false;
         }
 
-
-        public void GenerateEnemyUnit_Queue()
-        {
-            while (this.enemySpawnQueue.Count > 0)
-            {
-                // 생성할 Unit의 ID 및 Position 가져오기.
-                var newSpawnData = this.enemySpawnQueue.Dequeue();
-                Vector2Int spawnPosition = new Vector2Int(newSpawnData.SpawnPositionX, newSpawnData.SpawnPositionY);
-
-                // 객체가 생성될 위치값이 비어있지 않으면 넘어감..
-                if (!this.IsEmpty(spawnPosition)) continue;
-
-                this.GenerateEnemyUnit(newSpawnData.UnitID, spawnPosition);
-            }
-        }
         public IEnumerator GenerateEnemyUnit_Queue_Coroutine()
         {
             while (this.enemySpawnQueue.Count > 0)
@@ -159,29 +138,8 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
                 yield return this.GenerateEnemyUnit_Coroutine(newSpawnData.UnitID, spawnPosition);
                 
                 // 잠시 대기.
-                yield return new WaitForSeconds(0.5f);
+                yield return null;
             }
-        }
-
-        // 코루틴이 아닌 생성. ( 생성 Animation 무시 )
-        public void GenerateEnemyUnit(int unitID, Vector2Int spawnPosition)
-        {
-            var HandlerManager = LazyReferenceHandlerManager.Instance;
-            var EnemyUnitDataDBHandler = HandlerManager.GetStaticDataHandler<EnemyUnitSystem.EnemyUnitDataDBHandler>();
-            var IsometricCoordinateConvertor = HandlerManager.GetUtilityHandler<UtilitySystem.IsometricCoordinateConvertor>();
-
-            // UnitID에 대응되는 Prefab이 없으면 넘어감.
-            if (!EnemyUnitDataDBHandler.TryGetEnemyPrefabResourceData(unitID, out var prefabData)) return;
-
-//            Debug.Log($"ID : {unitID}, pos : {spawnPosition}");
-
-            // Enemy Unit 생성 및 Hierarchy 배치.
-            GameObject createdEnemyUnit = Object.Instantiate(prefabData.EnemyPrefab, this.EnemyUnitObjectParent);
-            // 위치 배치.
-            createdEnemyUnit.transform.position = IsometricCoordinateConvertor.ConvertGridToWorld(spawnPosition);
-
-            // 초기 셋팅 호출 후 끝.
-            createdEnemyUnit.GetComponent<EnemyUnitSystem.IEnemyUnitManager>().OperateEnemyUnitInitialSetting();
         }
         // 코루틴 생성. ( 애니메이션 대기 )
         public IEnumerator GenerateEnemyUnit_Coroutine(int unitID, Vector2Int spawnPosition)
@@ -195,7 +153,6 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
 
             // Enemy Unit 생성 및 Hierarchy 배치.
             GameObject createdEnemyUnit = Object.Instantiate(prefabData.EnemyPrefab, this.EnemyUnitObjectParent);
-            var enemyUnitManager = createdEnemyUnit.GetComponent<EnemyUnitSystem.IEnemyUnitManager>();
             // 위치 배치.
             createdEnemyUnit.transform.position = IsometricCoordinateConvertor.ConvertGridToWorld(spawnPosition);
 
@@ -204,16 +161,10 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
 
             // Enemy 초기 셋팅 값 넘기기.
             // 여기서 Enemy 객체의 생성 코루틴 대기.
-            yield return StartCoroutine(enemyUnitManager.OperateEnemyUnitInitialSetting_Coroutine());
+            yield return createdEnemyUnit.GetComponent<EnemyUnitSystem.IEnemyUnitManager>().OperateEnemyUnitInitialSetting_Coroutine();
 
-            // 1프레임 대기. ( 그냥 안전성     )
+            // 1프레임 대기. ( 그냥 안전성 )
             yield return null;
-        }
-
-
-        public void StopAllCoroutines_Refer()
-        {
-            this.StopAllCoroutines();
         }
 
         // 생성된 모든 EnemyUnit GameObject를 삭제 및 관련 데이터 삭제.
@@ -260,6 +211,5 @@ namespace GameSystems.EnemySystem.EnemySpawnSystem
 
             return true;
         }
-
     }
 }

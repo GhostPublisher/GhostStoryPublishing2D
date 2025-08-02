@@ -53,7 +53,7 @@ namespace GameSystems.UIUXSystem
 
         public void Update_SkillActionableState()
         {
-            this.isBlocked = this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current < this.myPlayerUnitManagerData.PlayerUnitStaticData.GetSkillCost(this.mySkillID);
+            this.isBlocked = this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current < this.myPlayerUnitManagerData.PlayerUnitStaticData.GetSkillActionCost(this.mySkillID);
         }
 
         public void OnPointerEnter(PointerEventData eventData)

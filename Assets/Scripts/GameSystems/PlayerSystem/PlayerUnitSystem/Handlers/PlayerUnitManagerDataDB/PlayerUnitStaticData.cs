@@ -47,17 +47,17 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 
         [SerializeField] public int BehaviourCost_Default;
 
-        [SerializeField] public int MoveCost;
+        [SerializeField] public int MoveActionCost;
 
-        [SerializeField] public List<SkillCostData> SkillCostDatas;
+        [SerializeField] public List<SkillActionCostData> SkillActionCostDatas;
 
-        public int GetSkillCost(int skillID) { return this.SkillCostDatas.Find(data => data.SkillID == skillID).SkillCost; }
+        public int GetSkillActionCost(int skillID) { return this.SkillActionCostDatas.Find(data => data.SkillID == skillID).SkillActionCost; }
     }
 
     [Serializable]
-    public class SkillCostData
+    public class SkillActionCostData
     {
         public int SkillID;
-        public int SkillCost;
+        public int SkillActionCost;
     }
 }

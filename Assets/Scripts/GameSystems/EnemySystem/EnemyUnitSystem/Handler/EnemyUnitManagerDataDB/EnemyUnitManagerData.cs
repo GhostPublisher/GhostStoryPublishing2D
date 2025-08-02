@@ -40,29 +40,14 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
         // 유닛 HP.
         [SerializeField] public int DefaultHPCost;
-//        [SerializeField] public int MaxHPCost;
-        // HP 회복량
-//        [SerializeField] public int DefaultHPRegenCost;
-//        [SerializeField] public int MaxHPRegenCost;
 
         // 이동 코스트
         [SerializeField] public int DefaultMoveCost;
-//        [SerializeField] public int MaxMoveCost;
-        // 이동 코스트 회복량.
-//        [SerializeField] public int DefaultMoveRegenCost;
-//        [SerializeField] public int MaxMoveRegenCost;
 
         // 스킬 코스트
         [SerializeField] public int DefaultSkillCost;
-        //        [SerializeField] public int MaxSkillCost;
-        // 스킬 코스트 회복량
-        //        [SerializeField] public int DefaultSkillRegenCost;
-        //        [SerializeField] public int MaxSkillRegenCost;
 
-        // 어차피 유닛과 스킬이 1 대 1 대응? 이기에 상관없음. ( 그냥 Unit에 Skill Cost를 박아 넣어놔도 상관은 없음 )
-        // 그런데 차후에 유닛과 스킬의 Table을 분류하고 싶은 경우,
-        // Linker를 통한 Table 연결. or Skill을 Table화 시키지 말고 Interface와 EnemyUnitDynamicData의 역참조를 통해 Cost를 동적으로 연결해 놓으면 되김함.
-        // 그런데 이후, 행동판단로직 아래에 '인식-가공' 로직이 들어가면 이거 필요없을듯??
+        [SerializeField] public int MoveActionCost;
         [SerializeField] public int Skill01ActionCost;
         [SerializeField] public int Skill02ActionCost;
         [SerializeField] public int Skill03ActionCost;

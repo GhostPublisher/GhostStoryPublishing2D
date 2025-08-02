@@ -41,7 +41,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             yield return this.StartCoroutine(this.StartSkillOperation(targetedPosition));
 
             // Skill Cost 감소.
-            this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current -= this.myPlayerUnitManagerData.PlayerUnitStaticData.GetSkillCost(this.SkillID_);
+            this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current -= this.myPlayerUnitManagerData.PlayerUnitStaticData.GetSkillActionCost(this.SkillID_);
         }
 
 

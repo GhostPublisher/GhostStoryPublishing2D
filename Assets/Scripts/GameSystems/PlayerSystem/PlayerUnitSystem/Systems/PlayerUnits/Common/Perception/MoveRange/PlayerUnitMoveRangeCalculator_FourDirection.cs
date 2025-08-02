@@ -42,7 +42,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             // 이동 가능 범위가 없을 시 리턴함.
             // 참고로, 요청마다 중복적으로 범위를 요청하는 것이긴 한데, 갱신 블럭에 대한 변수가 너무많아서 그냥 이렇게 하는게 편함.
             HashSet<Vector2Int> moveableRange = this.UnitMoveRangeCalculator_BFS_FourDirection.GetMoveRange(currentPosition,
-                (this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current / this.myPlayerUnitManagerData.PlayerUnitStaticData.MoveCost),
+                (this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current / this.myPlayerUnitManagerData.PlayerUnitStaticData.MoveActionCost),
                 this.myPlayerUnitManagerData.PlayerUnitStaticData.GroundOvercomeWeight);
 
             // Notify를 통해 Moveable Tilemap에 Notify.

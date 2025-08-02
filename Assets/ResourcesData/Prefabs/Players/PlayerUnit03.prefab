@@ -159,17 +159,17 @@ MonoBehaviour:
     VisibleBlockWeight: 25
     PhysicalVisionBlockWeight: 25
     SpiritualVisionBlockWeight: 0
-    SkillBlockWeight: 25
+    SkillBlockWeight: 0
     HPCost_Default: 5
     BehaviourCost_Default: 3
-    MoveCost: 1
-    SkillCostDatas:
+    MoveActionCost: 1
+    SkillActionCostDatas:
     - SkillID: 6
-      SkillCost: 1
+      SkillActionCost: 1
     - SkillID: 7
-      SkillCost: 2
+      SkillActionCost: 2
     - SkillID: 8
-      SkillCost: 2
+      SkillActionCost: 2
   myPlayerUnitDynamicData:
     UniqueID: 0
     HPCost_Current: 0

@@ -78,12 +78,11 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
         public IEnumerator OperateEnemyAI_Coroutine()
         {
-            // 행동 판단을 위한 데이터 갱신.
-            this.UpdateSensingAndPerceptionData();
-
             while (!this.myEnemyUnitManagerData.EnemyUnitDynamicData.IsOperationOver)
             {
                 Debug.Log($"UniqueID : {this.myEnemyUnitManagerData.UniqueID}, MoveCost :{this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentMoveCost}, SkillCost : {this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentSkillCost}");
+                // 행동 판단을 위한 데이터 갱신.
+                this.UpdateSensingAndPerceptionData();
 
                 // 공격 가능한 범위 안에 존재하면 공격해라.
                 if (this.IsOperationAvailable_Skill01Operation())
@@ -133,7 +132,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
         private bool IsOperationAvailable_MoveToTarget()
         {
             // 이동 가능한 Cost가 없으면 false
-            if (this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentMoveCost <= 0) return false;
+            if (this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentMoveCost < this.myEnemyUnitManagerData.EnemyUnitStaticData.MoveActionCost) return false;
             // 탐지된 적 데이터가 없거나, 정상적이지 못하면 false.
             if (!this.myEnemyUnitManagerData.EnemyUnitDynamicData.TryGetEnemyUnitCurrentDetectedData<EnemyUnitCurrentMemoryData_PlayerUnit>(out var detectedData)) return false;
             if (detectedData == null || detectedData.DetectedPositions == null || detectedData.DetectedPositions.Count <= 0) return false;
@@ -145,7 +144,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
         private bool IsOperationAvailable_Skill01Operation()
         {
             // 사용 가능한 Skill Cost가 없으면 false
-            if (this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentSkillCost <= 0) return false;
+            if (this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentSkillCost < this.myEnemyUnitManagerData.EnemyUnitStaticData.Skill01ActionCost) return false;
             // 공격 가능한 대상이 없거나, 정상적이지 못하면 false
             if (!this.myEnemyUnitManagerData.EnemyUnitDynamicData.TryGetSkillValidTargetRangeData(SkillSlotType.Skill01, out var validTargetRange)) return false;
             if (validTargetRange == null || validTargetRange.ValidTargetPositions == null || validTargetRange.ValidTargetPositions.Count <= 0) return false;

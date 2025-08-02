@@ -82,7 +82,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             yield return StartCoroutine(this.MovePlayerToTarget(nextPosition));
 
             // 이곳에서 이동 코스값을 줄여주자.
-            --this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentMoveCost;
+            this.myEnemyUnitManagerData.EnemyUnitDynamicData.CurrentMoveCost -= this.myEnemyUnitManagerData.EnemyUnitStaticData.MoveActionCost;
 
             // 장애물 관련 작업을 수행하라고 호출해야 되는 부분.
             // 장애물 관련 작업을 수행하라는 OperateObstacle_ToEnemy(enemyUniqueID, enemyPosition);

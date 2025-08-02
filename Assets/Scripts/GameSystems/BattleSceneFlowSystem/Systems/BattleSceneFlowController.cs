@@ -71,7 +71,7 @@ namespace GameSystems.BattleSceneSystem
 
             EnemyUnitSpawnController.InitialSetting(this.myBattleSceneData.StageID);
             EnemyUnitSpawnController.AllocateEnemyUnitSpawnData_Stage();
-            EnemyUnitSpawnController.GenerateEnemyUnit_Queue();
+            yield return EnemyUnitSpawnController.GenerateEnemyUnit_Queue_Coroutine();
 
             PlayerUnitSpawnContorller.InitialSetting(this.myBattleSceneData.StageID);
             PlayerUnitSpawnContorller.AllocatePlayerUnitSpawnData_Stage();

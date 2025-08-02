@@ -8,7 +8,6 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 {
     public interface IEnemyUnitManager
     {
-        public void OperateEnemyUnitInitialSetting();
         public IEnumerator OperateEnemyUnitInitialSetting_Coroutine();
 
         public IEnumerator OperateEnemyAI_Coroutine();
@@ -89,22 +88,6 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             this.EnemyAIBehaviourController.InitialSetting(this.myEnemyUnitManagerData);
         }
 
-        public void OperateEnemyUnitInitialSetting()
-        {
-            this.InitialSetting();
-
-            var HandlerManager = LazyReferenceHandlerManager.Instance;
-            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
-
-            // 해당 위치 시야 갱신.
-            if (PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
-            {
-                foreach (var data in playerUnitManagerDatas)
-                {
-                    data.PlayerUnitFeatureInterfaceGroup.PlayerUnitVisibilityController.UpdateVisibleRange();
-                }
-            }
-        }
         public IEnumerator OperateEnemyUnitInitialSetting_Coroutine()
         {
             this.InitialSetting();

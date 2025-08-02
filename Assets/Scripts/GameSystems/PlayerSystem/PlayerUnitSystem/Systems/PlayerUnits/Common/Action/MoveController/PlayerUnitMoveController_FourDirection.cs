@@ -63,7 +63,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
                 yield return new WaitForSeconds(0.1f);
 
                 // Move Cost 감소.
-                this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current -= this.myPlayerUnitManagerData.PlayerUnitStaticData.MoveCost;
+                this.myPlayerUnitManagerData.PlayerUnitDynamicData.BehaviourCost_Current -= this.myPlayerUnitManagerData.PlayerUnitStaticData.MoveActionCost;
 
                 // 장애물 이벤트에 한번 확인.
                 // if( try(~~~) ) 이벤트가 있을 경우, movePath_Queue.Clear(); 를 통해 이동 정지. + 관련 이벤트 코루틴 수행 및 yield return을 통해 대기.
