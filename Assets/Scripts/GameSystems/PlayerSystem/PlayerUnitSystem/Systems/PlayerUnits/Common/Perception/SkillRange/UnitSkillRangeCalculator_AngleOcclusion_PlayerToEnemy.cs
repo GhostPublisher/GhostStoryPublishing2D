@@ -2,7 +2,6 @@
 
 using UnityEngine;
 
-using Foundations.Architecture.EventObserver;
 using Foundations.Architecture.ReferencesHandler;
 
 using GameSystems.UtilitySystem;
@@ -18,9 +17,9 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
     // 공격이 장애물에 영향을 받는 경우 사용.
     public class UnitSkillRangeCalculator_AngleOcclusion_PlayerToEnemy : MonoBehaviour, IPlayerUnitSkillRangeCalculator
     {
-        private IEventObserverNotifier EventObserverNotifier;
-
         private EnemyUnitManagerDataDBHandler EnemyUnitManagerDataDBHandler;
+
+        private ISkillRangeTilemapSystem SkillRangeTilemapSystem;
 
         private SkillRangeCalculator_AngleOcclusion SkillRangeCalculator_AngleOcclusion;
 
@@ -40,11 +39,10 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         private void Awake()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-            this.SkillRangeCalculator_AngleOcclusion = HandlerManager.GetUtilityHandler<SkillRangeCalculator_AngleOcclusion>();
-
-            this.EventObserverNotifier = new EventObserverNotifier();
-
+            this.SkillRangeTilemapSystem = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().ISkillRangeTilemapSystem;
             this.EnemyUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<EnemyUnitManagerDataDBHandler>();
+
+            this.SkillRangeCalculator_AngleOcclusion = HandlerManager.GetUtilityHandler<SkillRangeCalculator_AngleOcclusion>();
         }
 
         public void InitialSetting(PlayerUnitManagerData playerUnitManagerData)
@@ -63,16 +61,13 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             var targetPositions = this.GetEnemyPositions(UpdateSkillTargetingRange);
 
             // Player Unit의 공격범위를 명시적으로 보여주기 위한 UIUX에 관련 정보를 전달하는 부분.
-            // 여기서 Notify.
-            ActivateFilteredSkillRangeTilemapEvent activateFilteredSkillRangeTilemapEvent = new();
-            activateFilteredSkillRangeTilemapEvent.PlayerUniqueID = this.myPlayerUnitManagerData.UniqueID;
-            activateFilteredSkillRangeTilemapEvent.SkillID = this.skillID;
-
-            activateFilteredSkillRangeTilemapEvent.CurrentPosition = this.myPlayerUnitManagerData.PlayerUnitGridPosition();
-            activateFilteredSkillRangeTilemapEvent.FilteredSkillRange = UpdateSkillTargetingRange;
-            activateFilteredSkillRangeTilemapEvent.SkillTargetPositions = targetPositions;
-
-            this.EventObserverNotifier.NotifyEvent(activateFilteredSkillRangeTilemapEvent);
+            this.SkillRangeTilemapSystem.ActivateFilteredSkillRangeTilemap(
+                this.myPlayerUnitManagerData.UniqueID,
+                this.skillID,
+                this.myPlayerUnitManagerData.PlayerUnitGridPosition(),
+                UpdateSkillTargetingRange,
+                targetPositions
+                );
         }
 
         public void UpdateSkillImpactRange(Vector2Int targetedPosition)
@@ -85,13 +80,11 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             // 가공이 한번 더 필요할거 같긴 함. ( 벽과 타일이 존재하지 않는 부분 제외 코드 )
             var additionalTargetPositions = this.GetEnemyPositions(UpdateSkillTargetingRange);
 
-            // 여기서 Notify. 
-            ActiavteSkillImpactRangeTilemap actiavteSkillImpactRangeTilemap = new();
-            actiavteSkillImpactRangeTilemap.MainTargetPosition = targetedPosition;
-            actiavteSkillImpactRangeTilemap.FilteredSkillImpactRange = UpdateSkillTargetingRange;
-            actiavteSkillImpactRangeTilemap.AdditionalTargetPositions = additionalTargetPositions;
-
-            this.EventObserverNotifier.NotifyEvent(actiavteSkillImpactRangeTilemap);
+            this.SkillRangeTilemapSystem.ActiavteSkillImpactRangeTilemap(
+                targetedPosition,
+                UpdateSkillTargetingRange,
+                additionalTargetPositions
+                );
         }
 
         public HashSet<Vector2Int> GetSkillAppliedRange(Vector2Int targetedPosition)

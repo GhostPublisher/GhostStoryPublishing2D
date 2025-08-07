@@ -1,14 +1,17 @@
 using Foundations.Architecture.ReferencesHandler;
 
-using GameSystems.TilemapSystem.FogTilemap;
+using GameSystems.TilemapSystem.MapVisibilityTilemap;
+using GameSystems.TilemapSystem.SkillRangeTilemap;
 
 namespace GameSystems.TilemapSystem
 {
     public class TilemapSystemHandler : IDynamicReferenceHandler
     {
-        public IFogTilemapController IFogTilemapController;
+        public IMapVisibilityTilemapController IMapVisibilityTilemapController;
+        public MapVisibilityTilemapData MapVisibilityTilemapData;
 
-        public FogTilemapData FogTilemapData;
+        public ISkillRangeTilemapSystem ISkillRangeTilemapSystem;
+
     }
 }
 

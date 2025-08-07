@@ -5,7 +5,7 @@ using Foundations.Architecture.ReferencesHandler;
 using GameSystems.UtilitySystem;
 
 using GameSystems.TilemapSystem;
-using GameSystems.TilemapSystem.FogTilemap;
+using GameSystems.TilemapSystem.MapVisibilityTilemap;
 using GameSystems.EnemySystem.EnemyVisibilitySystem;
 
 namespace GameSystems.PlayerSystem.PlayerUnitSystem
@@ -15,7 +15,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
     {
         private IEventObserverNotifier EventObserverNotifier;
 
-        private IFogTilemapController IFogTilemapController;
+        private IMapVisibilityTilemapController IFogTilemapController;
 
         private VisibilityRangeCalculator VisibilityRangeCalculator;
 
@@ -24,7 +24,7 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
         private void Awake()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-            this.IFogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController;
+            this.IFogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IMapVisibilityTilemapController;
 
             this.VisibilityRangeCalculator = HandlerManager.GetUtilityHandler<VisibilityRangeCalculator>();
 

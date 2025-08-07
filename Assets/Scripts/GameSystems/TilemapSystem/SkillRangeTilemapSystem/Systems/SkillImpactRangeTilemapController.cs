@@ -5,7 +5,14 @@ using UnityEngine.Tilemaps;
 
 namespace GameSystems.TilemapSystem.SkillRangeTilemap
 {
-    public class SkillImpactRangeTilemapController : MonoBehaviour
+    public interface ISkillImpactRangeTilemapController
+    {
+        public void InitialSetting();
+        public void ActivateSkillImpactRangeTilemap(Vector2Int mainTargetPosition, HashSet<Vector2Int> filteredSkillImpactRange, HashSet<Vector2Int> additionalTargetPositions);
+        public void DisActivateSkillImpactRangeTilemap();
+    }
+
+    public class SkillImpactRangeTilemapController : MonoBehaviour, ISkillImpactRangeTilemapController
     {
         [SerializeField] private Tilemap SkillImpactRangeTilemap;
 
@@ -13,6 +20,12 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
         [SerializeField] private TileBase MainTargetTile;
         [SerializeField] private TileBase ImpactRangeTile;
         [SerializeField] private TileBase AdditionalTargetTile;
+
+        public void InitialSetting()
+        {
+            // 전부 비활성화.
+            this.SkillImpactRangeTilemap.ClearAllTiles();
+        }
 
         public void ActivateSkillImpactRangeTilemap(Vector2Int mainTargetPosition, HashSet<Vector2Int> filteredSkillImpactRange, HashSet<Vector2Int> additionalTargetPositions)
         {

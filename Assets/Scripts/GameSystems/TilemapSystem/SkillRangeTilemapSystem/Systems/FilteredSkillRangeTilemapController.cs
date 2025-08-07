@@ -2,13 +2,17 @@
 
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Foundations.Architecture.ReferencesHandler;
-
-using GameSystems.TerrainSystem;
 
 namespace GameSystems.TilemapSystem.SkillRangeTilemap
 {
-    public class FilteredSkillRangeTilemapController : MonoBehaviour
+    public interface IFilteredSkillRangeTilemapController
+    {
+        public void InitialSetting();
+        public void ActivateFilteredSkillRangeTileMap(Vector2Int currentPosition, HashSet<Vector2Int> filteredSkillRange, HashSet<Vector2Int> SkillTargetPositions);
+        public void DisActivateFilteredSkillRangeTilemap();
+    }
+
+    public class FilteredSkillRangeTilemapController : MonoBehaviour, IFilteredSkillRangeTilemapController
     {
         [SerializeField] private Tilemap FilteredSkillRangeTilemap;
 
@@ -17,25 +21,12 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
         [SerializeField] private TileBase currentPositionTile;
         [SerializeField] private TileBase SkillTargetTile;  
 
-        private int Width;
-        private int Height;
-
-        public void InitialSetting(int stageID)
+        public void InitialSetting()
         {
-            var HandlerManager = LazyReferenceHandlerManager.Instance;
-            var StageTileSpawnDataDBHandler = HandlerManager.GetStaticDataHandler<StageTerrainDataDBHandler>();
-
-            // 값이 없으면 0 x 0 크기를 반환해줌.
-            StageTileSpawnDataDBHandler.TryGetStageTerrainSize(stageID, out int width, out int height);
-
-            this.InitialSetting(width, height);
+            // 전부 비활성화.
+            this.FilteredSkillRangeTilemap.ClearAllTiles();
         }
-        public void InitialSetting(int width, int height)
-        {
-            this.Width = width;
-            this.Height = height;
-        }
-            
+
         public void ActivateFilteredSkillRangeTileMap(Vector2Int currentPosition, HashSet<Vector2Int> filteredSkillRange, HashSet<Vector2Int> SkillTargetPositions)
         {
             this.FilteredSkillRangeTilemap.enabled = true;

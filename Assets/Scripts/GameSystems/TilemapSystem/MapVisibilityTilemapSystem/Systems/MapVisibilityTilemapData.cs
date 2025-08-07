@@ -1,8 +1,8 @@
-﻿namespace GameSystems.TilemapSystem.FogTilemap
+﻿namespace GameSystems.TilemapSystem.MapVisibilityTilemap
 {
     public enum FogState { None, Hidden, Revealed, Visible }
 
-    public class FogTilemapData
+    public class MapVisibilityTilemapData
     {
         private FogState[,] fogStates;
 

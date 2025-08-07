@@ -9,9 +9,9 @@ using GameSystems.UtilitySystem;
 
 using GameSystems.TerrainSystem;
 
-namespace GameSystems.TilemapSystem.FogTilemap
+namespace GameSystems.TilemapSystem.MapVisibilityTilemap
 {
-    public interface IFogTilemapController
+    public interface IMapVisibilityTilemapController
     {
         public void InitialSetting(int stageID);
         // Test 수행 용, Private로 존재해도 됨.
@@ -35,9 +35,9 @@ namespace GameSystems.TilemapSystem.FogTilemap
 
     // '시야 기능'을 사용하는 '객체'의 UniqueID와 '시야' 기능을 갖는다.
 
-    public class FogTilemapController : MonoBehaviour, IFogTilemapController
+    public class MapVisibilityTilemapController : MonoBehaviour, IMapVisibilityTilemapController
     {
-        [SerializeField] private Tilemap FogTilemap;
+        [SerializeField] private Tilemap MapVisibilityTilemap;
 
         [Header("Fog Tiles")]
         [SerializeField] private TileBase HiddenTile;
@@ -46,15 +46,15 @@ namespace GameSystems.TilemapSystem.FogTilemap
         private Dictionary<int, HashSet<Vector2Int>> playerUnitVisibilityDatas = new();
         private Dictionary<int, HashSet<Vector2Int>> scannerVisibilityDatas = new();
 
-        private FogTilemapData myFogTilemapData = new();
+        private MapVisibilityTilemapData myMapVisibilityTilemapData = new();
 
         private void Awake()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
             var TilemapDataHandler = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>();
 
-            TilemapDataHandler.IFogTilemapController = this;
-            TilemapDataHandler.FogTilemapData = this.myFogTilemapData;
+            TilemapDataHandler.IMapVisibilityTilemapController = this;
+            TilemapDataHandler.MapVisibilityTilemapData = this.myMapVisibilityTilemapData;
         }
 
         public void InitialSetting(int stageID)
@@ -68,13 +68,13 @@ namespace GameSystems.TilemapSystem.FogTilemap
         }
         public void InitialSetting(int width, int height)
         {
-            this.myFogTilemapData.InitialSetting(width, height);
+            this.myMapVisibilityTilemapData.InitialSetting(width, height);
 
             for (int x = 0; x < width; ++x)
             {
                 for (int y = 0; y < height; ++y)
                 {
-                    this.FogTilemap.SetTile(new Vector3Int(x, y, 0), this.HiddenTile);
+                    this.MapVisibilityTilemap.SetTile(new Vector3Int(x, y, 0), this.HiddenTile);
                 }
             }
         }
@@ -110,7 +110,7 @@ namespace GameSystems.TilemapSystem.FogTilemap
 
         public void UpdateFogVisibility()
         {
-            var length = this.myFogTilemapData.GetLength();
+            var length = this.myMapVisibilityTilemapData.GetLength();
 
             // 전부 비활성화.
             for (int x = 0; x < length.Item1; ++x)
@@ -118,13 +118,13 @@ namespace GameSystems.TilemapSystem.FogTilemap
                 for (int y = 0; y < length.Item2; ++y)
                 {
                     // false이면 해당 좌표는 범위 밖인 거임.
-                    if (!this.myFogTilemapData.TryGetFogState(x, y, out FogState fogState)) continue;
+                    if (!this.myMapVisibilityTilemapData.TryGetFogState(x, y, out FogState fogState)) continue;
 
                     // 이 경우 말고 다 Revealed 한 상태로 만듬.
                     if (fogState == FogState.Hidden) continue;
 
-                    this.myFogTilemapData.SetFogState(x, y, FogState.Revealed);
-                    this.FogTilemap.SetTile(new Vector3Int(x, y, 0), this.RevealedTile);
+                    this.myMapVisibilityTilemapData.SetFogState(x, y, FogState.Revealed);
+                    this.MapVisibilityTilemap.SetTile(new Vector3Int(x, y, 0), this.RevealedTile);
                 }
             }
 
@@ -134,10 +134,10 @@ namespace GameSystems.TilemapSystem.FogTilemap
                 foreach(var pos in list)
                 {
                     // false이면 해당 좌표는 범위 밖인 거임.
-                    if (!this.myFogTilemapData.TryGetFogState(pos.x, pos.y, out FogState fogState)) continue;
+                    if (!this.myMapVisibilityTilemapData.TryGetFogState(pos.x, pos.y, out FogState fogState)) continue;
 
-                    this.myFogTilemapData.SetFogState(pos.x, pos.y, FogState.Visible);
-                    this.FogTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), null);
+                    this.myMapVisibilityTilemapData.SetFogState(pos.x, pos.y, FogState.Visible);
+                    this.MapVisibilityTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), null);
                 }
             }
 
@@ -147,10 +147,10 @@ namespace GameSystems.TilemapSystem.FogTilemap
                 foreach (var pos in list)
                 {
                     // false이면 해당 좌표는 범위 밖인 거임.
-                    if (!this.myFogTilemapData.TryGetFogState(pos.x, pos.y, out FogState fogState)) continue;
+                    if (!this.myMapVisibilityTilemapData.TryGetFogState(pos.x, pos.y, out FogState fogState)) continue;
 
-                    this.myFogTilemapData.SetFogState(pos.x, pos.y, FogState.Visible);
-                    this.FogTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), null);
+                    this.myMapVisibilityTilemapData.SetFogState(pos.x, pos.y, FogState.Visible);
+                    this.MapVisibilityTilemap.SetTile(new Vector3Int(pos.x, pos.y, 0), null);
                 }
             }
 
@@ -159,22 +159,22 @@ namespace GameSystems.TilemapSystem.FogTilemap
 
         public void ClearFogData()
         {
-            if (this.myFogTilemapData == null) return;
+            if (this.myMapVisibilityTilemapData == null) return;
 
-            this.myFogTilemapData.ClearFogTilemapData();
-            this.myFogTilemapData = null;
+            this.myMapVisibilityTilemapData.ClearFogTilemapData();
+            this.myMapVisibilityTilemapData = null;
 
-            this.FogTilemap.ClearAllTiles();
+            this.MapVisibilityTilemap.ClearAllTiles();
         }
 
         public void HideAllFog_Test()
         {
             // 전부 비활성화.
-            this.FogTilemap.ClearAllTiles();
+            this.MapVisibilityTilemap.ClearAllTiles();
         }
         public void ShowAllFog_Test()
         {
-            var length = this.myFogTilemapData.GetLength();
+            var length = this.myMapVisibilityTilemapData.GetLength();
 
             // 전부 활성화.
             for (int x = 0; x < length.Item1; ++x)
@@ -182,13 +182,13 @@ namespace GameSystems.TilemapSystem.FogTilemap
                 for (int y = 0; y < length.Item2; ++y)
                 {
                     // false이면 해당 좌표는 범위 밖인 거임.
-                    if (!this.myFogTilemapData.TryGetFogState(x, y, out FogState fogState)) continue;
+                    if (!this.myMapVisibilityTilemapData.TryGetFogState(x, y, out FogState fogState)) continue;
 
                     // 이 경우 말고 다 Revealed 한 상태로 만듬.
                     if (fogState == FogState.Hidden)
-                        this.FogTilemap.SetTile(new Vector3Int(x, y, 0), this.HiddenTile);
+                        this.MapVisibilityTilemap.SetTile(new Vector3Int(x, y, 0), this.HiddenTile);
                     else if (fogState == FogState.Revealed)
-                        this.FogTilemap.SetTile(new Vector3Int(x, y, 0), this.RevealedTile);
+                        this.MapVisibilityTilemap.SetTile(new Vector3Int(x, y, 0), this.RevealedTile);
                     else { }
                 }
             }

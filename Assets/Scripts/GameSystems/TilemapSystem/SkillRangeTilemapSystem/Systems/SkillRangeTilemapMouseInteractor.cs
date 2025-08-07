@@ -5,15 +5,13 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 using Foundations.Architecture.ReferencesHandler;
-using Foundations.Architecture.EventObserver;
-
-using GameSystems.PlayerSystem.PlayerUnitSystem;
 
 namespace GameSystems.TilemapSystem.SkillRangeTilemap
 {
-    public class FilteredSkillRangeTilemapMouseInteractor : MonoBehaviour
+    public class SkillRangeTilemapMouseInteractor : MonoBehaviour
     {
-        private ISkillRangeTilemapSystem SkillRangeTilemapSystem;
+        private IFilteredSkillRangeTilemapController FilteredSkillRangeTilemapController;
+        private ISkillImpactRangeTilemapController SkillImpactRangeTilemapController;
 
         [SerializeField] private Tilemap FilteredSkillRangeTilemap;
         [SerializeField] private Vector3 mousePositionOffset;
@@ -25,9 +23,16 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
         private bool isActivated = false;
         private Vector2Int currentGridPosition;
 
-        public void InitialSetting(ISkillRangeTilemapSystem SkillRangeTilemapSystem)
+        private void Awake()
         {
-            this.SkillRangeTilemapSystem = SkillRangeTilemapSystem;
+            // 최초 선언 시, Unity Event 함수 비활성화.
+            this.DisActivateMouseInteraction();
+        }
+
+        public void InitialSetting(IFilteredSkillRangeTilemapController FilteredSkillRangeTilemapController, ISkillImpactRangeTilemapController SkillImpactRangeTilemapController)
+        {
+            this.FilteredSkillRangeTilemapController = FilteredSkillRangeTilemapController;
+            this.SkillImpactRangeTilemapController = SkillImpactRangeTilemapController;
         }
 
         private void Update()
@@ -49,7 +54,7 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
                 // 이전 좌표 값이 활성화된 상태였을 경우, PointerExit.
                 if (this.skillTargetPositions.Contains(currentGridPosition))
                 {
-                    this.SkillRangeTilemapSystem.DisActivateSkillImpactRangeTilemap();
+                    this.SkillImpactRangeTilemapController.DisActivateSkillImpactRangeTilemap();
                 }
 
                 // 새로운 좌표 값이 활성화된 상태였을 경우, PointerExit.
@@ -72,7 +77,9 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
             }
         }
 
-        public void ActivateSkillImpactTileMap(int playerUnitID, int skillID, HashSet<Vector2Int> skillTargetPositions)
+        // Tilemap에 대한 마우스 상호작용 활성화.
+        // 상호작용 관련 정보 기록.
+        public void ActivateMouseInteraction(int playerUnitID, int skillID, HashSet<Vector2Int> skillTargetPositions)
         {
             this.enabled = true;
             this.isActivated = true;
@@ -82,11 +89,10 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
             this.skillTargetPositions = skillTargetPositions;
         }
 
-        public void DisActivateMovementTileMap()
+        public void DisActivateMouseInteraction()
         {
             this.enabled = false;
             this.isActivated = false;
-
 
             this.currentPlayerUniqueID = -99;
             this.currentSkillID = -99;
@@ -117,14 +123,20 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
             var HandlerManager = LazyReferenceHandlerManager.Instance;
            
             // 특정 지점에 '스킬' 작동.
-            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<GameSystems.PlayerSystem.PlayerUnitManagerDataDBHandler>();
+            var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
 
             if (PlayerUnitManagerDataDBHandler.TryGetPlayerUnitManagerData(this.currentPlayerUniqueID, out var playerUnitManagerData))
             {
                 playerUnitManagerData.PlayerUnitFeatureInterfaceGroup.PlayerUnitManager.OperateSkill(this.currentPlayerUniqueID, this.currentSkillID, skillTargetPosition);
             }
-            
-            this.SkillRangeTilemapSystem.DisActivateSkillRangeTilemap();
+
+            // Skill Range 시스템 종료.
+            // Tilemap 비활성화.
+            this.FilteredSkillRangeTilemapController.DisActivateFilteredSkillRangeTilemap();
+            this.SkillImpactRangeTilemapController.DisActivateSkillImpactRangeTilemap();
+
+            // 마우스 상호작용 비활성화 및 마우스 상호작용 조건 초기화.
+            this.DisActivateMouseInteraction();
         }
 
         private void RequestSkillRangeTilemapCancelEvent()
@@ -134,7 +146,13 @@ namespace GameSystems.TilemapSystem.SkillRangeTilemap
 
             PlayerUnitActionUIUXHandler.IPlayerUnitActionPanelUIMediator.Show_PlayerUnitBehaviourPanel(this.currentPlayerUniqueID);
 
-            this.SkillRangeTilemapSystem.DisActivateSkillRangeTilemap();
+            // Skill Range 시스템 종료.
+            // Tilemap 비활성화.
+            this.FilteredSkillRangeTilemapController.DisActivateFilteredSkillRangeTilemap();
+            this.SkillImpactRangeTilemapController.DisActivateSkillImpactRangeTilemap();
+
+            // 마우스 상호작용 비활성화 및 마우스 상호작용 조건 초기화.
+            this.DisActivateMouseInteraction();
         }
     }
 }

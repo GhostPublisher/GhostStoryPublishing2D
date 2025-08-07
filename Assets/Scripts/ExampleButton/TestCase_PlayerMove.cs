@@ -11,7 +11,7 @@ using GameSystems.UtilitySystem;
 using GameSystems.TerrainSystem;
 using GameSystems.StageVisualSystem;
 using GameSystems.TilemapSystem;
-using GameSystems.TilemapSystem.FogTilemap;
+using GameSystems.TilemapSystem.MapVisibilityTilemap;
 using GameSystems.TilemapSystem.MovementTilemap;
 
 using GameSystems.EnemySystem.EnemyVisibilitySystem;
@@ -83,22 +83,22 @@ namespace Example00
         public void Notify_Allocate_FogTilemap()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController.InitialSetting(this.Width, this.Height);
+            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IMapVisibilityTilemapController.InitialSetting(this.Width, this.Height);
         }
         public void Notify_Clear_FogTilemap()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController.ClearFogData();
+            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IMapVisibilityTilemapController.ClearFogData();
         }
         public void Notify_Hide_FogTilemap()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController.HideAllFog_Test();
+            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IMapVisibilityTilemapController.HideAllFog_Test();
         }
         public void Notify_Show_FogTilemap()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController.ShowAllFog_Test();
+            HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IMapVisibilityTilemapController.ShowAllFog_Test();
         }
 
 
@@ -177,7 +177,7 @@ namespace Example00
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
             var FogVisibleRangeCalculator = HandlerManager.GetUtilityHandler<VisibilityRangeCalculator>();
-            var IFogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController;
+            var IFogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IMapVisibilityTilemapController;
 
             foreach (Vector2Int target in this.TargetMoves)
             {
@@ -200,7 +200,7 @@ namespace Example00
         public void Notify_ClearScanner()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-            var IFogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IFogTilemapController;
+            var IFogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystemHandler>().IMapVisibilityTilemapController;
 
             IFogTilemapController.RemoveScannerVisibleData_ForFogVisibility(this.ScannerTestData.ScannerID);
             IFogTilemapController.UpdateFogVisibility();

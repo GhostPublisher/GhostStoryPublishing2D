@@ -19,13 +19,9 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
         // triggerID 기반 Player Unit 생성 데이터 할당
         public bool TryAllocatePlayerUnitSpawnData_Trigger(int triggerID);
 
-        // Queue를 사용한 PlayerUnit 생성 요청
-        public void GeneratePlayerUnit_Queue();
         // Queue를 사용한 PlayerUnit 생성 요청 ( 내부 코루틴 대기 )
         public IEnumerator GeneratePlayerUnit_Queue_Coroutine();
 
-        // PlayerUnit 생성 요청.
-        public void GeneratePlayerUnit(int unitID, Vector2Int spawnPosition);
         // PlayerUnit 생성 요청 ( 내부 코루틴 대기 )
         public IEnumerator GeneratePlayerUnit_Coroutine(int unitID, Vector2Int spawnPosition);
 
@@ -98,22 +94,6 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
             return false;
         }
 
-
-        // Queue를 사용한 PlayerUnit 생성 요청
-        public void GeneratePlayerUnit_Queue()
-        {
-            while (this.playerSpawnQueue.Count > 0)
-            {
-                // 생성할 Unit의 ID 및 Position 가져오기.
-                var newSpawnData = this.playerSpawnQueue.Dequeue();
-                Vector2Int spawnPosition = new Vector2Int(newSpawnData.SpawnPositionX, newSpawnData.SpawnPositionY);
-
-                // 객체가 생성될 위치값이 비어있지 않으면 넘어감..
-                if (!this.IsEmpty(spawnPosition)) continue;
-
-                this.GeneratePlayerUnit(newSpawnData.UnitID, spawnPosition);
-            }
-        }
         // Queue를 사용한 PlayerUnit 생성 요청 ( 내부 코루틴 대기 )
         public IEnumerator GeneratePlayerUnit_Queue_Coroutine()
         {
@@ -135,22 +115,6 @@ namespace GameSystems.PlayerSystem.PlayerSpawnSystem
 
 
         // 매개변수로 받은 ID와 Position에 대응되는 PlayerUnit을 배치.
-        public void GeneratePlayerUnit(int unitID, Vector2Int spawnPosition)
-        {
-            var HandlerManager = LazyReferenceHandlerManager.Instance;
-            var PlayerUnitDataDBHandler = HandlerManager.GetStaticDataHandler<PlayerUnitDataDBHandler>();
-            var IsometricCoordinateConvertor = HandlerManager.GetUtilityHandler<UtilitySystem.IsometricCoordinateConvertor>();
-
-            if (!PlayerUnitDataDBHandler.TryGetPlayerUnitResourceData(unitID, out var prefabData)) return;
-
-            // 객체 생성
-            GameObject createdPlayerUnit = MonoBehaviour.Instantiate(prefabData.UnitPrefab, this.PlayerUnitObjectParent);
-            // 객체 위치 지정.
-            createdPlayerUnit.transform.localPosition = IsometricCoordinateConvertor.ConvertGridToWorld(spawnPosition);
-
-            // 초기 셋팅 호출 후 끝.
-            createdPlayerUnit.GetComponent<PlayerUnitSystem.IPlayerUnitManager>().OperatePlayerUnitInitialSetting();
-        }
         public IEnumerator GeneratePlayerUnit_Coroutine(int unitID, Vector2Int spawnPosition)
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;

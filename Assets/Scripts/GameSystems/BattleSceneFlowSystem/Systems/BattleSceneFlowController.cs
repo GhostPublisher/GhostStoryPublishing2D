@@ -44,7 +44,8 @@ namespace GameSystems.BattleSceneSystem
         public IEnumerator OperateBattleSceneFlow_StageSetting_Coroutine()
         {
             var HandlerManager = LazyReferenceHandlerManager.Instance;
-            var FogTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().IFogTilemapController;
+            var IMapVisibilityTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().IMapVisibilityTilemapController;
+            var SkillRangeTilemapController = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().ISkillRangeTilemapSystem;
             var EnemyUnitSpawnController = HandlerManager.GetDynamicDataHandler<EnemySystem.EnemySystemHandler>().IEnemyUnitSpawnController;
             var PlayerUnitSpawnContorller = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerSystemHandler>().IPlayerUnitSpawnController;
 
@@ -57,17 +58,15 @@ namespace GameSystems.BattleSceneSystem
             TilemapSystem.MovementTilemap.InitialSetMovementTilemapEvent initialSetMovementTilemapEvent = new();
             initialSetMovementTilemapEvent.StageID = this.myBattleSceneData.StageID;
 
-            TilemapSystem.SkillRangeTilemap.InitialSetSkillRangeTilemapEvent initialSetSkillRangeTilemapEvent = new();
-            initialSetSkillRangeTilemapEvent.StageID = this.myBattleSceneData.StageID;
-
-            FogTilemapController.InitialSetting(this.myBattleSceneData.StageID);
-            FogTilemapController.UpdateFogVisibility();
+            IMapVisibilityTilemapController.InitialSetting(this.myBattleSceneData.StageID);
+            IMapVisibilityTilemapController.UpdateFogVisibility();
 
             this.EventObserverNotifier.NotifyEvent(initialSetGeneratedTerrainDataEvent);
             this.EventObserverNotifier.NotifyEvent(initialSetStageVisualResourcesData);
 
             this.EventObserverNotifier.NotifyEvent(initialSetMovementTilemapEvent);
-            this.EventObserverNotifier.NotifyEvent(initialSetSkillRangeTilemapEvent);
+
+            SkillRangeTilemapController.InitialSetting();
 
             EnemyUnitSpawnController.InitialSetting(this.myBattleSceneData.StageID);
             EnemyUnitSpawnController.AllocateEnemyUnitSpawnData_Stage();
@@ -75,7 +74,7 @@ namespace GameSystems.BattleSceneSystem
 
             PlayerUnitSpawnContorller.InitialSetting(this.myBattleSceneData.StageID);
             PlayerUnitSpawnContorller.AllocatePlayerUnitSpawnData_Stage();
-            PlayerUnitSpawnContorller.GeneratePlayerUnit_Queue();
+            yield return PlayerUnitSpawnContorller.GeneratePlayerUnit_Queue_Coroutine();
 
             yield return null;
 

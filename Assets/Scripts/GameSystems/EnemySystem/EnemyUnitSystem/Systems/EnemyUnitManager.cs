@@ -94,7 +94,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
 
             var HandlerManager = LazyReferenceHandlerManager.Instance;
             var PlayerUnitManagerDataDBHandler = HandlerManager.GetDynamicDataHandler<PlayerSystem.PlayerUnitManagerDataDBHandler>();
-            var FogTilemapData = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().FogTilemapData;
+            var FogTilemapData = HandlerManager.GetDynamicDataHandler<TilemapSystem.TilemapSystemHandler>().MapVisibilityTilemapData;
 
             // 해당 위치 시야 갱신.
             if (PlayerUnitManagerDataDBHandler.TryGetAll(out var playerUnitManagerDatas))
@@ -106,7 +106,7 @@ namespace GameSystems.EnemySystem.EnemyUnitSystem
             }
 
             // 플레이어의 시야 안에 존재할 시, 카메라 포커싱 작업 수행.
-            if(FogTilemapData.TryGetFogState(this.myEnemyUnitManagerData.EnemyUnitGridPosition(), out var fogStage) && fogStage == TilemapSystem.FogTilemap.FogState.Visible)
+            if(FogTilemapData.TryGetFogState(this.myEnemyUnitManagerData.EnemyUnitGridPosition(), out var fogStage) && fogStage == TilemapSystem.MapVisibilityTilemap.FogState.Visible)
             {
                 // 카메라 포커싱. 부분
 

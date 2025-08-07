@@ -780,7 +780,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 42529312}
-  - component: {fileID: 42529317}
   - component: {fileID: 42529316}
   - component: {fileID: 42529315}
   - component: {fileID: 42529314}
@@ -866,21 +865,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FilteredSkillRangeTilemapController: {fileID: 42529315}
-  FilteredSkillRangeTilemapMouseInteractor: {fileID: 42529314}
   SkillImpactRangeTilemapController: {fileID: 42529313}
---- !u!114 &42529317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42529311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6424fa5ff7d2b8b47b3715a8cde65b3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillRangeTilemapSystem: {fileID: 42529316}
+  SkillRangeTilemapMouseInteractor: {fileID: 42529314}
 --- !u!1 &45668747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,7 +1591,7 @@ GameObject:
   - component: {fileID: 259111130}
   - component: {fileID: 259111129}
   m_Layer: 0
-  m_Name: FogTilemap
+  m_Name: MapVisibilityTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2590,7 +2576,7 @@ GameObject:
   - component: {fileID: 483963701}
   - component: {fileID: 483963703}
   m_Layer: 0
-  m_Name: FogTilemap
+  m_Name: MapVisibilityTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2623,7 +2609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95dc776bde6dfac448157cda885f0685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FogTilemap: {fileID: 259111130}
+  MapVisibilityTilemap: {fileID: 259111130}
   HiddenTile: {fileID: 11400000, guid: 37dce9c2b41d24e43a23105e2d33cbd2, type: 2}
   RevealedTile: {fileID: 11400000, guid: 7b9e2d7683dfd3b498f82246168da195, type: 2}
 --- !u!1 &490877650

@@ -9,7 +9,6 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
 {
     public interface IPlayerUnitManager
     {
-        public void OperatePlayerUnitInitialSetting();
         public IEnumerator OperatePlayerUnitInitialSetting_Coroutine();
 
         public void OperateMove(int uniqueID, Vector2Int targetPosition);
@@ -150,12 +149,6 @@ namespace GameSystems.PlayerSystem.PlayerUnitSystem
             }
         }
 
-        public void OperatePlayerUnitInitialSetting()
-        {
-            this.InitialSetting();
-
-            this.PlayerUnitVisibilityController.UpdateVisibleRange(this.myPlayerUnitManagerData.PlayerUnitGridPosition());
-        }
         public IEnumerator OperatePlayerUnitInitialSetting_Coroutine()
         {
             this.InitialSetting();
