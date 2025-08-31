@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 78410991}
   - component: {fileID: 78410990}
   m_Layer: 5
-  m_Name: "\uC9C0\uD615_\uC0DD\uC131_\uC0AD\uC81C"
+  m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -747,7 +747,7 @@ GameObject:
   - component: {fileID: 670648665}
   - component: {fileID: 670648664}
   m_Layer: 5
-  m_Name: "\uC9C0\uD615_\uC0DD\uC131_\uC0AD\uC81C (1)"
+  m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1194,7 +1194,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter StageID
+  m_text: "\uD14C\uC2A4\uD2B8\uD560 StageID"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06454c479f0e6f14da7ac8b59c3b1d05, type: 2}
   m_sharedMaterial: {fileID: 1446102998550409179, guid: 06454c479f0e6f14da7ac8b59c3b1d05, type: 2}
@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD14C\uC2A4\uD2B8\uD560 StageID \uC785\uD601\uD558\uC138\uC694"
+  m_text: "0\uACFC 1\uB9CC \uC785\uB825\uD574 \uC8FC\uC138\uC694."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06454c479f0e6f14da7ac8b59c3b1d05, type: 2}
   m_sharedMaterial: {fileID: 1446102998550409179, guid: 06454c479f0e6f14da7ac8b59c3b1d05, type: 2}
